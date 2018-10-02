@@ -1,0 +1,154 @@
+From def8cf8622f7ec89f0879f326b28f407399e34fa Mon Sep 17 00:00:00 2001
+From: Hiroshi Hatake <hatake@clear-code.com>
+Date: Fri, 24 Aug 2018 16:30:29 +0900
+Subject: [PATCH] Only native tool
+
+---
+ CMakeLists.txt            | 20 +++++++++++++++-----
+ data/CMakeLists.txt       |  2 ++
+ src/CMakeLists.txt        | 14 ++++++++++----
+ src/module/CMakeLists.txt |  4 ++++
+ tools/CMakeLists.txt      |  4 +++-
+ 5 files changed, 34 insertions(+), 10 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 18eb88be..348d34f6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -13,6 +13,7 @@ set(CMAKE_AUTOMOC_RELAXED_MODE TRUE)
+ 
+ set_property(GLOBAL PROPERTY "__FCITX_INTERNAL_BUILD" On)
+ 
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
+ option(ENABLE_X11 "Enable X11 as dependency" ON)
+ option(ENABLE_GLIB2 "Enable GLib2 as depenedency" ON)
+ option(ENABLE_CAIRO "Enable Cairo" ON)
+@@ -55,6 +56,7 @@ if(NOT NO_PREEDIT_APPS)
+   set(NO_PREEDIT_APPS "gvim"
+     CACHE STRING "Disable Preedit for the following apps")
+ endif()
++endif()
+ 
+ include(CheckIncludeFiles)
+ include(CheckFunctionExists)
+@@ -68,10 +70,12 @@ check_include_files(malloc.h HAVE_MALLOC_H)
+ check_include_files(stdbool.h HAVE_STDBOOL_H)
+ check_function_exists(asprintf HAVE_ASPRINTF)
+ 
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
+ find_package(Libintl REQUIRED)
+ find_package(Libiconv REQUIRED)
+ find_package(Pthread REQUIRED)
+ find_package(Libexecinfo)
++endif()
+ find_package(GettextPo)
+ find_package(XKBCommon 0.5.0 REQUIRED COMPONENTS XKBCommon)
+ 
+@@ -287,14 +291,20 @@ include_directories(${PROJECT_BINARY_DIR}/src/)
+ include_directories(${PROJECT_SOURCE_DIR}/src/)
+ include_directories(${PROJECT_SOURCE_DIR}/src/lib/)
+ 
+-# must be the first
+-add_subdirectory(po)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
++  # must be the first
++  add_subdirectory(po)
++endif()
+ add_subdirectory(src)
+-add_subdirectory(doc)
+-add_subdirectory(skin)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
++  add_subdirectory(doc)
++  add_subdirectory(skin)
++endif()
+ add_subdirectory(tools)
+ add_subdirectory(data)
+-add_subdirectory(cmake)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
++  add_subdirectory(cmake)
++endif()
+ 
+ if(ENABLE_TEST)
+   add_subdirectory(test)
+diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
+index 0bf2ca85..0b1a918a 100644
+--- a/data/CMakeLists.txt
++++ b/data/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ add_subdirectory(script)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
+ add_subdirectory(icon)
+ 
+ set(FCITX_DESC_FILES
+@@ -56,3 +57,4 @@ if(_ENABLE_DBUS)
+ endif()
+ 
+ install(FILES env_setup.sh DESTINATION share/fcitx/data/)
++endif()
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 9bfb2543..8a91846d 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,12 +1,18 @@
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
+ include_directories(${LIBINTL_INCLUDE_DIR})
+ include_directories(${LIBICONV_INCLUDE_DIR})
+ include_directories(${LIBEXECINFO_INCLUDE_DIR})
+ include_directories(${DL_INCLUDE_DIR})
+ include_directories(${PTHREAD_INCLUDE_DIR})
++endif()
+ 
+ add_subdirectory(lib)
+-add_subdirectory(core)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
++  add_subdirectory(core)
++endif()
+ add_subdirectory(module)
+-add_subdirectory(im)
+-add_subdirectory(frontend)
+-add_subdirectory(ui)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
++  add_subdirectory(im)
++  add_subdirectory(frontend)
++  add_subdirectory(ui)
++endif()
+diff --git a/src/module/CMakeLists.txt b/src/module/CMakeLists.txt
+index 904caa90..bfcb7204 100644
+--- a/src/module/CMakeLists.txt
++++ b/src/module/CMakeLists.txt
+@@ -1,3 +1,4 @@
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
+ add_subdirectory(x11)
+ 
+ if(ENABLE_X11 AND ENABLE_LIBXML2)
+@@ -16,7 +17,9 @@ add_subdirectory(xkbdbus)
+ 
+ add_subdirectory(chttrans)
+ add_subdirectory(punc)
++endif()
+ add_subdirectory(spell)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
+ add_subdirectory(pinyin-enhance)
+ add_subdirectory(quickphrase)
+ add_subdirectory(autoeng)
+@@ -30,3 +33,4 @@ add_subdirectory(lua)
+ add_subdirectory(unicode)
+ add_subdirectory(freedesktop-notify)
+ add_subdirectory(notificationitem)
++endif()
+diff --git a/tools/CMakeLists.txt b/tools/CMakeLists.txt
+index cfd5a837..e612c6b2 100644
+--- a/tools/CMakeLists.txt
++++ b/tools/CMakeLists.txt
+@@ -1,5 +1,7 @@
+ include_directories(../src/lib)
+ 
+-add_subdirectory(gui)
++if("${FCITX_TOOL_CROSS_COMPILE}" STREQUAL "")
++  add_subdirectory(gui)
++endif()
+ add_subdirectory(cli)
+ add_subdirectory(dev)
+-- 
+2.11.0
+

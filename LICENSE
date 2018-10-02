@@ -1,0 +1,12 @@
+Different components of meta-inputmethod are under different licenses (a mix
+of MIT and GPLv2). Please see:
+
+COPYING.GPLv2 (GPLv2)
+COPYING.MIT (MIT)
+
+All metadata files (including, but not limited to bb, bbappend,
+bbclass, inc and conf files) are MIT licensed unless otherwise stated.
+All patch is GPL version 2 licensed unless otherwise stated.
+
+License information for any other files is either explicitly stated 
+or defaults to GPL version 2.

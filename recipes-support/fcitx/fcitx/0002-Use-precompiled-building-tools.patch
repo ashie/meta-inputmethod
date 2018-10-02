@@ -1,0 +1,124 @@
+From 248964fed91391ead0f5b23f54ddd2c404aadadc Mon Sep 17 00:00:00 2001
+From: Hiroshi Hatake <hatake@clear-code.com>
+Date: Tue, 4 Sep 2018 13:25:08 +0900
+Subject: [PATCH 2/4] Use precompiled building tools
+
+Force to set fcitx-tools executables for external build
+---
+ cmake/FcitxMacro.cmake               | 42 +++++++++++++++++++++++++-----------
+ src/im/pinyin/data/CMakeLists.txt    |  7 +++++-
+ src/im/table/data/CMakeLists.txt     |  6 +++++-
+ src/module/spell/dict/CMakeLists.txt |  9 ++++++--
+ 4 files changed, 48 insertions(+), 16 deletions(-)
+
+diff --git a/cmake/FcitxMacro.cmake b/cmake/FcitxMacro.cmake
+index e02c27a1..c8b07a36 100644
+--- a/cmake/FcitxMacro.cmake
++++ b/cmake/FcitxMacro.cmake
+@@ -174,21 +174,39 @@ function(__fcitx_cmake_init)
+   set_property(GLOBAL PROPERTY "__FCITX_CMAKE_CACHE_BASE"
+     "${fcitx_cmake_cache_base}")
+   if(FCITX_INTERNAL_BUILD)
+-    set(FCITX_SCANNER_EXECUTABLE
+-      "${PROJECT_BINARY_DIR}/tools/dev/fcitx-scanner"
+-      CACHE INTERNAL "fcitx-scanner" FORCE)
+-    set(FCITX_PO_PARSER_EXECUTABLE
+-      "${PROJECT_BINARY_DIR}/tools/dev/fcitx-po-parser"
+-      CACHE INTERNAL "fcitx-po-parser" FORCE)
++    if("${FCITX_TOOL_BINARY_DIR}" STREQUAL "")
++      set(FCITX_SCANNER_EXECUTABLE
++        "${PROJECT_BINARY_DIR}/tools/dev/fcitx-scanner"
++        CACHE INTERNAL "fcitx-scanner" FORCE)
++      set(FCITX_PO_PARSER_EXECUTABLE
++        "${PROJECT_BINARY_DIR}/tools/dev/fcitx-po-parser"
++        CACHE INTERNAL "fcitx-po-parser" FORCE)
++    else()
++      set(FCITX_SCANNER_EXECUTABLE
++        "${FCITX_TOOL_BINARY_DIR}/libexec/fcitx-scanner"
++        CACHE INTERNAL "fcitx-scanner" FORCE)
++      set(FCITX_PO_PARSER_EXECUTABLE
++        "${FCITX_TOOL_BINARY_DIR}/libexec/fcitx-po-parser"
++        CACHE INTERNAL "fcitx-po-parser" FORCE)
++    endif()
+     set(FCITX4_FCITX_INCLUDEDIR "${CMAKE_INSTALL_PREFIX}/include"
+       CACHE INTERNAL "include dir" FORCE)
+   else()
+-    set(FCITX_SCANNER_EXECUTABLE
+-      "${FCITX4_ADDON_INSTALL_DIR}/libexec/fcitx-scanner"
+-      CACHE INTERNAL "fcitx-scanner" FORCE)
+-    set(FCITX_PO_PARSER_EXECUTABLE
+-      "${FCITX4_ADDON_INSTALL_DIR}/libexec/fcitx-po-parser"
+-      CACHE INTERNAL "fcitx-po-parser" FORCE)
++    if("${FCITX_TOOL_BINARY_DIR}" STREQUAL "")
++      set(FCITX_SCANNER_EXECUTABLE
++        "${FCITX4_ADDON_INSTALL_DIR}/libexec/fcitx-scanner"
++        CACHE INTERNAL "fcitx-scanner" FORCE)
++      set(FCITX_PO_PARSER_EXECUTABLE
++        "${FCITX4_ADDON_INSTALL_DIR}/libexec/fcitx-po-parser"
++        CACHE INTERNAL "fcitx-po-parser" FORCE)
++    else()
++      set(FCITX_SCANNER_EXECUTABLE
++        "${FCITX_TOOL_BINARY_DIR}/libexec/fcitx-scanner"
++        CACHE INTERNAL "fcitx-scanner" FORCE)
++      set(FCITX_PO_PARSER_EXECUTABLE
++        "${FCITX_TOOL_BINARY_DIR}/libexec/fcitx-po-parser"
++        CACHE INTERNAL "fcitx-po-parser" FORCE)
++    endif()
+     execute_process(COMMAND env ${FCITX_PO_PARSER_EXECUTABLE}
+       --gettext-support RESULT_VARIABLE result)
+     if(result)
+diff --git a/src/im/pinyin/data/CMakeLists.txt b/src/im/pinyin/data/CMakeLists.txt
+index 5b8ac60d..0d196d8b 100644
+--- a/src/im/pinyin/data/CMakeLists.txt
++++ b/src/im/pinyin/data/CMakeLists.txt
+@@ -15,7 +15,12 @@ fcitx_download(py-data-download "${PY_URL}" "${PY_TAR}"
+   MD5SUM 34dcb1b5209c28baa4e87f6a2773bfd0)
+ fcitx_extract(py-data-extract "${PY_TAR}" DEPENDS py-data-download
+   OUTPUT ${PY_ORGDATA})
+-set(CREATE_PYMB_BIN "${PROJECT_BINARY_DIR}/tools/cli/createPYMB")
++
++if("${FCITX_TOOL_BINARY_DIR}" STREQUAL "")
++  set(CREATE_PYMB_BIN "${PROJECT_BINARY_DIR}/tools/cli/createPYMB")
++else()
++  set(CREATE_PYMB_BIN "${FCITX_TOOL_BINARY_DIR}/libexec/createPYMB")
++endif()
+ add_custom_command(OUTPUT ${PY_DATA}
+   DEPENDS ${PY_ORGDATA} "${CREATE_PYMB_BIN}" py-data-extract
+   COMMAND "${CREATE_PYMB_BIN}" "${CMAKE_CURRENT_SOURCE_DIR}/gbkpy.org"
+diff --git a/src/im/table/data/CMakeLists.txt b/src/im/table/data/CMakeLists.txt
+index 8dc9b385..32263ffa 100644
+--- a/src/im/table/data/CMakeLists.txt
++++ b/src/im/table/data/CMakeLists.txt
+@@ -1,4 +1,8 @@
+-set(TXT2MB_BIN "${PROJECT_BINARY_DIR}/tools/cli/txt2mb")
++if("${FCITX_TOOL_BINARY_DIR}" STREQUAL "")
++  set(TXT2MB_BIN "${PROJECT_BINARY_DIR}/tools/cli/txt2mb")
++else()
++  set(TXT2MB_BIN "${FCITX_TOOL_BINARY_DIR}/libexec/txt2mb")
++endif()
+ 
+ set(TABLE_DATA
+   "${CMAKE_CURRENT_BINARY_DIR}/db.mb"
+diff --git a/src/module/spell/dict/CMakeLists.txt b/src/module/spell/dict/CMakeLists.txt
+index 401630f4..e8b6c486 100644
+--- a/src/module/spell/dict/CMakeLists.txt
++++ b/src/module/spell/dict/CMakeLists.txt
+@@ -19,8 +19,13 @@ fcitx_download(spell-en-download "${SPELL_EN_DICT_URL}" "${SPELL_EN_DICT_TAR}"
+ fcitx_extract(spell-en-extract "${SPELL_EN_DICT_TAR}" DEPENDS spell-en-download
+   OUTPUT ${SPELL_EN_DICT_SRC})
+ 
+-set(COMP_SPELL_DICT
+-  "${PROJECT_BINARY_DIR}/src/module/spell/dict/comp-spell-dict")
++if("${FCITX_TOOL_BINARY_DIR}" STREQUAL "")
++  set(COMP_SPELL_DICT
++    "${PROJECT_BINARY_DIR}/src/module/spell/dict/comp-spell-dict")
++else()
++  set(COMP_SPELL_DICT
++    "${FCITX_TOOL_BINARY_DIR}/libexec/comp-spell-dict")
++endif()
+ add_custom_command(
+   OUTPUT "${SPELL_EN_DICT}"
+   DEPENDS "${SPELL_EN_DICT_SRC}" "${COMP_SPELL_DICT}" spell-en-extract
+-- 
+2.11.0
+

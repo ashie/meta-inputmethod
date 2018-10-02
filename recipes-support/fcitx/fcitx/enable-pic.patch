@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 595d70c5..9b96ecf2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -279,6 +279,9 @@ if(NOT DEFINED PRESAGE_LIBRARY_FILENAME)
+     endif ()
+ endif()
+ 
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
++
+ set(CMAKE_C_FLAGS "-Wall -Wextra -Wno-sign-compare -Wno-unused-parameter -fvisibility=hidden ${CMAKE_C_FLAGS}")
+ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-sign-compare -Wno-unused-parameter -fvisibility=hidden ${CMAKE_CXX_FLAGS}")
+ set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed ${CMAKE_SHARED_LINKER_FLAGS}")

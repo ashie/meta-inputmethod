@@ -1,0 +1,36 @@
+From a1609751982bac40ce7c84e93766bc04eb7a7af7 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Sat, 25 Aug 2018 11:46:43 +0900
+Subject: [PATCH] Add CMAKE_SYSROOT for paths for cmake macros
+
+---
+ cmake/FcitxConfig.cmake | 2 +-
+ cmake/FcitxMacro.cmake  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/FcitxConfig.cmake b/cmake/FcitxConfig.cmake
+index 0b496ea..df0f341 100644
+--- a/cmake/FcitxConfig.cmake
++++ b/cmake/FcitxConfig.cmake
+@@ -89,4 +89,4 @@ ENDIF(FCITX4_FCITXCONFIG_EXECUTABLE)
+ INCLUDE(FindPackageHandleStandardArgs)
+ FIND_PACKAGE_HANDLE_STANDARD_ARGS(Fcitx DEFAULT_MSG FCITX4_VERSION)
+ 
+-INCLUDE(${FCITX4_PREFIX}/share/cmake/fcitx/FcitxMacro.cmake)
++INCLUDE(${CMAKE_SYSROOT}${FCITX4_PREFIX}/share/cmake/fcitx/FcitxMacro.cmake)
+diff --git a/cmake/FcitxMacro.cmake b/cmake/FcitxMacro.cmake
+index e02c27a..55d8658 100644
+--- a/cmake/FcitxMacro.cmake
++++ b/cmake/FcitxMacro.cmake
+@@ -877,7 +877,7 @@ ENDMACRO(INTLTOOL_MERGE_TRANSLATION)
+ MACRO(EXTRACT_FCITX_DESC_FILE_POSTRING)
+   IF(NOT _FCITX_GETDESCPO_PATH)
+     FIND_FILE(_FCITX_GETDESCPO_PATH NAMES getdescpo
+-      HINTS ${FCITX4_PREFIX}/share/cmake/fcitx
++      HINTS ${CMAKE_SYSROOT}${FCITX4_PREFIX}/share/cmake/fcitx
+       )
+   ENDIF(NOT _FCITX_GETDESCPO_PATH)
+ 
+-- 
+2.7.4
+

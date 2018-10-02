@@ -1,0 +1,213 @@
+From ab6e5a040d0046714d7b6081be875a8937dbe04b Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 3 Sep 2018 22:42:13 +0900
+Subject: [PATCH] Add NoUI module
+
+---
+ src/ui/CMakeLists.txt           |   1 +
+ src/ui/noui/CMakeLists.txt      |  17 ++++
+ src/ui/noui/fcitx-no-ui.conf.in |   9 ++
+ src/ui/noui/noui.c              | 142 ++++++++++++++++++++++++++++++++
+ 4 files changed, 169 insertions(+)
+ create mode 100644 src/ui/noui/CMakeLists.txt
+ create mode 100644 src/ui/noui/fcitx-no-ui.conf.in
+ create mode 100644 src/ui/noui/noui.c
+
+diff --git a/src/ui/CMakeLists.txt b/src/ui/CMakeLists.txt
+index ab6c03ff..f517a494 100644
+--- a/src/ui/CMakeLists.txt
++++ b/src/ui/CMakeLists.txt
+@@ -1,3 +1,4 @@
+ add_subdirectory(cairostuff)
+ add_subdirectory(classic)
+ add_subdirectory(kimpanel)
++add_subdirectory(noui)
+diff --git a/src/ui/noui/CMakeLists.txt b/src/ui/noui/CMakeLists.txt
+new file mode 100644
+index 00000000..ab1a309a
+--- /dev/null
++++ b/src/ui/noui/CMakeLists.txt
+@@ -0,0 +1,17 @@
++set(FCITX_NOUI_LINK_LIBS)
++if(_ENABLE_DBUS)
++  include_directories(${DBUS_INCLUDE_DIRS})
++  link_directories(${DBUS_LIBRARY_DIRS})
++  set(FCITX_NOUI_LINK_LIBS ${FCITX_NOUI_LINK_LIBS})
++  set(noui_noinstall)
++else()
++  set(noui_noinstall NO_INSTALL)
++endif()
++
++set(FCITX_NOUI_UI_SOURCES
++  noui.c
++  )
++
++fcitx_add_addon_full(no-ui ${noui_noinstall}
++  SOURCES ${FCITX_NOUI_UI_SOURCES}
++  LINK_LIBS ${FCITX_NOUI_LINK_LIBS})
+diff --git a/src/ui/noui/fcitx-no-ui.conf.in b/src/ui/noui/fcitx-no-ui.conf.in
+new file mode 100644
+index 00000000..215340c2
+--- /dev/null
++++ b/src/ui/noui/fcitx-no-ui.conf.in
+@@ -0,0 +1,9 @@
++[Addon]
++Name=fcitx-no-ui
++_GeneralName=NoUI
++_Comment=NoUI
++Category=UI
++Enabled=True
++Library=fcitx-no-ui.so
++Type=SharedLibrary
++Priority=50
+diff --git a/src/ui/noui/noui.c b/src/ui/noui/noui.c
+new file mode 100644
+index 00000000..1a465bc6
+--- /dev/null
++++ b/src/ui/noui/noui.c
+@@ -0,0 +1,142 @@
++/***************************************************************************
++ *   Copyright (C) 2008~2010 by Zealot.Hoi                                 *
++ *   Copyright (C) 2010~2012 by CSSlayer                                   *
++ *   Copyright (C) 2018 by Takuro Ashie <ashie@clear-code.com>             *
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ *   This program is distributed in the hope that it will be useful,       *
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
++ *   GNU General Public License for more details.                          *
++ *                                                                         *
++ *   You should have received a copy of the GNU General Public License     *
++ *   along with this program; if not, write to the                         *
++ *   Free Software Foundation, Inc.,                                       *
++ *   51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.              *
++ ***************************************************************************/
++
++#include "config.h"
++#include "fcitx/ui.h"
++#include "fcitx-utils/log.h"
++#include "fcitx/instance.h"
++#include "fcitx/module.h"
++
++typedef struct _FcitxNoUI {
++    FcitxInstance* owner;
++    FcitxAddon* addon;
++} FcitxNoUI;
++
++static void* NoUICreate(FcitxInstance* instance);
++static void NoUICloseInputWindow(void* arg);
++static void NoUIShowInputWindow(void* arg);
++static void NoUIMoveInputWindow(void* arg);
++static void NoUIRegisterMenu(void *arg, FcitxUIMenu* menu);
++static void NoUIUpdateStatus(void *arg, FcitxUIStatus* status);
++static void NoUIRegisterStatus(void *arg, FcitxUIStatus* status);
++static void NoUIRegisterComplexStatus(void* arg, FcitxUIComplexStatus* status);
++static void NoUIUpdateComplexStatus(void* arg, FcitxUIComplexStatus* status);
++static void NoUIOnInputFocus(void *arg);
++static void NoUIOnInputUnFocus(void *arg);
++static void NoUIOnTriggerOn(void *arg);
++static void NoUIOnTriggerOff(void *arg);
++static void NoUISuspend(void* arg);
++static void NoUIDestroy(void* arg);
++
++FCITX_DEFINE_PLUGIN(fcitx_no_ui, ui, FcitxUI) = {
++    NoUICreate,
++    NoUICloseInputWindow,
++    NoUIShowInputWindow,
++    NoUIMoveInputWindow,
++    NoUIUpdateStatus,
++    NoUIRegisterStatus,
++    NoUIRegisterMenu,
++    NoUIOnInputFocus,
++    NoUIOnInputUnFocus,
++    NoUIOnTriggerOn,
++    NoUIOnTriggerOff,
++    NULL,
++    NULL,
++    NULL,
++    NoUISuspend,
++    NULL,
++    NoUIDestroy,
++    NoUIRegisterComplexStatus,
++    NoUIUpdateComplexStatus,
++    NULL
++};
++
++void* NoUICreate(FcitxInstance* instance)
++{
++    FcitxNoUI *noui = fcitx_utils_malloc0(sizeof(FcitxNoUI));
++    return noui;
++}
++
++void NoUIOnInputFocus(void* arg)
++{
++}
++
++void NoUIOnInputUnFocus(void* arg)
++{
++}
++
++void NoUIOnTriggerOff(void* arg)
++{
++}
++
++void NoUIOnTriggerOn(void* arg)
++{
++}
++
++void NoUICloseInputWindow(void* arg)
++{
++}
++
++void NoUIMoveInputWindow(void* arg)
++{
++}
++
++void NoUIRegisterMenu(void* arg, FcitxUIMenu* menu)
++{
++}
++
++void NoUIRegisterStatus(void* arg, FcitxUIStatus* status)
++{
++}
++
++void NoUIRegisterComplexStatus(void* arg, FcitxUIComplexStatus* status)
++{
++}
++
++void NoUIShowInputWindow(void* arg)
++{
++}
++
++void NoUIUpdateStatus(void* arg, FcitxUIStatus* status)
++{
++}
++
++void NoUIUpdateComplexStatus(void* arg, FcitxUIComplexStatus* status)
++{
++}
++
++void NoUIReset(FcitxNoUI* noui)
++{
++}
++
++
++void NoUISuspend(void* arg)
++{
++}
++
++
++void NoUIDestroy(void* arg)
++{
++    FcitxNoUI* noui = (FcitxNoUI*) arg;
++    free(noui);
++}
++
++// kate: indent-mode cstyle; space-indent on; indent-width 0;
+-- 
+2.17.1
+
