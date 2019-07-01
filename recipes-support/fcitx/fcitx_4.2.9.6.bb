@@ -46,6 +46,7 @@ SRC_URI += " \
            file://0001-Add-CMAKE_SYSROOT-for-paths-for-cmake-macros.patch \
            file://0004-Force-set-configuration-directories.patch \
            file://0001-Add-NoUI-module.patch \
+           file://0005-do-not-build-tools.patch \
 "
 
 SRC_URI_append_fcitx-anthy="http://download.fcitx-im.org/fcitx-anthy/fcitx-anthy-0.2.1.tar.xz;name=anthy"
@@ -66,9 +67,9 @@ SRC_URI[table.md5sum] = "acb0b112423474ab2c1a22cee590d636"
 SRC_URI[table.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3cde63b7a8d6ab87b7"
 
 # NOTE: unable to map the following CMake package dependencies: GettextPo Presage DL OpenCC IsoCodes Enchant Qt4 Libexecinfo Lua Libintl XkbFile XKBCommon Libkvm ECM
-DEPENDS = "gettext glib-2.0 glib-2.0-native pango dbus-glib libx11 cairo gtk+ libxml2 gtk+3 dbus fontconfig virtual/libiconv extra-cmake-modules takao-fonts libxkbcommon enchant iso-codes libxkbfile fcitx-tools-native xkeyboard-config"
+DEPENDS = "gettext-native glib-2.0 glib-2.0-native pango dbus-glib libx11 cairo gtk+ libxml2 gtk+3 dbus fontconfig virtual/libiconv extra-cmake-modules takao-fonts libxkbcommon enchant iso-codes libxkbfile fcitx-tools-native xkeyboard-config"
 
-inherit cmake pkgconfig gettext binconfig
+inherit cmake pkgconfig binconfig
 
 BINCONFIG = "${bindir}/fcitx4-config"
 BINCONFIG_GLOB = "fcitx4-config"
