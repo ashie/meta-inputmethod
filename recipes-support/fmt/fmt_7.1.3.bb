@@ -23,6 +23,8 @@ SRC_URI[sha512sum] = "cfb2431de822202f17a6f34a302b1922b9cd696d8d4c27ad50ea08add7
 # NOTE: unable to map the following CMake package dependencies: CUDA
 inherit cmake python3native
 
+BBCLASSEXTEND = "native"
+
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = ""
 
