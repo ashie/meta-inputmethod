@@ -77,6 +77,8 @@ BINCONFIG_GLOB = "fcitx4-config"
 inherit cmake gtk-immodules-cache
 GTKIMMODULES_PACKAGES = "fcitx-gtk2.0 fcitx-gtk3"
 
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 EXTRA_OECMAKE += "-DENABLE_XDGAUTOSTART=OFF -DFORCE_ENCHANT=ON \
                 -DDATADIR=${datadir} \
                 -DDOCSDIR=${docsdir} \

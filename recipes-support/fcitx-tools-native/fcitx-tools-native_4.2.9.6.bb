@@ -42,6 +42,8 @@ DEPENDS = "libxkbcommon libxkbfile extra-cmake-modules gettext"
 
 inherit cmake pkgconfig gettext native
 
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE += "-DENABLE_XDGAUTOSTART=OFF \
                 -DDATADIR=${datadir} \

@@ -23,6 +23,8 @@ S = "${WORKDIR}/${PN}-${PV}/"
 
 inherit cmake pkgconfig
 
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 EXTRA_OECMAKE += "-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DMAKE_INSTALL_PREFIX=/usr \
     -DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}/${libdir}/fcitx/ \
