@@ -37,6 +37,8 @@ SRC_URI += " \
            file://only-native-tool.patch \
 "
 
+FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx-tools:"
+
 # NOTE: unable to map the following CMake package dependencies: GettextPo Presage DL OpenCC IsoCodes Enchant Qt4 Libexecinfo Lua Libintl XkbFile XKBCommon Libkvm ECM
 DEPENDS = "libxkbcommon libxkbfile extra-cmake-modules gettext"
 
