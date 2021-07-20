@@ -15,7 +15,6 @@ SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5/fcitx5-${PV}_dict.tar.xz"
 SRC_URI[sha256sum] = "02f5de5e4d8c9912656b5acf954085ee5cdd567292fc1a915be051f9aed46614"
 
 SRC_URI_append = "\
-	file://0001-use-precompiled-tools.patch \
 	file://0001-Don-t-use-charconv-to-support-GCC-7.x.patch \
 	file://0002-Add-CMAKE_SYSROOT-for-xkb_base.patch \
 	file://0003-Add-options-to-disable-XIM-IBus-frontend.patch \
@@ -41,7 +40,6 @@ EXTRA_OECMAKE = "\
 	-DENABLE_XIM=OFF \
 	-DENABLE_IBUS=OFF \
 	-DENABLE_METAINFO=OFF \
-	-DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}${libdir}/fcitx5/ \
 "
 
 FILES_${PN} += " \

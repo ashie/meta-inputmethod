@@ -52,8 +52,9 @@ do_compile() {
 }
 
 do_install() {
-	install -d ${D}/${libdir}/fcitx5/libexec
-	install -m 744 src/modules/spell/dict/comp-spell-dict ${D}/${libdir}/fcitx5/libexec
+	install -d ${D}/${bindir}
+	install -d ${D}/${libdir}
+	install -m 744 src/modules/spell/dict/comp-spell-dict ${D}/${bindir}/Fcitx5::comp-spell-dict
 	install -m 644 src/lib/fcitx-utils/libFcitx5Utils.so* ${D}/${libdir}
 	install -m 644 src/lib/fcitx-config/libFcitx5Config.so* ${D}/${libdir}
 }
