@@ -19,6 +19,7 @@ SRC_URI_append = "\
 	file://0002-Add-CMAKE_SYSROOT-for-xkb_base.patch \
 	file://0003-Add-options-to-disable-XIM-IBus-frontend.patch \
 	file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
+	file://0005-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
 "
 
 # Modify these as desired
@@ -31,7 +32,7 @@ DEPENDS = " ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
 	gdk-pixbuf pango enchant2 json-c systemd fcitx5-tools-native xkeyboard-config \
 "
 
-inherit autotools cmake pkgconfig gettext
+inherit cmake pkgconfig gettext
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = "\
