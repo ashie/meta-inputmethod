@@ -21,6 +21,8 @@ SRC_URI_append = "\
 # Modify these as desired
 S = "${WORKDIR}/fcitx5-${PV}"
 
+FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx5-tools:"
+
 # NOTE: unable to map the following CMake package dependencies: WaylandScanner ECM Execinfo WaylandProtocols LibUUID XKBCommon fmt XCBImdkit XKeyboardConfig Systemd DL LibIntl LibKVM Doxygen Libevent IsoCodes Wayland
 
 DEPENDS = "ninja extra-cmake-modules fmt libevent enchant2 gettext"
