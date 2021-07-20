@@ -1,0 +1,48 @@
+From 2cdb1f400408614704ede5919a520d3e93c53e9f Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 19 Jul 2021 18:18:33 +0900
+Subject: [PATCH 3/3] Add options to disable XIM & IBus frontend
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt              | 2 ++
+ src/frontend/CMakeLists.txt | 6 +++++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ee2f094..ca9f874 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,7 +27,9 @@ set(DEFAULT_XKB_RULES "evdev" CACHE STRING "Xkb rules name")
+ option(ENABLE_ENCHANT "Enable enchant for word predication" On)
+ option(ENABLE_X11 "Enable X11 support" On)
+ option(ENABLE_WAYLAND "Enable wayland support" On)
++option(ENABLE_XIM "Enable XIM frontend" On)
+ option(ENABLE_DBUS "Enable DBus" On)
++option(ENABLE_IBUS "Enable IBus frontend" On)
+ option(ENABLE_DOC "Build doxygen" Off)
+ option(ENABLE_SERVER "Build a fcitx as server, disable this option if you want to use fcitx as an embedded library." On)
+ option(ENABLE_KEYBOARD "Enable key event translation with XKB and build keyboard engine" On)
+diff --git a/src/frontend/CMakeLists.txt b/src/frontend/CMakeLists.txt
+index 2e67852..e423d45 100644
+--- a/src/frontend/CMakeLists.txt
++++ b/src/frontend/CMakeLists.txt
+@@ -1,4 +1,6 @@
+-add_subdirectory(xim)
++if (ENABLE_XIM)
++    add_subdirectory(xim)
++endif()
+ 
+ if (WAYLAND_FOUND)
+     add_subdirectory(waylandim)
+@@ -7,5 +9,7 @@ endif()
+ if (ENABLE_DBUS)
+     add_subdirectory(dbusfrontend)
+     add_subdirectory(fcitx4frontend)
++if (ENABLE_IBUS)
+     add_subdirectory(ibusfrontend)
+ endif()
++endif()
+-- 
+2.30.2
+

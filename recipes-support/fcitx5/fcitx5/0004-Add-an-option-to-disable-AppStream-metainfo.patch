@@ -1,0 +1,55 @@
+From 29345fbe4eea751a428afb198a49f2091ce474ca Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 19 Jul 2021 23:44:05 +0900
+Subject: [PATCH 4/4] Add an option to disable AppStream metainfo
+
+See https://www.freedesktop.org/software/appstream/docs/ for more
+detail of AppStream.
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt      | 1 +
+ data/CMakeLists.txt | 8 +++++---
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ca9f874..f6a7e13 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -34,6 +34,7 @@ option(ENABLE_DOC "Build doxygen" Off)
+ option(ENABLE_SERVER "Build a fcitx as server, disable this option if you want to use fcitx as an embedded library." On)
+ option(ENABLE_KEYBOARD "Enable key event translation with XKB and build keyboard engine" On)
+ option(USE_SYSTEMD "Use systemd for event loop and dbus, will fallback to libevent/libdbus if not found." On)
++option(ENABLE_METAINFO "Enable AppStream metainfo" On)
+ option(ENABLE_XDGAUTOSTART "Enable xdg autostart desktop file installation" On)
+ option(USE_FLATPAK_ICON "Use flatpak icon name for desktop files" Off)
+ set(CLDR_DIR "" CACHE STRING "Unicode CLDR (Common Locale Data Repository) directory")
+diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
+index d67ede2..9541c8f 100644
+--- a/data/CMakeLists.txt
++++ b/data/CMakeLists.txt
+@@ -11,8 +11,6 @@ fcitx5_translate_desktop_file(${CMAKE_CURRENT_BINARY_DIR}/fcitx5-configtool.desk
+                               fcitx5-configtool.desktop)
+ fcitx5_translate_desktop_file(${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.desktop.in
+                               org.fcitx.Fcitx5.desktop)
+-fcitx5_translate_desktop_file(org.fcitx.Fcitx5.metainfo.xml.in
+-                              org.fcitx.Fcitx5.metainfo.xml XML)
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.desktop"
+               "${CMAKE_CURRENT_BINARY_DIR}/fcitx5-configtool.desktop"
+@@ -22,7 +20,11 @@ if (ENABLE_XDGAUTOSTART)
+     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.desktop" DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/xdg/autostart)
+ endif()
+ 
+-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++if (ENABLE_METAINFO)
++    fcitx5_translate_desktop_file(org.fcitx.Fcitx5.metainfo.xml.in
++                                  org.fcitx.Fcitx5.metainfo.xml XML)
++    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ 
+ install(FILES fcitx5-configtool.sh RENAME fcitx5-configtool DESTINATION "${FCITX_INSTALL_BINDIR}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+ GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+-- 
+2.30.2
+

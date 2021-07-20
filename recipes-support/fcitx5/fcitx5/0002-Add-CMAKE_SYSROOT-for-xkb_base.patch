@@ -1,0 +1,26 @@
+From a970728bf4adfdff9f6d64543e7dc03cd2228be5 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 19 Jul 2021 16:59:08 +0900
+Subject: [PATCH 2/3] Add CMAKE_SYSROOT for xkb_base
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 01d4a83..ee2f094 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -139,7 +139,7 @@ if (ENABLE_KEYBOARD)
+     find_package(XKeyboardConfig REQUIRED)
+     pkg_check_modules(JsonC REQUIRED IMPORTED_TARGET "json-c")
+ 
+-    set(DEFAULT_XKB_RULES_FILES "${XKEYBOARDCONFIG_XKBBASE}/rules/${DEFAULT_XKB_RULES}.xml")
++    set(DEFAULT_XKB_RULES_FILES "${CMAKE_SYSROOT}${XKEYBOARDCONFIG_XKBBASE}/rules/${DEFAULT_XKB_RULES}.xml")
+     if (NOT EXISTS "${DEFAULT_XKB_RULES_FILES}")
+     message(FATAL_ERROR "Could not find default xkb rules file: ${DEFAULT_XKB_RULES_FILES}")
+     endif()
+-- 
+2.30.2
+

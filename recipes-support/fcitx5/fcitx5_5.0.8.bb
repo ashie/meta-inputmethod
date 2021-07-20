@@ -16,21 +16,41 @@ SRC_URI[sha256sum] = "02f5de5e4d8c9912656b5acf954085ee5cdd567292fc1a915be051f9ae
 
 SRC_URI_append = "\
 	file://0001-use-precompiled-tools.patch \
+	file://0001-Don-t-use-charconv-to-support-GCC-7.x.patch \
+	file://0002-Add-CMAKE_SYSROOT-for-xkb_base.patch \
+	file://0003-Add-options-to-disable-XIM-IBus-frontend.patch \
+	file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
 "
 
 # Modify these as desired
 S = "${WORKDIR}/${BPN}-${PV}"
 
 # NOTE: unable to map the following CMake package dependencies: WaylandScanner ECM Execinfo WaylandProtocols LibUUID XKBCommon fmt XCBImdkit XKeyboardConfig Systemd DL LibIntl LibKVM Doxygen Libevent IsoCodes Wayland
-DEPENDS = " ninja extra-cmake-modules virtual/egl expat dbus fmt \
+DEPENDS = " ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
 	libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit libxkbcommon libxkbfile\
 	wayland wayland-native wayland-protocols iso-codes cairo \
-	gdk-pixbuf pango enchant2 json-c systemd fcitx5-tools-native \
+	gdk-pixbuf pango enchant2 json-c systemd fcitx5-tools-native xkeyboard-config \
 "
 
 inherit autotools cmake pkgconfig gettext
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = "\
-	-DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}${noarch_libdir}/fcitx5/ \
+	-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
+	-DENABLE_TEST=OFF \
+	-DENABLE_XIM=OFF \
+	-DENABLE_IBUS=OFF \
+	-DENABLE_METAINFO=OFF \
+	-DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}${libdir}/fcitx5/ \
+"
+
+FILES_${PN} += " \
+   ${datadir}/icons/hicolor/128x128/apps/*.png \
+   ${datadir}/icons/hicolor/16x16/apps/*.png \
+   ${datadir}/icons/hicolor/22x22/apps/*.png \
+   ${datadir}/icons/hicolor/24x24/apps/*.png \
+   ${datadir}/icons/hicolor/32x32/apps/*.png \
+   ${datadir}/icons/hicolor/48x48/apps/*.png \
+   ${datadir}/icons/hicolor/scalable/apps/*.svg \
+   ${datadir}/dbus-1/services/org.fcitx.Fcitx5.service \
 "

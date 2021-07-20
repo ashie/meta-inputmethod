@@ -6,7 +6,7 @@
  add_executable(comp-spell-dict ${DICT_COMP_SRC})
 -add_executable(Fcitx5::comp-spell-dict ALIAS comp-spell-dict)
 +
-+if("${FCITX_TOOL_BINARY_DICT}" STREQUAL "")
++if("${FCITX_TOOL_BINARY_DIR}" STREQUAL "")
 +       add_executable(Fcitx5::comp-spell-dict ALIAS comp-spell-dict)
 +else()
 +       add_executable(Fcitx5::comp-spell-dict ALIAS "${FCITX_TOOL_BINARY_DIR}/libexec/comp-spell-dict")
