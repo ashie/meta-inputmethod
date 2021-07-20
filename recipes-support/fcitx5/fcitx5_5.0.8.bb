@@ -38,10 +38,15 @@ inherit cmake pkgconfig gettext
 EXTRA_OECMAKE = "\
 	-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
 	-DENABLE_TEST=OFF \
-	-DENABLE_XIM=OFF \
 	-DENABLE_IBUS=OFF \
 	-DENABLE_METAINFO=OFF \
 "
+
+do_configure_append() {
+    # Someone put unexpected "-I/usr/include" for building xim module but we
+    # don't yet find who does it.
+    sed -i -e "s# -I/usr/include # #g" ${B}/build.ninja
+}
 
 FILES_${PN} += " \
    ${datadir}/icons/hicolor/128x128/apps/*.png \
