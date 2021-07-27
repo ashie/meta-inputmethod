@@ -20,6 +20,7 @@ SRC_URI_append = "\
 	file://0003-Add-options-to-disable-XIM-IBus-frontend.patch \
 	file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
 	file://0005-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
+        file://0006-Tweak-include-directories-to-care-CMAKE_SYSROOT.patch \
 "
 
 # Modify these as desired

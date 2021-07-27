@@ -1,0 +1,65 @@
+From 6941cf16941dfb52bee7bab3392e1f94fe5f8949 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 27 Jul 2021 05:50:35 +0900
+Subject: [PATCH 6/6] Tweak include directories to care CMAKE_SYSROOT
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/lib/fcitx-config/CMakeLists.txt               | 2 +-
+ src/lib/fcitx-utils/CMakeLists.txt                | 2 +-
+ src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in | 2 +-
+ src/lib/fcitx/CMakeLists.txt                      | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/lib/fcitx-config/CMakeLists.txt b/src/lib/fcitx-config/CMakeLists.txt
+index 66c840f..e00b519 100644
+--- a/src/lib/fcitx-config/CMakeLists.txt
++++ b/src/lib/fcitx-config/CMakeLists.txt
+@@ -37,7 +37,7 @@ set_target_properties(Fcitx5Config
+ target_include_directories(Fcitx5Config PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}/Fcitx5/Config>)
++    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/Fcitx5/Config>)
+ target_link_libraries(Fcitx5Config PUBLIC Fcitx5::Utils)
+ 
+ configure_file(Fcitx5Config.pc.in ${CMAKE_CURRENT_BINARY_DIR}/Fcitx5Config.pc @ONLY)
+diff --git a/src/lib/fcitx-utils/CMakeLists.txt b/src/lib/fcitx-utils/CMakeLists.txt
+index 46dbe8d..9c560d5 100644
+--- a/src/lib/fcitx-utils/CMakeLists.txt
++++ b/src/lib/fcitx-utils/CMakeLists.txt
+@@ -126,7 +126,7 @@ set_target_properties(Fcitx5Utils
+ target_include_directories(Fcitx5Utils PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}/Fcitx5/Utils>)
++    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/Fcitx5/Utils>)
+ target_link_libraries(Fcitx5Utils PRIVATE DL::DL LibIntl::LibIntl Pthread::Pthread ${FMT_TARGET})
+ if(LIBKVM_FOUND)
+     target_link_libraries(Fcitx5Utils PRIVATE LibKVM::LibKVM)
+diff --git a/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in b/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in
+index e51f044..ab7b470 100644
+--- a/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in
++++ b/src/lib/fcitx-utils/Fcitx5ModuleTemplate.cmake.in
+@@ -4,4 +4,4 @@ endif()
+ 
+ add_library(@FEM_TARGET@-interface INTERFACE)
+ add_library(Fcitx5::Module::@FEM_EXPORTNAME@ ALIAS @FEM_TARGET@-interface)
+-set_target_properties(@FEM_TARGET@-interface PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "@_MODULE_HEADER_DIR@")
++set_target_properties(@FEM_TARGET@-interface PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SYSROOT}@_MODULE_HEADER_DIR@")
+diff --git a/src/lib/fcitx/CMakeLists.txt b/src/lib/fcitx/CMakeLists.txt
+index ec02756..2701b9c 100644
+--- a/src/lib/fcitx/CMakeLists.txt
++++ b/src/lib/fcitx/CMakeLists.txt
+@@ -72,7 +72,7 @@ set_target_properties(Fcitx5Core
+ target_include_directories(Fcitx5Core PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}/Fcitx5/Core>)
++    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/Fcitx5/Core>)
+ target_link_libraries(Fcitx5Core PUBLIC Fcitx5::Config Fcitx5::Utils PRIVATE LibIntl::LibIntl ${FMT_TARGET})
+ if (ENABLE_KEYBOARD)
+     target_link_libraries(Fcitx5Core PRIVATE XKBCommon::XKBCommon)
+-- 
+2.30.2
+

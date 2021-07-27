@@ -1,7 +1,7 @@
 From a970728bf4adfdff9f6d64543e7dc03cd2228be5 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 19 Jul 2021 16:59:08 +0900
-Subject: [PATCH 2/5] Add CMAKE_SYSROOT for xkb_base
+Subject: [PATCH 2/6] Add CMAKE_SYSROOT for xkb_base
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
