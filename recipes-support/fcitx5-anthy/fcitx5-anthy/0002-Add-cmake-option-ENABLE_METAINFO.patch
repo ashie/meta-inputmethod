@@ -1,0 +1,36 @@
+From ab6897f10078af54f861be8fe5aa7d3806dc8c6e Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 27 Jul 2021 13:31:56 +0900
+Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a2d829a..b76013e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,6 +8,8 @@ include(FeatureSummary)
+ include(GNUInstallDirs)
+ include(ECMUninstallTarget)
+ 
++option(ENABLE_METAINFO "Enable AppStream metainfo" On)
++
+ find_package(Fcitx5Core 5.0.6 REQUIRED)
+ find_package(Fcitx5Module REQUIRED COMPONENTS Clipboard)
+ find_package(Gettext REQUIRED)
+@@ -31,7 +33,9 @@ add_subdirectory(src)
+ add_subdirectory(icon)
+ add_subdirectory(profile)
+ 
++if (ENABLE_METAINFO)
+ fcitx5_translate_desktop_file(org.fcitx.Fcitx5.Addon.Anthy.metainfo.xml.in
+     org.fcitx.Fcitx5.Addon.Anthy.metainfo.xml XML)
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.Addon.Anthy.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.30.2
+
