@@ -1,0 +1,25 @@
+From 3ea41bdc57c3ac19651c9f4c1fd6cf7ac096ec64 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 2 Aug 2021 15:33:11 +0900
+Subject: [PATCH 7/7] Make sure to get global registry
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/frontend/waylandim/waylandimserver.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/frontend/waylandim/waylandimserver.cpp b/src/frontend/waylandim/waylandimserver.cpp
+index e417752..df45767 100644
+--- a/src/frontend/waylandim/waylandimserver.cpp
++++ b/src/frontend/waylandim/waylandimserver.cpp
+@@ -41,6 +41,7 @@ WaylandIMServer::WaylandIMServer(wl_display *display, FocusGroup *group,
+                 init();
+             }
+         });
++    display_->roundtrip();
+ 
+     init();
+ }
+-- 
+2.30.2
+

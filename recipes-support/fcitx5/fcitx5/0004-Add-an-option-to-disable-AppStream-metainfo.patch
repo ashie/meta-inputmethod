@@ -1,7 +1,7 @@
 From 29345fbe4eea751a428afb198a49f2091ce474ca Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 19 Jul 2021 23:44:05 +0900
-Subject: [PATCH 4/6] Add an option to disable AppStream metainfo
+Subject: [PATCH 4/7] Add an option to disable AppStream metainfo
 
 See https://www.freedesktop.org/software/appstream/docs/ for more
 detail of AppStream.

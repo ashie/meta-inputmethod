@@ -1,7 +1,7 @@
 From 6941cf16941dfb52bee7bab3392e1f94fe5f8949 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 27 Jul 2021 05:50:35 +0900
-Subject: [PATCH 6/6] Tweak include directories to care CMAKE_SYSROOT
+Subject: [PATCH 6/7] Tweak include directories to care CMAKE_SYSROOT
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---

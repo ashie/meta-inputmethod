@@ -1,7 +1,7 @@
 From 2cdb1f400408614704ede5919a520d3e93c53e9f Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 19 Jul 2021 18:18:33 +0900
-Subject: [PATCH 3/6] Add options to disable XIM & IBus frontend
+Subject: [PATCH 3/7] Add options to disable XIM & IBus frontend
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
