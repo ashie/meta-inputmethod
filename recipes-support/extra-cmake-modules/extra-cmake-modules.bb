@@ -1,27 +1,3 @@
-# Recipe created by recipetool
-# This is the basis of a recipe and may need further editing in order to be fully functional.
-# (Feel free to remove these comments when editing.)
-
-# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
-# your responsibility to verify that the values are complete and correct.
-#
-# The following license files were not able to be identified and are
-# represented as "Unknown" below, you will need to check them yourself:
-#   docs/module/ECMCheckOutboundLicense.rst
-#   modules/ECMCheckOutboundLicense.cmake
-#   modules/check-outbound-license.py
-#   tests/ECMCheckOutboundLicenseTest/testdata/GPL-2.0-only.cpp
-#   tests/ECMCheckOutboundLicenseTest/testdata/GPL-2.0-or-later.cpp
-#   tests/ECMCheckOutboundLicenseTest/testdata/GPL-3.0-only.cpp
-#   tests/ECMCheckOutboundLicenseTest/testdata/LGPL-2.1-or-later.cpp
-#   tests/ECMCheckOutboundLicenseTest/testdata/LGPL-3.0-only.cpp
-#
-# NOTE: multiple licenses have been detected; they have been separated with &
-# in the LICENSE value for now since it is a reasonable assumption that all
-# of the licenses apply. If instead there is a choice between the multiple
-# licenses then you should change the value to separate the licenses with |
-# instead of &. If there is any doubt, check the accompanying documentation
-# to determine which situation is applicable.
 SUMMARY = "Extra modules and scripts for CMake"
 
 LICENSE = "BSD-3-Clause & Unknown"

@@ -1,4 +1,4 @@
-LICENSE = "LGPLv2.1 & Unknown"
+LICENSE = "LGPLv2.1 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4b54a1fd55a448865a0b32d41598759d \
                     file://src/xlibi18n/lcUniConv/COPYRIGHT;md5=2715cd5c86722a098d6b97148d1e6936"
 

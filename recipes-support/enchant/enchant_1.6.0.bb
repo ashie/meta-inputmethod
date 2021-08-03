@@ -1,18 +1,4 @@
-# Recipe created by recipetool
-# This is the basis of a recipe and may need further editing in order to be fully functional.
-# (Feel free to remove these comments when editing.)
-
-SUMMARY = "An Enchanting Spell Checking Library"
-# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
-# your responsibility to verify that the values are complete and correct.
-#
-# The following license files were not able to be identified and are
-# represented as "Unknown" below, you will need to check them yourself:
-#   COPYING.LIB
-#   src/myspell/license.myspell
-#   src/myspell/license.readme
-#   src/myspell/license.hunspell
-LICENSE = "Unknown"
+LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=dfcbabf9131dc9a95febef6753a2958b \
                     file://src/myspell/license.myspell;md5=144d202f24e14f38b722f11f45135c91 \
                     file://src/myspell/license.readme;md5=144d202f24e14f38b722f11f45135c91 \
