@@ -1,0 +1,36 @@
+From 0cd468c14b95f0f94e01985706b65e9d5af4a9c2 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 3 Aug 2021 18:22:50 +0900
+Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b74bbff..443285b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,6 +8,8 @@ include(FeatureSummary)
+ include(GNUInstallDirs)
+ include(ECMUninstallTarget)
+ 
++option(ENABLE_METAINFO "Enable AppStream metainfo" On)
++
+ find_package(Fcitx5Core 5.0.2 REQUIRED)
+ find_package(Gettext REQUIRED)
+ find_package(PkgConfig REQUIRED)
+@@ -22,7 +24,9 @@ add_subdirectory(src)
+ add_subdirectory(data)
+ add_subdirectory(list)
+ 
++if (ENABLE_METAINFO)
+ fcitx5_translate_desktop_file(org.fcitx.Fcitx5.Addon.Hangul.metainfo.xml.in
+                               org.fcitx.Fcitx5.Addon.Hangul.metainfo.xml XML)
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.Addon.Hangul.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.30.2
+

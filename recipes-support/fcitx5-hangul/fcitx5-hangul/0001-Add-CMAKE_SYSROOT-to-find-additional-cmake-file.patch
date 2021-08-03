@@ -1,0 +1,26 @@
+From ac046f48a510a2e3a979cb87861f2ebd41d9fbb8 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 3 Aug 2021 18:21:22 +0900
+Subject: [PATCH 1/2] Add CMAKE_SYSROOT to find additional cmake file
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8342e0f..b74bbff 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -13,7 +13,7 @@ find_package(Gettext REQUIRED)
+ find_package(PkgConfig REQUIRED)
+ pkg_check_modules(Hangul IMPORTED_TARGET "libhangul>=0.0.12" REQUIRED)
+ 
+-include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
++include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+ add_definitions(-DFCITX_GETTEXT_DOMAIN=\"fcitx5-hangul\" -D_GNU_SOURCE)
+ fcitx5_add_i18n_definition()
+ 
+-- 
+2.30.2
+
