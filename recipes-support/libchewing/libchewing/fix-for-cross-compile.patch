@@ -1,0 +1,21 @@
+--- ./data/Makefile.am	2015-04-17 08:42:30.000000000 +0000
++++ ./data/Makefile.am	2020-01-08 06:57:24.278650341 +0000
+@@ -28,6 +28,6 @@
+ 	touch $@
+ 
+ gendata:
+-	env LC_ALL=C $(tooldir)/init_database$(EXEEXT) $(top_srcdir)/data/phone.cin $(top_srcdir)/data/tsi.src
++	env LC_ALL=C init_database$(EXEEXT) $(top_srcdir)/data/phone.cin $(top_srcdir)/data/tsi.src
+ 
+ CLEANFILES = $(datas) gendata_stamp
+--- ./Makefile.am	2015-06-15 10:49:31.000000000 +0000
++++ ./Makefile.am	2020-01-08 06:52:29.764845019 +0000
+@@ -6,7 +6,7 @@
+ else
+ SUBDIRS =
+ endif
+-SUBDIRS += src/tools data src test doc
++SUBDIRS += data src test doc
+ 
+ CMAKE_FILES = \
+ 	cmake/config.h.in \
