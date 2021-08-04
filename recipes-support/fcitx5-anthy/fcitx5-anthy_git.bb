@@ -1,4 +1,4 @@
-LICENSE = "GPLv2"
+LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c"
 
 DEPENDS = "fcitx5 anthy fcitx5-tools-native"
