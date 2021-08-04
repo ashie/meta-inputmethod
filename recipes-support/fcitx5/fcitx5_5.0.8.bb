@@ -32,6 +32,9 @@ EXTRA_OECMAKE = "\
 	-DENABLE_TEST=OFF \
 	-DENABLE_IBUS=OFF \
 	-DENABLE_METAINFO=OFF \
+	-DENABLE_X11=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)} \
+	-DENABLE_XIM=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)} \
+	-DENABLE_WAYLAND=${@bb.utils.contains("DISTRO_FEATURES", "wayland", "ON", "OFF", d)} \
 "
 
 do_configure_append() {
