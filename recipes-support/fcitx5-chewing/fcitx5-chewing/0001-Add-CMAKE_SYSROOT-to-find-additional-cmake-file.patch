@@ -1,0 +1,26 @@
+From 9a45fe69f7571d290b6b9107f3f74d66a7998067 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 09:50:58 +0900
+Subject: [PATCH 1/2] Add CMAKE_SYSROOT to find additional cmake file
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e4c48bb..493f6fa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -15,7 +15,7 @@ include(ECMUninstallTarget)
+ pkg_check_modules(Chewing "chewing>=0.5.0" IMPORTED_TARGET REQUIRED)
+ pkg_get_variable(CHEWING_DATADIR "chewing" datadir)
+ 
+-include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
++include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+ 
+ configure_file(
+   "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in"
+-- 
+2.30.2
+

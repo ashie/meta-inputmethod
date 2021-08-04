@@ -1,0 +1,36 @@
+From 8b03881413f0f7b0c75eff0b682969072883aa72 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 09:51:53 +0900
+Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 493f6fa..72157e2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -12,6 +12,8 @@ include(GNUInstallDirs)
+ include(ECMSetupVersion)
+ include(ECMUninstallTarget)
+ 
++option(ENABLE_METAINFO "Enable AppStream metainfo" On)
++
+ pkg_check_modules(Chewing "chewing>=0.5.0" IMPORTED_TARGET REQUIRED)
+ pkg_get_variable(CHEWING_DATADIR "chewing" datadir)
+ 
+@@ -26,7 +28,9 @@ add_subdirectory(src)
+ add_subdirectory(data)
+ add_subdirectory(po)
+ 
++if (ENABLE_METAINFO)
+ fcitx5_translate_desktop_file(org.fcitx.Fcitx5.Addon.Chewing.metainfo.xml.in
+                               org.fcitx.Fcitx5.Addon.Chewing.metainfo.xml XML)
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.Addon.Chewing.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.30.2
+
