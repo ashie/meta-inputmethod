@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f650
 DEPENDS = "fcitx5 fcitx5-tools-native m17n-lib"
 RDPENDS = "fcitx5 m17n-lib"
 
-SRC_URI = "https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz" 
+SRC_URI = "https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz"
 SRC_URI[sha256sum] = "292deb065e571b38eacc28007e1a6b69d27d7332aa2708055a645d98549dd69f"
 
 SRC_URI_append = "\
