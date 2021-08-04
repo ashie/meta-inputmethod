@@ -1,0 +1,37 @@
+From 28b13c9c1fe13e39167ab25550a8edbe16c035a2 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 10:10:50 +0900
+Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 91ebec5..1f79fe7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,6 +8,7 @@ include(FeatureSummary)
+ include(GNUInstallDirs)
+ include(ECMUninstallTarget)
+ 
++option(ENABLE_METAINFO "Enable AppStream metainfo" On)
+ option(ENABLE_TEST "Build Test" On)
+ option(ENABLE_COVERAGE "Build the project with gcov support (Need ENABLE_TEST=On)" Off)
+ set(GCOV_TOOL "gcov" CACHE STRING "Path to gcov tool used by coverage.")
+@@ -48,9 +49,11 @@ if (ENABLE_TEST)
+     endif()
+ endif ()
+ 
++if (ENABLE_METAINFO)
+ fcitx5_translate_desktop_file(org.fcitx.Fcitx5.Addon.M17N.metainfo.xml.in
+     org.fcitx.Fcitx5.Addon.M17N.metainfo.xml XML)
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.Addon.M17N.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.30.2
+
