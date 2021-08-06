@@ -1,0 +1,26 @@
+From 107ca59ed0f7337056f0b2b608ddf8643e9b8ed3 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 14:49:55 +0900
+Subject: [PATCH] Add CMAKE_SYSROOT to find additional cmake file
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 058f5ad..31ae8e1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,7 +27,7 @@ include(ECMGeneratePkgConfigFile)
+ include(ECMUninstallTarget)
+ 
+ find_package(Fcitx5Utils REQUIRED)
+-include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
++include("${CMAKE_SYSROOT}${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+ 
+ find_package(Boost 1.61 REQUIRED COMPONENTS iostreams filesystem regex)
+ set(LIBIME_INSTALL_PKGDATADIR "${CMAKE_INSTALL_FULL_DATADIR}/libime")
+-- 
+2.30.2
+
