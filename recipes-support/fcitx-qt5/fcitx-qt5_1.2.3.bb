@@ -1,7 +1,7 @@
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6306e547e5c5e43190193019ed46ee13"
 
-DEPENDS = "fcitx anthy fcitx-tools-native qtbase-native"
+DEPENDS = "fcitx fcitx-tools-native qtbase-native"
 RDPENDS = "fcitx-bin fcitx-data fcitx-modules"
 
 SRC_URI = "https://gitlab.com/fcitx/fcitx-qt5/-/archive/${PV}/fcitx-qt5-${PV}.tar.bz2"
