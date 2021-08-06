@@ -6,6 +6,7 @@ SRC_URI[sha256sum] = "02f5de5e4d8c9912656b5acf954085ee5cdd567292fc1a915be051f9ae
 
 SRC_URI_append = "\
 	file://0001-Don-t-use-charconv-to-support-GCC-7.x.patch \
+	file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
 "
 
 # Modify these as desired
@@ -31,6 +32,7 @@ EXTRA_OECMAKE = " \
         -DENABLE_XDGAUTOSTART=OFF \
         -DENABLE_EMOJI=OFF \
         -DENABLE_LIBUUID=OFF \
+	-DENABLE_METAINFO=OFF \
 	-DDL_INCLUDE_DIR=/usr/include \
 	-DLibIntl_INCLUDE_DIR=/usr/include \
 	-DPTHREAD_INCLUDE_DIR=/usr/include \
@@ -40,7 +42,7 @@ EXTRA_OECMAKE = " \
 LDFLAGS_append = ",--no-as-needed -ldl "
 
 do_compile() {
-	ninja Fcitx5Config comp-spell-dict
+	ninja Fcitx5Utils Fcitx5Config comp-spell-dict
 }
 
 do_install() {
@@ -49,6 +51,16 @@ do_install() {
 	install -m 744 src/modules/spell/dict/comp-spell-dict ${D}/${bindir}/Fcitx5::comp-spell-dict
 	install -m 644 src/lib/fcitx-utils/libFcitx5Utils.so* ${D}/${libdir}
 	install -m 644 src/lib/fcitx-config/libFcitx5Config.so* ${D}/${libdir}
+
+	install -d ${D}/${libdir}/cmake/Fcitx5Utils
+	install -m 644 src/lib/fcitx-utils/*.cmake ${D}/${libdir}/cmake/Fcitx5Utils
+	install -m 644 ${S}/cmake/Fcitx5CompilerSettings.cmake ${D}/${libdir}/cmake/Fcitx5Utils
+	install -m 644 ${S}/src/lib/fcitx-utils/*.cmake ${D}/${libdir}/cmake/Fcitx5Utils
+	install -m 644 ${S}/src/lib/fcitx-utils/*.cmake.in ${D}/${libdir}/cmake/Fcitx5Utils
+	install -m 644 src/lib/fcitx-utils/CMakeFiles/Export/lib/cmake/Fcitx5Utils/*.cmake ${D}/${libdir}/cmake/Fcitx5Utils
+	install -d ${D}/${libdir}/cmake/Fcitx5Config
+	install -m 644 src/lib/fcitx-config/*.cmake ${D}/${libdir}/cmake/Fcitx5Config
+	install -m 644 src/lib/fcitx-config/CMakeFiles/Export/lib/cmake/Fcitx5Config/*.cmake ${D}/${libdir}/cmake/Fcitx5Config
 }
 
 BBCLASSEXTEND = "native nativesdk"
