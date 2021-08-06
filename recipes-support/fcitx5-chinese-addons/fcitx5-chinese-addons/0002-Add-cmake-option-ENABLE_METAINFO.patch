@@ -1,0 +1,37 @@
+From ec2f092505ac3a3657aedf684835fdd3ca7df3bb Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 4 Aug 2021 14:11:13 +0900
+Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ce55011..ee7c8f2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -37,6 +37,7 @@ option(ENABLE_OPENCC "Enable OpenCC for chttrans" On)
+ option(ENABLE_GUI "Enable Configure Gui" On)
+ option(ENABLE_BROWSER "Enable built-in browser." On)
+ option(USE_WEBKIT "Use WebKit as browser backend." On)
++option(ENABLE_METAINFO "Enable AppStream metainfo" On)
+ 
+ if (ENABLE_OPENCC)
+     find_package(OpenCC REQUIRED)
+@@ -90,9 +91,11 @@ if (ENABLE_TEST)
+     endif()
+ endif ()
+ 
++if (ENABLE_METAINFO)
+ fcitx5_translate_desktop_file(org.fcitx.Fcitx5.Addon.ChineseAddons.metainfo.xml.in
+     org.fcitx.Fcitx5.Addon.ChineseAddons.metainfo.xml XML)
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.Fcitx5.Addon.ChineseAddons.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
++endif()
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.30.2
+
