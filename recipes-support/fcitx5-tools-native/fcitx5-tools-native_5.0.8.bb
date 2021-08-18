@@ -42,25 +42,19 @@ EXTRA_OECMAKE = " \
 LDFLAGS_append = ",--no-as-needed -ldl "
 
 do_compile() {
-	ninja Fcitx5Utils Fcitx5Config comp-spell-dict
+	cmake --build ${B} --target Fcitx5Utils
+	cmake --build ${B} --target Fcitx5Config
+	cmake --build ${B} --target comp-spell-dict
 }
 
 do_install() {
+	DESTDIR=${D} cmake --build ${B} --target src/lib/fcitx-utils/install
+	DESTDIR=${D} cmake --build ${B} --target src/lib/fcitx-config/install
 	install -d ${D}/${bindir}
-	install -d ${D}/${libdir}
-	install -m 744 src/modules/spell/dict/comp-spell-dict ${D}/${bindir}/Fcitx5::comp-spell-dict
+	install -m 755 src/modules/spell/dict/comp-spell-dict ${D}/${bindir}/Fcitx5::comp-spell-dict
 	install -m 644 src/lib/fcitx-utils/libFcitx5Utils.so* ${D}/${libdir}
 	install -m 644 src/lib/fcitx-config/libFcitx5Config.so* ${D}/${libdir}
-
-	install -d ${D}/${libdir}/cmake/Fcitx5Utils
-	install -m 644 src/lib/fcitx-utils/*.cmake ${D}/${libdir}/cmake/Fcitx5Utils
 	install -m 644 ${S}/cmake/Fcitx5CompilerSettings.cmake ${D}/${libdir}/cmake/Fcitx5Utils
-	install -m 644 ${S}/src/lib/fcitx-utils/*.cmake ${D}/${libdir}/cmake/Fcitx5Utils
-	install -m 644 ${S}/src/lib/fcitx-utils/*.cmake.in ${D}/${libdir}/cmake/Fcitx5Utils
-	install -m 644 src/lib/fcitx-utils/CMakeFiles/Export/lib/cmake/Fcitx5Utils/*.cmake ${D}/${libdir}/cmake/Fcitx5Utils
-	install -d ${D}/${libdir}/cmake/Fcitx5Config
-	install -m 644 src/lib/fcitx-config/*.cmake ${D}/${libdir}/cmake/Fcitx5Config
-	install -m 644 src/lib/fcitx-config/CMakeFiles/Export/lib/cmake/Fcitx5Config/*.cmake ${D}/${libdir}/cmake/Fcitx5Config
 }
 
 BBCLASSEXTEND = "native nativesdk"
