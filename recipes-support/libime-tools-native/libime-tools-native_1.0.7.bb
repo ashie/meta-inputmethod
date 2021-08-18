@@ -14,10 +14,6 @@ SRC_URI[opengram_lm.sha256sum] = "751bab7c55ea93a2cedfb0fbb7eb09f67d4da9c2c55496
 SRC_URI[opengram_dict.sha256sum] = "818cfbb5a99ae5b40c2707b6158734f4a10196444853400cbd6b14505592d80d"
 SRC_URI[table_dict.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3cde63b7a8d6ab87b7"
 
-SRC_URI_append = "\
-    file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
-"
-
 S = "${WORKDIR}/libime-${PV}"
 
 FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx5-tools:"
@@ -25,7 +21,6 @@ FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx5-tools:"
 inherit cmake pkgconfig python3native native
 
 EXTRA_OECMAKE += " \
-    -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DENABLE_TEST=OFF \
 "
 
@@ -40,13 +35,20 @@ do_unpack_extra() {
 addtask unpack_extra after do_unpack before do_patch
 
 do_compile() {
-    ninja libime_pinyindict
+    cmake --build ${B} --target libime_pinyindict
+    cmake --build ${B} --target libime_tabledict
+    cmake --build ${B} --target libime_slm_build_binary
 }
 
-#FILES_${PN} += "\
-#    ${libdir}/fcitx5/hangul.so \
-#    ${datadir}/icons \
-#    ${datadir}/fcitx5 \
-#"
+do_install() {
+    install -d ${D}/${bindir}
+    install -d ${D}/${libdir}
+    install -m 755 tools/libime_pinyindict ${D}/${bindir}/LibIME::pinyindict
+    install -m 755 tools/libime_tabledict ${D}/${bindir}/LibIME::tabledict
+    install -m 755 tools/libime_tabledict ${D}/${bindir}/LibIME::slm_build_binary
+    install -m 644 src/libime/core/libIMECore.so* ${D}/${libdir}
+    install -m 644 src/libime/pinyin/libIMEPinyin.so* ${D}/${libdir}
+    install -m 644 src/libime/table/libIMETable.so* ${D}/${libdir}
+}
 
 BBCLASSEXTEND = "native nativesdk"
