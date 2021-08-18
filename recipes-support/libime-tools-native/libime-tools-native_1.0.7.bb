@@ -38,6 +38,7 @@ do_compile() {
     cmake --build ${B} --target libime_pinyindict
     cmake --build ${B} --target libime_tabledict
     cmake --build ${B} --target libime_slm_build_binary
+    cmake --build ${B} --target libime_prediction
 }
 
 do_install() {
@@ -45,7 +46,8 @@ do_install() {
     install -d ${D}/${libdir}
     install -m 755 tools/libime_pinyindict ${D}/${bindir}/LibIME::pinyindict
     install -m 755 tools/libime_tabledict ${D}/${bindir}/LibIME::tabledict
-    install -m 755 tools/libime_tabledict ${D}/${bindir}/LibIME::slm_build_binary
+    install -m 755 tools/libime_slm_build_binary ${D}/${bindir}/LibIME::slm_build_binary
+    install -m 755 tools/libime_prediction ${D}/${bindir}/LibIME::prediction
     install -m 644 src/libime/core/libIMECore.so* ${D}/${libdir}
     install -m 644 src/libime/pinyin/libIMEPinyin.so* ${D}/${libdir}
     install -m 644 src/libime/table/libIMETable.so* ${D}/${libdir}
