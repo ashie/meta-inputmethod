@@ -1,7 +1,7 @@
 From ec2f092505ac3a3657aedf684835fdd3ca7df3bb Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 4 Aug 2021 14:11:13 +0900
-Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+Subject: [PATCH 2/3] Add cmake option ENABLE_METAINFO
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---

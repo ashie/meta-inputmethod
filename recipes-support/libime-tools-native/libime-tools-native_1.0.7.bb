@@ -44,9 +44,13 @@ do_compile() {
 do_install() {
     install -d ${D}/${bindir}
     install -d ${D}/${libdir}
+    install -m 755 tools/libime_pinyindict ${D}/${bindir}/
     install -m 755 tools/libime_pinyindict ${D}/${bindir}/LibIME::pinyindict
+    install -m 755 tools/libime_tabledict ${D}/${bindir}/
     install -m 755 tools/libime_tabledict ${D}/${bindir}/LibIME::tabledict
+    install -m 755 tools/libime_slm_build_binary ${D}/
     install -m 755 tools/libime_slm_build_binary ${D}/${bindir}/LibIME::slm_build_binary
+    install -m 755 tools/libime_prediction ${D}/${bindir}/
     install -m 755 tools/libime_prediction ${D}/${bindir}/LibIME::prediction
     install -m 644 src/libime/core/libIMECore.so* ${D}/${libdir}
     install -m 644 src/libime/pinyin/libIMEPinyin.so* ${D}/${libdir}
