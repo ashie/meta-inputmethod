@@ -12,6 +12,7 @@ SRC_URI_append = "\
 	file://0005-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
         file://0006-Tweak-include-directories-to-care-CMAKE_SYSROOT.patch \
         file://0007-Make-sure-to-get-global-registry.patch \
+        file://0008-Fix-a-bug-that-wayland-module-cannot-input-text-to-w.patch \
 "
 
 # Modify these as desired
