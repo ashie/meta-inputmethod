@@ -1,0 +1,38 @@
+From c9184183a81caf20e645211b1ec62a2b8b26b6f1 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 23 Aug 2021 12:56:31 +0900
+Subject: [PATCH 8/8] Fix a bug that wayland module cannot input text to
+ weston-editor
+
+According to the protocol specification,
+zwp_input_method_context_v1::key has to be used for unhandled key
+events:
+
+  https://github.com/wayland-project/wayland-protocols/blob/7dffa6f346ae32f7888177d74a45459997059767/unstable/input-method/input-method-unstable-v1.xml#L171-L176
+
+But fcitx5 uses zwp_input_method_context_v1::keysym instead.
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/frontend/waylandim/waylandimserver.cpp | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/src/frontend/waylandim/waylandimserver.cpp b/src/frontend/waylandim/waylandimserver.cpp
+index df45767..82b41c4 100644
+--- a/src/frontend/waylandim/waylandimserver.cpp
++++ b/src/frontend/waylandim/waylandimserver.cpp
+@@ -351,10 +351,7 @@ void WaylandIMInputContextV1::keyCallback(uint32_t serial, uint32_t time,
+     WAYLANDIM_DEBUG() << event.key().toString()
+                       << " IsRelease=" << event.isRelease();
+     if (!keyEvent(event)) {
+-        ic_->keysym(serial, time, event.rawKey().sym(),
+-                    event.isRelease() ? WL_KEYBOARD_KEY_STATE_RELEASED
+-                                      : WL_KEYBOARD_KEY_STATE_PRESSED,
+-                    event.rawKey().states());
++        ic_->key(serial, time, key, state);
+     }
+     server_->display_->flush();
+ }
+-- 
+2.30.2
+
