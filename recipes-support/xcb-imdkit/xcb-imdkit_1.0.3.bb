@@ -9,11 +9,9 @@ SRC_URI[sha256sum] = "09c2626ea29fbd6a8c650144ca126b7bdd6365258b7c39508028bfdca6
 SRC_URI[sha384sum] = "73d0acdf8a4754c75afa12bf6677174876b3ddc4122d40fc62546fefeec003fd428439b9f76df9a96cdeeffc4ad25b47"
 SRC_URI[sha512sum] = "df15dbe8363f89259f59b4afb81befd3be88173362f78c3b6cf0c7cdb2bdca75b352b779e0e7a91bb814a6afe59c4cc8acc946ce96721ca376438a9e8f3b4e80"
 
-# NOTE: unable to map the following CMake package dependencies: UTHash ECM
 DEPENDS = "extra-cmake-modules libxcb xcb-util xcb-util-keysyms"
 
 inherit cmake
 
-# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = ""
 
