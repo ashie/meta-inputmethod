@@ -1,4 +1,4 @@
-LICENSE = "Unknown"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b \
                     file://doc/python-license.txt;md5=d214581529e343354f8e23025bdf582d"
 
