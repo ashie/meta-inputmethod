@@ -21,12 +21,17 @@ EXTRA_OECMAKE += " \
     -DENABLE_GIR=OFF \
 "
 
-FILES_${PN} += "\
+DEBIAN_NOAUTONAME_${PN}3 = "1"
+PACKAGES =+ "fcitx5-gclient ${PN}3"
+
+RDEPENDS_${PN}-gtk3 = "fcitx5-gclient"
+
+FILES_${PN}3 += "\
     ${libdir}/gtk-3.0/3.0.0/immodules/im-fcitx5.so \
 "
 
 PACKAGE_WRITE_DEPS += "qemu-native"
-pkg_postinst_${PN}() {
+pkg_postinst_${PN}3() {
     if test -n "$D"; then
         ${@qemu_run_binary(d, '$D', '${bindir}/gtk-query-immodules-3.0')} > $D${libdir}/gtk-3.0/3.0.0/immodules.cache
     else
