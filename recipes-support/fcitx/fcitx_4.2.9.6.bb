@@ -28,6 +28,7 @@ SRC_URI += " \
            file://0004-Force-set-configuration-directories.patch \
            file://0001-Add-NoUI-module.patch \
            file://0005-do-not-build-tools.patch \
+           file://0001-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_XML.patch \
 "
 
 SRC_URI[en_dict.md5sum] = "8315f85331e0545c256a46e0cb00f10f"
