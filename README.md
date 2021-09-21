@@ -118,3 +118,6 @@ Qt applications aren't confirmed yet.
 
 You can enable input method by `Ctrl + Space` on such applications, and switch
 input methods by `Ctrl + Shift`.
+
+If DBus's session bus is enabled, you can switch IMs also by `fcitx5-remote`
+command. e.g.) `fcitx5-remote -s anthy`
