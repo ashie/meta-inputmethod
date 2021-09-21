@@ -2,7 +2,7 @@ LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68"
 
 DEPENDS = "fcitx5 fcitx5-tools-native boost python3-native libime-tools-native"
-RDPENDS = "fcitx5 boost"
+RDEPENDS_${PN} = "fcitx5 boost"
 
 SRC_URI = " \
 	https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz;name=src \

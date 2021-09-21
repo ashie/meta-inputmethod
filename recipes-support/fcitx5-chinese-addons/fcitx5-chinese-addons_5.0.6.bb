@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "fcitx5 fcitx5-tools-native fmt curl opencc libime libime-tools-native"
-RDPENDS = "fcitx5 fmt curl opencc libime"
+RDEPENDS_${PN} = "fcitx5 curl opencc libime"
 
 SRC_URI = " \
     https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz;name=src \
