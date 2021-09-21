@@ -30,8 +30,6 @@ SRC_URI += " \
            file://0005-do-not-build-tools.patch \
 "
 
-SRC_URI_append_fcitx-anthy="http://download.fcitx-im.org/fcitx-anthy/fcitx-anthy-0.2.1.tar.xz;name=anthy"
-
 SRC_URI[en_dict.md5sum] = "8315f85331e0545c256a46e0cb00f10f"
 SRC_URI[en_dict.sha256sum] = "c44a5d7847925eea9e4d2d04748d442cd28dd9299a0b572ef7d91eac4f5a6ceb"
 
