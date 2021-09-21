@@ -40,7 +40,7 @@ Mainly for X11 environment.
 
 ### ibus and ibus-*
 
-Although we don't yet publish them, we alreay have these recipes internally.
+Although we don't yet publish them, we already have these recipes internally.
 Please contact us if you need them. We'll ensure to publish them if there are
 actual needs.
 
