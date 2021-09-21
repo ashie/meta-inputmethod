@@ -98,7 +98,7 @@ Name=chewing
 [Groups/0/Items/3]
 Name=pinyin
 
-[Groups/0/Items/3]
+[Groups/0/Items/4]
 Name=hangul
 ```
 * Run weston
