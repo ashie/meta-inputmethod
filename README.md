@@ -110,9 +110,9 @@ chromium-ozone-wayland. It will also work with other applications
 that supports text-input-v1 protocol.
 
 GTK applications aren't supported yet because GTK supports only text-input-v3
-and gtk-text-input protocols. On the other hand, we are preparing a patch at
-[gtk3-wayland-text-input-v1 branch](./-/tree/gtk3-wayland-text-input-v1) to
-support v1 protocol.
+and gtk-text-input protocols. To resolve this issue: we are preparing a patch
+at: [gtk3-wayland-text-input-v1 branch](./-/tree/gtk3-wayland-text-input-v1).
+We'll import it into master branch as a separated module.
 
 Qt applications aren't confirmed yet.
 
