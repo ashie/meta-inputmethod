@@ -1,13 +1,39 @@
-From 3586f950cdd4ac153ab0c93f64ece78d54c03991 Mon Sep 17 00:00:00 2001
+From 8b71b03261bc0ad7cc1e6d9ca2f5727220b2db22 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 27 Jul 2021 22:56:42 +0900
 Subject: [PATCH] Enable to build against older GLib (< 2.60)
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
+ gtk2/fcitximcontext.cpp | 7 ++++++-
  gtk3/fcitximcontext.cpp | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ 2 files changed, 12 insertions(+), 2 deletions(-)
 
+diff --git a/gtk2/fcitximcontext.cpp b/gtk2/fcitximcontext.cpp
+index 41ecea9..ab8b8a4 100644
+--- a/gtk2/fcitximcontext.cpp
++++ b/gtk2/fcitximcontext.cpp
+@@ -408,6 +408,10 @@ static void fcitx_im_context_init(FcitxIMContext *context, gpointer) {
+     g_queue_init(&context->gdk_events);
+ }
+ 
++static void free_gdk_event(gpointer gdkevent, gpointer user_data) {
++  gdk_event_free((GdkEvent*)gdkevent);
++}
++
+ static void fcitx_im_context_finalize(GObject *obj) {
+     FcitxIMContext *context = FCITX_IM_CONTEXT(obj);
+ 
+@@ -428,7 +432,8 @@ static void fcitx_im_context_finalize(GObject *obj) {
+     g_clear_pointer(&context->preedit_string, g_free);
+     g_clear_pointer(&context->surrounding_text, g_free);
+     g_clear_pointer(&context->attrlist, pango_attr_list_unref);
+-    g_queue_clear_full(&context->gdk_events, (GDestroyNotify)gdk_event_free);
++    g_queue_foreach(&context->gdk_events, free_gdk_event, NULL);
++    g_queue_clear(&context->gdk_events);
+ 
+     G_OBJECT_CLASS(parent_class)->finalize(obj);
+ }
 diff --git a/gtk3/fcitximcontext.cpp b/gtk3/fcitximcontext.cpp
 index 3e62f1f..98b4841 100644
 --- a/gtk3/fcitximcontext.cpp
