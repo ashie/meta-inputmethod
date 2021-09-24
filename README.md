@@ -107,12 +107,18 @@ Name=hangul
 
 Fcitx5 provided by this recipe is confirmed with weston-editor and
 chromium-ozone-wayland. It will also work with other applications
-that supports text-input-v1 protocol.
+that supports
+[text-input-v1](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/master/unstable/text-input/text-input-unstable-v1.xml)
+protocol.
 
-GTK applications aren't supported yet because GTK supports only text-input-v3
-and gtk-text-input protocols. To resolve this issue: we are preparing a patch
-at: [gtk3-wayland-text-input-v1 branch](./-/tree/gtk3-wayland-text-input-v1).
-We'll import it into master branch as a separated module.
+GTK applications aren't supported yet because GTK supports only
+[text-input-v3](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/master/unstable/text-input/text-input-unstable-v3.xml)
+and
+[gtk-text-input](https://gitlab.gnome.org/GNOME/mutter/-/commit/efd7a4af5e37299f17011a7f39cc66d8416a1bf9)
+protocols.
+To resolve this issue, we are preparing a patch at:
+[gtk3-wayland-text-input-v1 branch](./-/tree/gtk3-wayland-text-input-v1).
+We'll import it into master branch as a separated module later.
 
 Qt applications aren't confirmed yet.
 
