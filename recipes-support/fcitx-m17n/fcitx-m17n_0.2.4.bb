@@ -14,9 +14,12 @@ SRC_URI[sha256sum] = "cf82158b907ba6b79aad3e4c26f9e0e2457a270619548adc31e9f77412
 inherit cmake pkgconfig
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-EXTRA_OECMAKE += "-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
-    -DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}/${nonarch_libdir}/fcitx/ \
+EXTRA_OECMAKE += " \
+    -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
+    -DMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=${libdir} \
+    -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
-FILES_${PN} += "${nonarch_libdir}/fcitx/fcitx-m17n.so \
+FILES_${PN} += "${libdir}/fcitx/fcitx-m17n.so \
 	${datadir}/fcitx \
 "

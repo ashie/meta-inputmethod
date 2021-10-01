@@ -14,9 +14,11 @@ inherit cmake pkgconfig
 
 OECMAKE_GENERATOR = "Unix Makefiles"
 
-EXTRA_OECMAKE += "-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
+EXTRA_OECMAKE += " \
+    -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DMAKE_INSTALL_PREFIX=/usr \
-    -DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}/${libdir}/fcitx/ \
+    -DLIB_INSTALL_DIR=${libdir} \
+    -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
 FILES_${PN} += "${libdir}/fcitx/fcitx-anthy.so \

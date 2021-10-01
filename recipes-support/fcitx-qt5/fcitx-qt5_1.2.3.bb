@@ -12,10 +12,12 @@ S = "${WORKDIR}/${PN}-${PV}/"
 
 inherit cmake pkgconfig cmake_qt5
 
-EXTRA_OECMAKE += "-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
+EXTRA_OECMAKE += " \
+    -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DMAKE_INSTALL_PREFIX=/usr \
-    -DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}/${libdir}/fcitx/ \
+    -DLIB_INSTALL_DIR=${libdir} \
     -DCMAKE_INSTALL_QTPLUGINDIR=${libdir}/qt5/plugins/ \
+    -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
 FILES_${PN} += "${libdir}/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \

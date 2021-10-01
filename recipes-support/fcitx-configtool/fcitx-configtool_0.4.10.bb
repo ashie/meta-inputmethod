@@ -12,8 +12,10 @@ S = "${WORKDIR}/${PN}-${PV}/"
 
 inherit cmake pkgconfig
 
-EXTRA_OECMAKE += "-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
+EXTRA_OECMAKE += " \
+    -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=${libdir} \
     -DENABLE_GTK2=On \
     -DENABLE_GTK3=On \
 "
