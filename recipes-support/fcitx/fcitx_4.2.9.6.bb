@@ -75,6 +75,7 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 
 EXTRA_OECMAKE += "-DENABLE_XDGAUTOSTART=OFF -DFORCE_ENCHANT=ON \
                 -DDATADIR=${datadir} \
+                -DLIB_INSTALL_DIR=${libdir} \
                 -DDOCSDIR=${docsdir} \
                 -DGOBJECT_INTROSPECTION_GIRDIR=${D}/usr/share/gir-1.0 \
                 -DGOBJECT_INTROSPECTION_TYPELIBDIR=${D}/usr/lib/girepository-1.0 \
