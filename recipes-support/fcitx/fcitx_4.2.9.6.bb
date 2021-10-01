@@ -69,7 +69,7 @@ EXTRA_OECMAKE += "-DENABLE_XDGAUTOSTART=OFF -DFORCE_ENCHANT=ON \
                 -DQT_PLUGINS_DIR=/usr/lib/qt4/plugins \
                 -DENABLE_GIR=OFF -DENABLE_GTK3_IM_MODULE=ON \
 		-DENABLE_QT=OFF -DENABLE_QT_IM_MODULE=OFF -DENABLE_QT_GUI=OFF \
-                -DFCITX_TOOL_BINARY_DIR=${RECIPE_SYSROOT_NATIVE}/${libdir}/fcitx/ \
+                -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
 CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
