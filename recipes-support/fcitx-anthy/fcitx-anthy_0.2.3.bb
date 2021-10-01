@@ -2,7 +2,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=00ed06f01bcb1983382068710eb131c4"
 
 DEPENDS = "fcitx anthy fcitx-tools-native"
-RDEPENDS_${PN} = "fcitx-bin fcitx-data fcitx-modules libanthy0 anthy"
+RDEPENDS_${PN} = "fcitx fcitx-data fcitx-modules libanthy0 anthy"
 
 SRC_URI = "https://gitlab.com/fcitx/fcitx-anthy/-/archive/${PV}/fcitx-anthy-${PV}.tar.bz2"
 SRC_URI[md5sum] = "5b5550733b5bdf5f0be2b877c4d7354a"

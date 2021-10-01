@@ -2,7 +2,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=00ed06f01bcb1983382068710eb131c4"
 
 DEPENDS = "fcitx gtk+3 gtk+ fcitx-tools-native glib-2.0-native"
-RDEPENDS_${PN} = "fcitx-bin fcitx-data fcitx-modules fcitx-module-gtk3 libfcitx-gclient0"
+RDEPENDS_${PN} = "fcitx fcitx-data fcitx-modules fcitx-module-gtk3 libfcitx-gclient0"
 
 SRC_URI = "https://gitlab.com/fcitx/fcitx-configtool/-/archive/${PV}/fcitx-configtool-${PV}.tar.bz2"
 SRC_URI[md5sum] = "fcd7e2238c5bdddb77098699025719ce"
