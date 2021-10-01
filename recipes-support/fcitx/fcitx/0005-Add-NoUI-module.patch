@@ -1,7 +1,7 @@
 From 577cc32e0c05dc2de6c2443a8cb8d8e24ded8d8f Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 3 Sep 2018 22:42:13 +0900
-Subject: [PATCH 5/7] Add NoUI module
+Subject: [PATCH 5/8] Add NoUI module
 
 ---
  src/ui/CMakeLists.txt           |   1 +

@@ -1,7 +1,7 @@
 From c147578819400fa88f2612fb5f2f024643c0b969 Mon Sep 17 00:00:00 2001
 From: Hiroshi Hatake <hatake@clear-code.com>
 Date: Tue, 4 Sep 2018 13:25:08 +0900
-Subject: [PATCH 2/7] Use precompiled building tools
+Subject: [PATCH 2/8] Use precompiled building tools
 
 Force to set fcitx-tools executables for external build
 ---

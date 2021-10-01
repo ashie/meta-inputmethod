@@ -1,0 +1,27 @@
+From b1e41fdf4dc02df808626929265212b2ca610ed6 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Fri, 1 Oct 2021 18:31:04 +0900
+Subject: [PATCH 8/8] Use LIB_INSTALL_DIR instead of CMAKE_INSTALL_PREFIX for
+ FCITX4_ADDON_INSTALL_DIR
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ cmake/FcitxConfig.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/FcitxConfig.cmake b/cmake/FcitxConfig.cmake
+index ee94c808..6a060fe9 100644
+--- a/cmake/FcitxConfig.cmake
++++ b/cmake/FcitxConfig.cmake
+@@ -89,7 +89,7 @@ ENDIF(FCITX4_FCITXCONFIG_EXECUTABLE)
+ INCLUDE(FindPackageHandleStandardArgs)
+ FIND_PACKAGE_HANDLE_STANDARD_ARGS(Fcitx DEFAULT_MSG FCITX4_VERSION)
+ 
+-set(FCITX4_ADDON_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib/fcitx")
++set(FCITX4_ADDON_INSTALL_DIR "${LIB_INSTALL_DIR}/fcitx")
+ set(FCITX4_INPUTMETHOD_CONFIG_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/fcitx/inputmethod")
+ set(FCITX4_CONFIGDESC_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/fcitx/configdesc")
+ set(FCITX4_ADDON_CONFIG_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/fcitx/addon")
+-- 
+2.30.2
+

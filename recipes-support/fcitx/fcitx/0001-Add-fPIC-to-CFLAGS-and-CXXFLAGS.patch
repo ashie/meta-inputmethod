@@ -1,7 +1,7 @@
 From a02f267c34ae957bc82fe83d58a7a90b5dd47669 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Fri, 1 Oct 2021 18:15:28 +0900
-Subject: [PATCH 1/7] Add -fPIC to CFLAGS and CXXFLAGS
+Subject: [PATCH 1/8] Add -fPIC to CFLAGS and CXXFLAGS
 
 TODO: Consider using CMAKE_POSITION_INDEPENDENT_CODE
 
