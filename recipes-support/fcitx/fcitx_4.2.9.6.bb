@@ -17,11 +17,11 @@ _PYSTROKE_VER=  "20121124"
 _PYTABLE_VER=   "20121124"
 
 SRC_URI += " \
-           http://download.fcitx-im.org/data/en_dict-${_DICT_VER}.tar.gz;name=en_dict \
            http://download.fcitx-im.org/data/pinyin.tar.gz;name=pinyin \
+           http://download.fcitx-im.org/data/table.tar.gz;name=table \
            http://download.fcitx-im.org/data/py_stroke-${_PYSTROKE_VER}.tar.gz;name=py_stroke \
            http://download.fcitx-im.org/data/py_table-${_PYTABLE_VER}.tar.gz;name=py_table \
-           http://download.fcitx-im.org/data/table.tar.gz;name=table \
+           http://download.fcitx-im.org/data/en_dict-${_DICT_VER}.tar.gz;name=en_dict \
            file://enable-pic.patch \
            file://0002-Use-precompiled-building-tools.patch \
            file://0001-Add-CMAKE_SYSROOT-for-paths-for-cmake-macros.patch \
@@ -31,11 +31,11 @@ SRC_URI += " \
            file://0001-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_XML.patch \
 "
 
-SRC_URI[en_dict.md5sum] = "8315f85331e0545c256a46e0cb00f10f"
-SRC_URI[en_dict.sha256sum] = "c44a5d7847925eea9e4d2d04748d442cd28dd9299a0b572ef7d91eac4f5a6ceb"
-
 SRC_URI[pinyin.md5sum] = "34dcb1b5209c28baa4e87f6a2773bfd0"
 SRC_URI[pinyin.sha256sum] = "583829b24a758c087c08de4a69480d0bf5946354fe77db360d6d7f467c2bd8e1"
+
+SRC_URI[table.md5sum] = "acb0b112423474ab2c1a22cee590d636"
+SRC_URI[table.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3cde63b7a8d6ab87b7"
 
 SRC_URI[py_stroke.md5sum] = "2559d025c5bbb50fa450a02429f92762"
 SRC_URI[py_stroke.sha256sum] = "8eb128a9bfa43952e67cf2fcee1fd134c6f4cfd317bc2f6c38a615f5eb64e248"
@@ -43,8 +43,22 @@ SRC_URI[py_stroke.sha256sum] = "8eb128a9bfa43952e67cf2fcee1fd134c6f4cfd317bc2f6c
 SRC_URI[py_table.md5sum] = "a72e275fe1916d67d01a2f038ca5d920"
 SRC_URI[py_table.sha256sum] = "42146ac97de6c13d55f9e99ed873915f4c66739e9c11532a34556badf9792c04"
 
-SRC_URI[table.md5sum] = "acb0b112423474ab2c1a22cee590d636"
-SRC_URI[table.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3cde63b7a8d6ab87b7"
+SRC_URI[en_dict.md5sum] = "8315f85331e0545c256a46e0cb00f10f"
+SRC_URI[en_dict.sha256sum] = "c44a5d7847925eea9e4d2d04748d442cd28dd9299a0b572ef7d91eac4f5a6ceb"
+
+do_unpack[pinyin.noexec] = "1"
+do_unpack[table.noexec] = "1"
+do_unpack[py_stroke.noexec] = "1"
+do_unpack[py_table.noexec] = "1"
+do_unpack[en_dict.noexec] = "1"
+do_unpack_extra() {
+    cp ${DL_DIR}/pinyin.tar.gz ${S}/src/im/pinyin/data/
+    cp ${DL_DIR}/table.tar.gz ${S}/src/im/table/data
+    cp ${DL_DIR}/py_stroke-${_PYSTROKE_VER}.tar.gz ${S}/src/module/pinyin-enhance/data/
+    cp ${DL_DIR}/py_table-${_PYTABLE_VER}.tar.gz ${S}/src/module/pinyin-enhance/data/
+    cp ${DL_DIR}/en_dict-${_DICT_VER}.tar.gz ${S}/src/module/spell/dict/
+}
+addtask unpack_extra after do_unpack before do_patch
 
 # NOTE: unable to map the following CMake package dependencies: GettextPo Presage DL OpenCC IsoCodes Enchant Qt4 Libexecinfo Lua Libintl XkbFile XKBCommon Libkvm ECM
 DEPENDS = "gettext-native glib-2.0 glib-2.0-native pango dbus-glib libx11 cairo gtk+ libxml2 gtk+3 dbus fontconfig virtual/libiconv extra-cmake-modules takao-fonts libxkbcommon enchant iso-codes libxkbfile fcitx-tools-native xkeyboard-config"
