@@ -1,14 +1,14 @@
-From 248964fed91391ead0f5b23f54ddd2c404aadadc Mon Sep 17 00:00:00 2001
+From c147578819400fa88f2612fb5f2f024643c0b969 Mon Sep 17 00:00:00 2001
 From: Hiroshi Hatake <hatake@clear-code.com>
 Date: Tue, 4 Sep 2018 13:25:08 +0900
-Subject: [PATCH 2/4] Use precompiled building tools
+Subject: [PATCH 2/7] Use precompiled building tools
 
 Force to set fcitx-tools executables for external build
 ---
- cmake/FcitxMacro.cmake               | 42 +++++++++++++++++++++++++-----------
- src/im/pinyin/data/CMakeLists.txt    |  7 +++++-
- src/im/table/data/CMakeLists.txt     |  6 +++++-
- src/module/spell/dict/CMakeLists.txt |  9 ++++++--
+ cmake/FcitxMacro.cmake               | 42 ++++++++++++++++++++--------
+ src/im/pinyin/data/CMakeLists.txt    |  7 ++++-
+ src/im/table/data/CMakeLists.txt     |  6 +++-
+ src/module/spell/dict/CMakeLists.txt |  9 ++++--
  4 files changed, 48 insertions(+), 16 deletions(-)
 
 diff --git a/cmake/FcitxMacro.cmake b/cmake/FcitxMacro.cmake
@@ -120,5 +120,5 @@ index 401630f4..e8b6c486 100644
    OUTPUT "${SPELL_EN_DICT}"
    DEPENDS "${SPELL_EN_DICT_SRC}" "${COMP_SPELL_DICT}" spell-en-extract
 -- 
-2.11.0
+2.30.2
 

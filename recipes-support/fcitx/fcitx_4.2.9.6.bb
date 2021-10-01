@@ -22,13 +22,13 @@ SRC_URI += " \
            http://download.fcitx-im.org/data/py_stroke-${_PYSTROKE_VER}.tar.gz;name=py_stroke \
            http://download.fcitx-im.org/data/py_table-${_PYTABLE_VER}.tar.gz;name=py_table \
            http://download.fcitx-im.org/data/en_dict-${_DICT_VER}.tar.gz;name=en_dict \
-           file://enable-pic.patch \
+           file://0001-Add-fPIC-to-CFLAGS-and-CXXFLAGS.patch \
            file://0002-Use-precompiled-building-tools.patch \
-           file://0001-Add-CMAKE_SYSROOT-for-paths-for-cmake-macros.patch \
+           file://0003-Add-CMAKE_SYSROOT-for-paths-for-cmake-macros.patch \
            file://0004-Force-set-configuration-directories.patch \
-           file://0001-Add-NoUI-module.patch \
-           file://0005-do-not-build-tools.patch \
-           file://0001-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_XML.patch \
+           file://0005-Add-NoUI-module.patch \
+           file://0006-fcitx-Don-t-build-dev-tools.patch \
+           file://0007-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_XML.patch \
 "
 
 SRC_URI[pinyin.md5sum] = "34dcb1b5209c28baa4e87f6a2773bfd0"

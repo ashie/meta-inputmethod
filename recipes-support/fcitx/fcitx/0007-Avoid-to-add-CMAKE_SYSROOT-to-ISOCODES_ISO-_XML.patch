@@ -1,7 +1,7 @@
-From ad16f5b050fe5c283d3c0b1139448e882b3340b9 Mon Sep 17 00:00:00 2001
+From 8beb6cda67148b813c5958527a041778abf51ea8 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 21 Sep 2021 16:46:09 +0900
-Subject: [PATCH] Avoid to add CMAKE_SYSROOT to ISOCODES_ISO*_XML
+Subject: [PATCH 7/7] Avoid to add CMAKE_SYSROOT to ISOCODES_ISO*_XML
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
