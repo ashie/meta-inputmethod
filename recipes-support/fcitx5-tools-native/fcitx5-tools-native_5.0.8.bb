@@ -16,11 +16,12 @@ FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx5-tools:"
 
 # NOTE: unable to map the following CMake package dependencies: WaylandScanner ECM Execinfo WaylandProtocols LibUUID XKBCommon fmt XCBImdkit XKeyboardConfig Systemd DL LibIntl LibKVM Doxygen Libevent IsoCodes Wayland
 
-DEPENDS = "ninja extra-cmake-modules fmt libevent enchant2 gettext"
+DEPENDS = "extra-cmake-modules fmt libevent enchant2 gettext"
 
 inherit cmake pkgconfig gettext native
 
-# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 EXTRA_OECMAKE = " \
         -DENABLE_TEST=OFF \
         -DENABLE_COVERAGE=OFF \
@@ -48,9 +49,10 @@ do_compile() {
 }
 
 do_install() {
-	DESTDIR=${D} cmake --build ${B} --target src/lib/fcitx-utils/install
-	DESTDIR=${D} cmake --build ${B} --target src/lib/fcitx-config/install
+	make install -C src/lib/fcitx-utils
+	make install -C src/lib/fcitx-config
 	install -d ${D}/${bindir}
+	install -d ${D}/${libdir}/cmake/Fcitx5Utils
 	install -m 755 src/modules/spell/dict/comp-spell-dict ${D}/${bindir}/Fcitx5::comp-spell-dict
 	install -m 644 src/lib/fcitx-utils/libFcitx5Utils.so* ${D}/${libdir}
 	install -m 644 src/lib/fcitx-config/libFcitx5Config.so* ${D}/${libdir}
