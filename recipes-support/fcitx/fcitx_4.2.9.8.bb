@@ -1,12 +1,12 @@
-LICENSE = "LGPLv2.1"
+LICENSE = "GPLv2+ & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6306e547e5c5e43190193019ed46ee13 \
                     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
-                    file://COPYING.LIBS;md5=e7a3d1af143519ecc617f1f95537934b \
+                    file://COPYING.LIBS;md5=3976e49afa51d2020b98eb4fdc395b21 \
                     file://cmake/COPYING-CMAKE-SCRIPTS;md5=2d149a0f4588c9f5e60c729e786dad45"
 
 SRC_URI = "http://download.fcitx-im.org/fcitx/fcitx-${PV}.tar.xz"
-SRC_URI[md5sum] = "88631df4af0b8d9fc7a816dd135fa97b"
-SRC_URI[sha256sum] = "d55eee3f094037b5c32f0c5397d585fdf932cbc7d2091ed6f78fd7a9ae512c47"
+SRC_URI[md5sum] = "dc155b77bebadb716be34f097baa1cdc"
+SRC_URI[sha256sum] = "bdb6a87d07506b903558e9b24a7b1548634695a93d5045c54ad520c6169f1e2a"
 
 DESCRIPTION = "A multilingual user input method library"
 HOMEPAGE = "https://fcitx-im.org/wiki/Fcitx"
@@ -28,7 +28,7 @@ SRC_URI += " \
            file://0004-Force-set-configuration-directories.patch \
            file://0005-Add-NoUI-module.patch \
            file://0006-fcitx-Don-t-build-dev-tools.patch \
-           file://0007-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_XML.patch \
+           file://0007-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
            file://0008-Use-LIB_INSTALL_DIR-instead-of-CMAKE_INSTALL_PREFIX-.patch \
 "
 
@@ -62,7 +62,7 @@ do_unpack_extra() {
 addtask unpack_extra after do_unpack before do_patch
 
 # NOTE: unable to map the following CMake package dependencies: GettextPo Presage DL OpenCC IsoCodes Enchant Qt4 Libexecinfo Lua Libintl XkbFile XKBCommon Libkvm ECM
-DEPENDS = "gettext-native glib-2.0 glib-2.0-native pango dbus-glib libx11 cairo gtk+ libxml2 gtk+3 dbus fontconfig virtual/libiconv extra-cmake-modules takao-fonts libxkbcommon enchant iso-codes libxkbfile fcitx-tools-native xkeyboard-config"
+DEPENDS = "gettext-native glib-2.0 glib-2.0-native pango dbus-glib libx11 cairo gtk+ libxml2 gtk+3 dbus fontconfig virtual/libiconv extra-cmake-modules takao-fonts libxkbcommon enchant iso-codes json-c libxkbfile fcitx-tools-native xkeyboard-config"
 
 inherit cmake pkgconfig binconfig
 

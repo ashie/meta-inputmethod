@@ -1,4 +1,4 @@
-From d5405b0ce7cfed059c9ad09ae5dfff7eb9de542f Mon Sep 17 00:00:00 2001
+From 0abda9026c00e40541309859abd3db583ce7d63d Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Sat, 25 Aug 2018 11:46:43 +0900
 Subject: [PATCH 3/8] Add CMAKE_SYSROOT for paths for cmake macros

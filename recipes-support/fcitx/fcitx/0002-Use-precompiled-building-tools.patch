@@ -1,4 +1,4 @@
-From c147578819400fa88f2612fb5f2f024643c0b969 Mon Sep 17 00:00:00 2001
+From 4e42032b07494de7c5137d94e1f7418e16eb8928 Mon Sep 17 00:00:00 2001
 From: Hiroshi Hatake <hatake@clear-code.com>
 Date: Tue, 4 Sep 2018 13:25:08 +0900
 Subject: [PATCH 2/8] Use precompiled building tools

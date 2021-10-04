@@ -1,0 +1,34 @@
+From 21c529b62f66f283704d1302f8766ebf872b0100 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 21 Sep 2021 16:46:09 +0900
+Subject: [PATCH 7/8] Avoid to add CMAKE_SYSROOT to ISOCODES_ISO*_JSON
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ cmake/FindIsoCodes.cmake | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/cmake/FindIsoCodes.cmake b/cmake/FindIsoCodes.cmake
+index d2d13187..a9e1377e 100644
+--- a/cmake/FindIsoCodes.cmake
++++ b/cmake/FindIsoCodes.cmake
+@@ -21,10 +21,16 @@ pkg_check_modules(PC_ISOCODES iso-codes)
+ find_file(ISOCODES_ISO639_JSON iso_639-3.json
+           HINTS "${PC_ISOCODES_PREFIX}/share/iso-codes/json/"
+           )
++if (ISOCODES_ISO639_JSON)
++  set(ISOCODES_ISO639_JSON "${PC_ISOCODES_PREFIX}/share/iso-codes/json/iso_639-3.json")
++endif()
+ 
+ find_file(ISOCODES_ISO3166_JSON iso_3166-1.json
+           HINTS "${PC_ISOCODES_PREFIX}/share/iso-codes/json/"
+           )
++if (ISOCODES_ISO3166_JSON)
++  set(ISOCODES_ISO3166_JSON "${PC_ISOCODES_PREFIX}/share/iso-codes/json/iso_3166-1.json")
++endif()
+ 
+ include(FindPackageHandleStandardArgs)
+ find_package_handle_standard_args(IsoCodes  DEFAULT_MSG  ISOCODES_ISO639_JSON ISOCODES_ISO3166_JSON)
+-- 
+2.30.2
+

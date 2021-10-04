@@ -1,4 +1,4 @@
-From 9fde71b75775f0520423deed9ab75dd0e1c0abab Mon Sep 17 00:00:00 2001
+From 52e129564b0afb6d959235c3771fdfdfa1324520 Mon Sep 17 00:00:00 2001
 From: Hiroshi Hatake <hatake@clear-code.com>
 Date: Mon, 27 Aug 2018 15:22:05 +0900
 Subject: [PATCH 4/8] Force set configuration directories

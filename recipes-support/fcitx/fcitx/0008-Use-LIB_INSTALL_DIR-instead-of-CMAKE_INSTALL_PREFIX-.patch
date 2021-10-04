@@ -1,4 +1,4 @@
-From b1e41fdf4dc02df808626929265212b2ca610ed6 Mon Sep 17 00:00:00 2001
+From 729e4750867c34b72d4f8b29aca34a8b9817a7fc Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Fri, 1 Oct 2021 18:31:04 +0900
 Subject: [PATCH 8/8] Use LIB_INSTALL_DIR instead of CMAKE_INSTALL_PREFIX for

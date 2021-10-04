@@ -1,4 +1,4 @@
-From 87d26f9538bcaf065ca7052b1e5270f79e1167c3 Mon Sep 17 00:00:00 2001
+From a49aeeff5cbe742d68a989ccf71c550206eeee2f Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Fri, 1 Oct 2021 18:10:35 +0900
 Subject: [PATCH 6/8] fcitx: Don't build dev tools
