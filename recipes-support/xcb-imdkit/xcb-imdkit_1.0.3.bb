@@ -15,3 +15,4 @@ inherit cmake
 
 EXTRA_OECMAKE = ""
 
+FILES_${PN}-dev += "${libdir}/cmake/XCBImdkit"

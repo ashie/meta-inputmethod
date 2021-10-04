@@ -15,3 +15,4 @@ BBCLASSEXTEND = "native"
 
 EXTRA_OECMAKE = ""
 
+FILES_${PN}-dev += "${libdir}/cmake/fmt"
