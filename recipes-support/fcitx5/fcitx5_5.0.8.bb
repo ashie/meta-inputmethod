@@ -27,7 +27,6 @@ DEPENDS = " ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
 
 inherit cmake pkgconfig gettext
 
-# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = "\
 	-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
 	-DENABLE_TEST=OFF \
@@ -41,7 +40,13 @@ EXTRA_OECMAKE = "\
 do_configure_append() {
     # Someone put unexpected "-I/usr/include" for building xim module but we
     # don't yet find who does it.
-    sed -i -e "s# -I/usr/include # #g" ${B}/build.ninja
+    NINJA_FLAGS_FILE="${B}/build.ninja"
+    MAKEFILE_FLAGS_FILE="${B}/src/frontend/xim/CMakeFiles/xim.dir/flags.make"
+    if test -f "${NINJA_FLAGS_FILE}"; then
+        sed -i -e "s# -I/usr/include # #g" "${NINJA_FLAGS_FILE}"
+    elif test -f "${MAKEFILE_FLAGS_FILE}"; then
+        sed -i -e "s# -I/usr/include # #g" "${MAKEFILE_FLAGS_FILE}"
+    fi
 }
 
 FILES_${PN} += " \
