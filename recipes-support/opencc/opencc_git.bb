@@ -18,4 +18,6 @@ inherit setuptools cmake
 
 RDEPENDS_${PN} += "python-core"
 
-
+EXTRA_OECMAKE = " \
+    -DLIB_INSTALL_DIR=${libdir} \
+"
