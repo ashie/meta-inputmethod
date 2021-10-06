@@ -1,0 +1,76 @@
+From 07602224c86ff497561add01822dcac96be3d120 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 6 Oct 2021 15:52:47 +0900
+Subject: [PATCH] Search RECIPE_SYSROOT to find wayland-protocols if it's
+ needed
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ ...SROOT-to-find-wayland-protocols-if-i.patch | 34 +++++++++++++++++++
+ configure.ac                                  |  9 ++++-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 0001-Search-RECIPE_SYSROOT-to-find-wayland-protocols-if-i.patch
+
+diff --git a/0001-Search-RECIPE_SYSROOT-to-find-wayland-protocols-if-i.patch b/0001-Search-RECIPE_SYSROOT-to-find-wayland-protocols-if-i.patch
+new file mode 100644
+index 0000000..5defef2
+--- /dev/null
++++ b/0001-Search-RECIPE_SYSROOT-to-find-wayland-protocols-if-i.patch
+@@ -0,0 +1,34 @@
++From b8e25ff6011e5bceb4e7addeb9a646f1cec576bb Mon Sep 17 00:00:00 2001
++From: Takuro Ashie <ashie@clear-code.com>
++Date: Wed, 6 Oct 2021 15:52:47 +0900
++Subject: [PATCH] Search RECIPE_SYSROOT to find wayland-protocols if it's
++ needed
++
++Signed-off-by: Takuro Ashie <ashie@clear-code.com>
++---
++ configure.ac | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 37bb2bb..af46092 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -92,7 +92,14 @@ PKG_CHECK_EXISTS(
++ if test "x$have_wayland_deps" = "xno"; then
++   AC_MSG_ERROR([Could not find wayland dependencies])
++ fi
++-AC_SUBST(WAYLAND_PROTOCOLS_DATADIR, `$PKG_CONFIG --variable=pkgdatadir wayland-protocols`)
+++WAYLAND_PROTOCOLS_DATADIR=`$PKG_CONFIG --variable=pkgdatadir wayland-protocols`
+++wl_protocols_datadir_with_sysroot=`echo "${WAYLAND_PROTOCOLS_DATADIR}" | grep "${WAYLAND_PROTOCOLS_SYSROOT_DIR}"`
+++echo ${WAYLAND_PROTOCOLS_SYSROOT_DIR}
+++echo ${wl_protocols_datadir_with_sysroot}
+++if test -z "${wl_protocols_datadir_with_sysroot}"; then
+++    WAYLAND_PROTOCOLS_DATADIR="${WAYLAND_PROTOCOLS_SYSROOT_DIR}${WAYLAND_PROTOCOLS_DATADIR}"
+++fi
+++AC_SUBST(WAYLAND_PROTOCOLS_DATADIR)
++ 
++ 
++ dnl
++-- 
++2.30.2
++
+diff --git a/configure.ac b/configure.ac
+index 37bb2bb..af46092 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -92,7 +92,14 @@ PKG_CHECK_EXISTS(
+ if test "x$have_wayland_deps" = "xno"; then
+   AC_MSG_ERROR([Could not find wayland dependencies])
+ fi
+-AC_SUBST(WAYLAND_PROTOCOLS_DATADIR, `$PKG_CONFIG --variable=pkgdatadir wayland-protocols`)
++WAYLAND_PROTOCOLS_DATADIR=`$PKG_CONFIG --variable=pkgdatadir wayland-protocols`
++wl_protocols_datadir_with_sysroot=`echo "${WAYLAND_PROTOCOLS_DATADIR}" | grep "${WAYLAND_PROTOCOLS_SYSROOT_DIR}"`
++echo ${WAYLAND_PROTOCOLS_SYSROOT_DIR}
++echo ${wl_protocols_datadir_with_sysroot}
++if test -z "${wl_protocols_datadir_with_sysroot}"; then
++    WAYLAND_PROTOCOLS_DATADIR="${WAYLAND_PROTOCOLS_SYSROOT_DIR}${WAYLAND_PROTOCOLS_DATADIR}"
++fi
++AC_SUBST(WAYLAND_PROTOCOLS_DATADIR)
+ 
+ 
+ dnl
+-- 
+2.30.2
+
