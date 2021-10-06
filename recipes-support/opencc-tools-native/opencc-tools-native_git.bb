@@ -12,7 +12,7 @@ SRCREV = "ea2f79a6938f5ef76cc3d17c8965a5eeacadbf6e"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "python3-wheel "
+DEPENDS = "python3 "
 
 inherit setuptools cmake native
 
