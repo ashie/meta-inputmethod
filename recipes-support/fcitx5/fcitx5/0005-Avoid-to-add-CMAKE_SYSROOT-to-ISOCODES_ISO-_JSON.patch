@@ -1,7 +1,7 @@
 From 7ce9f8ef092cfd70754b054395ef19f82a39f1eb Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 20 Jul 2021 16:12:10 +0900
-Subject: [PATCH 5/8] Avoid to add CMAKE_SYSROOT to ISOCODES_ISO*_JSON
+Subject: [PATCH 05/11] Avoid to add CMAKE_SYSROOT to ISOCODES_ISO*_JSON
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---

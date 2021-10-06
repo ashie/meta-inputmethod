@@ -1,0 +1,28 @@
+From 6b0ea828e4ab92361a75dd6cc1ebbbd640c39c99 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 6 Oct 2021 17:56:15 +0900
+Subject: [PATCH] Use "code" instead of "public-code" for wayland-scanner
+
+Keep backward compatibility with older wayland-scanner.
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ find-modules/FindWaylandScanner.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/find-modules/FindWaylandScanner.cmake b/find-modules/FindWaylandScanner.cmake
+index e0e68c4..08b0650 100644
+--- a/find-modules/FindWaylandScanner.cmake
++++ b/find-modules/FindWaylandScanner.cmake
+@@ -111,7 +111,7 @@ function(ecm_add_wayland_client_protocol out_var)
+         DEPENDS ${_infile} VERBATIM)
+ 
+     add_custom_command(OUTPUT "${_code}"
+-        COMMAND ${WaylandScanner_EXECUTABLE} public-code ${_infile} ${_code}
++        COMMAND ${WaylandScanner_EXECUTABLE} code ${_infile} ${_code}
+         DEPENDS ${_infile} ${_client_header} VERBATIM)
+ 
+     list(APPEND ${out_var} "${_client_header}" "${_code}")
+-- 
+2.30.2
+

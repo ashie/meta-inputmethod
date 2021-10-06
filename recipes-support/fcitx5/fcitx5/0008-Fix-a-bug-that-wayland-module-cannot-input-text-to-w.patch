@@ -1,7 +1,7 @@
 From c9184183a81caf20e645211b1ec62a2b8b26b6f1 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 23 Aug 2021 12:56:31 +0900
-Subject: [PATCH 8/8] Fix a bug that wayland module cannot input text to
+Subject: [PATCH 08/11] Fix a bug that wayland module cannot input text to
  weston-editor
 
 According to the protocol specification,

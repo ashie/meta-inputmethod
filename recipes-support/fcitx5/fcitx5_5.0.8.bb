@@ -13,6 +13,9 @@ SRC_URI_append = "\
         file://0006-Tweak-include-directories-to-care-CMAKE_SYSROOT.patch \
         file://0007-Make-sure-to-get-global-registry.patch \
         file://0008-Fix-a-bug-that-wayland-module-cannot-input-text-to-w.patch \
+        file://0009-Add-input-method-unstable-v1.xml.patch \
+        file://0010-Disable-input-method-v2.patch \
+        file://0011-Add-text-input-unstable-v1.xml-and-text-input-unstab.patch \
 "
 
 # Modify these as desired
@@ -59,3 +62,5 @@ FILES_${PN} += " \
    ${datadir}/icons/hicolor/scalable/apps/*.svg \
    ${datadir}/dbus-1/services/org.fcitx.Fcitx5.service \
 "
+
+FILES_${PN}-dev += "${libdir}/cmake"

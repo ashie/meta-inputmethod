@@ -1,0 +1,230 @@
+From 6870ada8c6bc53ec8fc8b9837873fce47f41a5f1 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Wed, 6 Oct 2021 17:14:32 +0900
+Subject: [PATCH 10/11] Disable input-method-v2
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/frontend/waylandim/CMakeLists.txt     | 4 ++--
+ src/frontend/waylandim/waylandim.cpp      | 8 ++++++++
+ src/frontend/waylandim/waylandim.h        | 6 ++++++
+ src/frontend/waylandim/waylandim_public.h | 2 ++
+ src/lib/fcitx-wayland/CMakeLists.txt      | 2 +-
+ src/ui/classic/CMakeLists.txt             | 2 +-
+ src/ui/classic/waylandinputwindow.cpp     | 6 ++++++
+ src/ui/classic/waylandinputwindow.h       | 4 ++++
+ src/ui/classic/waylandui.cpp              | 2 ++
+ 9 files changed, 32 insertions(+), 4 deletions(-)
+
+diff --git a/src/frontend/waylandim/CMakeLists.txt b/src/frontend/waylandim/CMakeLists.txt
+index 9e05bf3..9d05e67 100644
+--- a/src/frontend/waylandim/CMakeLists.txt
++++ b/src/frontend/waylandim/CMakeLists.txt
+@@ -8,9 +8,9 @@ ecm_add_wayland_client_protocol(WAYLAND_IM_PROTOCOL_SRCS
+     PROTOCOL ${WAYLAND_PROTOCOLS_PKGDATADIR}/unstable/text-input/text-input-unstable-v3.xml
+     BASENAME text-input-unstable-v3)
+ 
+-add_library(waylandim MODULE waylandim.cpp waylandimserver.cpp waylandimserverv2.cpp ${WAYLAND_IM_PROTOCOL_SRCS})
++add_library(waylandim MODULE waylandim.cpp waylandimserver.cpp ${WAYLAND_IM_PROTOCOL_SRCS})
+ target_include_directories(waylandim PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+-target_link_libraries(waylandim Fcitx5::Core Wayland::Client XKBCommon::XKBCommon Fcitx5::Module::Wayland Fcitx5::Wayland::Core Fcitx5::Wayland::InputMethod Fcitx5::Wayland::InputMethodV2)
++target_link_libraries(waylandim Fcitx5::Core Wayland::Client XKBCommon::XKBCommon Fcitx5::Module::Wayland Fcitx5::Wayland::Core Fcitx5::Wayland::InputMethod)
+ set_target_properties(waylandim PROPERTIES PREFIX "")
+ install(TARGETS waylandim DESTINATION "${FCITX_INSTALL_ADDONDIR}")
+ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/waylandim.conf.in.in ${CMAKE_CURRENT_BINARY_DIR}/waylandim.conf.in @ONLY)
+diff --git a/src/frontend/waylandim/waylandim.cpp b/src/frontend/waylandim/waylandim.cpp
+index 4cbbec1..5331e34 100644
+--- a/src/frontend/waylandim/waylandim.cpp
++++ b/src/frontend/waylandim/waylandim.cpp
+@@ -14,7 +14,9 @@
+ #include "fcitx/inputcontext.h"
+ #include "display.h"
+ #include "waylandimserver.h"
++#if 0
+ #include "waylandimserverv2.h"
++#endif
+ 
+ FCITX_DEFINE_LOG_CATEGORY(waylandim, "waylandim")
+ 
+@@ -28,20 +30,25 @@ WaylandIMModule::WaylandIMModule(Instance *instance) : instance_(instance) {
+                 WaylandIMServer *server =
+                     new WaylandIMServer(display, group, name, this);
+                 servers_[name].reset(server);
++#if 0
+                 WaylandIMServerV2 *serverv2 =
+                     new WaylandIMServerV2(display, group, name, this);
+                 serversV2_[name].reset(serverv2);
++#endif
+             });
+     closedCallback_ =
+         wayland()->call<IWaylandModule::addConnectionClosedCallback>(
+             [this](const std::string &name, wl_display *) {
+                 servers_.erase(name);
++#if 0
+                 serversV2_.erase(name);
++#endif
+             });
+ }
+ 
+ WaylandIMModule::~WaylandIMModule() {}
+ 
++#if 0
+ wayland::ZwpInputMethodV2 *WaylandIMModule::getInputMethodV2(InputContext *ic) {
+     if (ic->frontend() != std::string_view("wayland_v2")) {
+         return nullptr;
+@@ -50,6 +57,7 @@ wayland::ZwpInputMethodV2 *WaylandIMModule::getInputMethodV2(InputContext *ic) {
+     auto *v2IC = static_cast<WaylandIMInputContextV2 *>(ic);
+     return v2IC->inputMethodV2();
+ }
++#endif
+ 
+ class WaylandIMModuleFactory : public AddonFactory {
+ public:
+diff --git a/src/frontend/waylandim/waylandim.h b/src/frontend/waylandim/waylandim.h
+index be65a46..c184bb7 100644
+--- a/src/frontend/waylandim/waylandim.h
++++ b/src/frontend/waylandim/waylandim.h
+@@ -18,7 +18,9 @@ namespace fcitx {
+ 
+ class WaylandIMModule;
+ class WaylandIMServer;
++#if 0
+ class WaylandIMServerV2;
++#endif
+ 
+ class WaylandIMModule : public AddonInstance {
+ public:
+@@ -28,15 +30,19 @@ public:
+     FCITX_ADDON_DEPENDENCY_LOADER(wayland, instance_->addonManager());
+     Instance *instance() { return instance_; }
+ 
++#if 0
+     wayland::ZwpInputMethodV2 *getInputMethodV2(InputContext *ic);
+ 
+     FCITX_ADDON_EXPORT_FUNCTION(WaylandIMModule, getInputMethodV2);
++#endif
+ 
+ private:
+     Instance *instance_;
+     std::unordered_map<std::string, std::unique_ptr<WaylandIMServer>> servers_;
++#if 0
+     std::unordered_map<std::string, std::unique_ptr<WaylandIMServerV2>>
+         serversV2_;
++#endif
+     std::unique_ptr<HandlerTableEntry<WaylandConnectionCreated>>
+         createdCallback_;
+     std::unique_ptr<HandlerTableEntry<WaylandConnectionClosed>> closedCallback_;
+diff --git a/src/frontend/waylandim/waylandim_public.h b/src/frontend/waylandim/waylandim_public.h
+index 736c1bc..2fc9d0b 100644
+--- a/src/frontend/waylandim/waylandim_public.h
++++ b/src/frontend/waylandim/waylandim_public.h
+@@ -14,10 +14,12 @@
+ #include <fcitx/addoninstance.h>
+ #include <fcitx/focusgroup.h>
+ #include <wayland-client.h>
++#if 0
+ #include "zwp_input_method_v2.h"
+ 
+ FCITX_ADDON_DECLARE_FUNCTION(
+     WaylandIMModule, getInputMethodV2,
+     fcitx::wayland::ZwpInputMethodV2 *(fcitx::InputContext *));
++#endif
+ 
+ #endif // _FCITX5_FRONTEND_WAYLANDIM_WAYLANDIM_PUBLIC_H_
+diff --git a/src/lib/fcitx-wayland/CMakeLists.txt b/src/lib/fcitx-wayland/CMakeLists.txt
+index 5efea24..788e531 100644
+--- a/src/lib/fcitx-wayland/CMakeLists.txt
++++ b/src/lib/fcitx-wayland/CMakeLists.txt
+@@ -1,4 +1,4 @@
+ add_subdirectory(core)
+ add_subdirectory(input-method)
+-add_subdirectory(input-method-v2)
++#add_subdirectory(input-method-v2)
+ #add_subdirectory(input-method-v3)
+diff --git a/src/ui/classic/CMakeLists.txt b/src/ui/classic/CMakeLists.txt
+index 2b237ba..3f4f1be 100644
+--- a/src/ui/classic/CMakeLists.txt
++++ b/src/ui/classic/CMakeLists.txt
+@@ -8,7 +8,7 @@ if (WAYLAND_FOUND)
+         waylandpointer.cpp buffer.cpp waylandinputwindow.cpp)
+     set(CLASSICUI_WAYLAND_LIBS ${CLASSICUI_WAYLAND_LIBS}
+         Fcitx5::Module::Wayland Fcitx5::Module::WaylandIM Wayland::Client Fcitx5::Wayland::Core
+-        Fcitx5::Wayland::InputMethod Fcitx5::Wayland::InputMethodV2)
++        Fcitx5::Wayland::InputMethod)
+ else()
+ endif()
+ 
+diff --git a/src/ui/classic/waylandinputwindow.cpp b/src/ui/classic/waylandinputwindow.cpp
+index d014513..f224e5f 100644
+--- a/src/ui/classic/waylandinputwindow.cpp
++++ b/src/ui/classic/waylandinputwindow.cpp
+@@ -9,7 +9,9 @@
+ #include "waylandui.h"
+ #include "waylandwindow.h"
+ #include "zwp_input_panel_v1.h"
++#if 0
+ #include "zwp_input_popup_surface_v2.h"
++#endif
+ 
+ #ifdef __linux__
+ #include <linux/input-event-codes.h>
+@@ -90,6 +92,7 @@ void WaylandInputWindow::resetPanel() { panelSurface_.reset(); }
+ 
+ void WaylandInputWindow::update(fcitx::InputContext *ic) {
+     InputWindow::update(ic);
++#if 0
+     if (ic->frontend() == std::string_view("wayland_v2")) {
+         if (ic != v2IC_.get()) {
+             v2IC_ = ic->watch();
+@@ -100,6 +103,9 @@ void WaylandInputWindow::update(fcitx::InputContext *ic) {
+         }
+     }
+     if (!panelSurface_ && !panelSurfaceV2_) {
++#else
++    if (!panelSurface_) {
++#endif
+         return;
+     }
+ 
+diff --git a/src/ui/classic/waylandinputwindow.h b/src/ui/classic/waylandinputwindow.h
+index 9559b73..dad64d6 100644
+--- a/src/ui/classic/waylandinputwindow.h
++++ b/src/ui/classic/waylandinputwindow.h
+@@ -9,7 +9,9 @@
+ 
+ #include "inputwindow.h"
+ #include "zwp_input_panel_surface_v1.h"
++#if 0
+ #include "zwp_input_popup_surface_v2.h"
++#endif
+ 
+ namespace fcitx {
+ namespace classicui {
+@@ -30,8 +32,10 @@ private:
+     WaylandUI *ui_;
+     wl_fixed_t scroll_ = 0;
+     std::unique_ptr<wayland::ZwpInputPanelSurfaceV1> panelSurface_;
++#if 0
+     TrackableObjectReference<InputContext> v2IC_;
+     std::unique_ptr<wayland::ZwpInputPopupSurfaceV2> panelSurfaceV2_;
++#endif
+     std::unique_ptr<WaylandWindow> window_;
+     TrackableObjectReference<InputContext> repaintIC_;
+ };
+diff --git a/src/ui/classic/waylandui.cpp b/src/ui/classic/waylandui.cpp
+index e5d21e8..5ffee3e 100644
+--- a/src/ui/classic/waylandui.cpp
++++ b/src/ui/classic/waylandui.cpp
+@@ -18,7 +18,9 @@
+ #include "wl_shell.h"
+ #include "wl_shm.h"
+ #include "zwp_input_panel_v1.h"
++#if 0
+ #include "zwp_input_popup_surface_v2.h"
++#endif
+ 
+ #ifdef CAIRO_EGL_FOUND
+ 
+-- 
+2.30.2
+

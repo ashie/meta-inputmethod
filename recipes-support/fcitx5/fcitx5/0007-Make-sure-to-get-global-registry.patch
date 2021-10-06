@@ -1,7 +1,7 @@
 From 3ea41bdc57c3ac19651c9f4c1fd6cf7ac096ec64 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 2 Aug 2021 15:33:11 +0900
-Subject: [PATCH 7/8] Make sure to get global registry
+Subject: [PATCH 07/11] Make sure to get global registry
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
