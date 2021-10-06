@@ -49,8 +49,8 @@ do_compile() {
 }
 
 do_install() {
-	make install -C src/lib/fcitx-utils
-	make install -C src/lib/fcitx-config
+	DESTDIR=${D} make install -C src/lib/fcitx-utils
+	DESTDIR=${D} make install -C src/lib/fcitx-config
 	install -d ${D}/${bindir}
 	install -d ${D}/${libdir}/cmake/Fcitx5Utils
 	install -m 755 src/modules/spell/dict/comp-spell-dict ${D}/${bindir}/Fcitx5::comp-spell-dict
