@@ -61,15 +61,13 @@ do_unpack_extra() {
 }
 addtask unpack_extra after do_unpack before do_patch
 
-# NOTE: unable to map the following CMake package dependencies: GettextPo Presage DL OpenCC IsoCodes Enchant Qt4 Libexecinfo Lua Libintl XkbFile XKBCommon Libkvm ECM
 DEPENDS = "gettext-native glib-2.0 glib-2.0-native pango dbus-glib libx11 cairo gtk+ libxml2 gtk+3 dbus fontconfig virtual/libiconv extra-cmake-modules takao-fonts libxkbcommon enchant iso-codes json-c libxkbfile fcitx-tools-native xkeyboard-config"
 
-inherit cmake pkgconfig binconfig
+inherit cmake pkgconfig binconfig gtk-immodules-cache
 
 BINCONFIG = "${bindir}/fcitx4-config"
 BINCONFIG_GLOB = "fcitx4-config"
 
-inherit cmake gtk-immodules-cache
 GTKIMMODULES_PACKAGES = "fcitx-gtk2.0 fcitx-gtk3"
 
 OECMAKE_GENERATOR = "Unix Makefiles"
