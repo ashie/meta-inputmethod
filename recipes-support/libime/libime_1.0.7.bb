@@ -18,6 +18,7 @@ SRC_URI[table_dict.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3
 SRC_URI_append = "\
     file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
     file://0002-Use-CMAKE_INSTALL_INCLUDEDIR-instead-of-CMAKE_INSTAL.patch \
+    file://0003-Fix-a-build-error-on-boost-1.64.0.patch \
 "
 
 inherit cmake pkgconfig python3native

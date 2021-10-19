@@ -1,0 +1,49 @@
+From 8ca6609694c65adebd9e07b502290fb02e2a2606 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 19 Oct 2021 21:40:49 +0900
+Subject: [PATCH 3/3] Fix a build error on boost-1.64.0
+
+/build/libime-1.0.7/src/libime/core/decoder.cpp: In member function 'bool libime::DecoderPrivate::buildLattice(const libime::Decoder*, libime::Lattice&, const std::unordered_set<const libime::SegmentGraphNode*>&, const State&, const libime::SegmentGraph&, size_t, void*) const':
+/build/libime-1.0.7/src/libime/core/decoder.cpp:130:50: error: no matching function for call to 'boost::ptr_vector<libime::LatticeNode>::push_back(std::remove_reference<std::unique_ptr<libime::LatticeNode>&>::type)'
+             latticeUnit.push_back(std::move(node));
+                                                  ^
+In file included from /build/recipe-sysroot/usr/include/boost/ptr_container/ptr_list.hpp:19:0,
+                 from /build/libime-1.0.7/src/libime/core/../../libime/core/segmentgraph.h:11,
+                 from /build/libime-1.0.7/src/libime/core/../../libime/core/lattice.h:16,
+                 from /build/libime-1.0.7/src/libime/core/../../libime/core/dictionary.h:9,
+                 from /build/libime-1.0.7/src/libime/core/decoder.h:12,
+                 from /build/libime-1.0.7/src/libime/core/decoder.cpp:7:
+/build/recipe-sysroot/usr/include/boost/ptr_container/ptr_sequence_adapter.hpp:244:14: note: candidate: void boost::ptr_sequence_adapter<T, VoidPtrSeq, CloneAllocator>::push_back(boost::ptr_sequence_adapter<T, VoidPtrSeq, CloneAllocator>::value_type) [with T = libime::LatticeNode; VoidPtrSeq = std::vector<void*, std::allocator<void*> >; CloneAllocator = boost::heap_clone_allocator; boost::ptr_sequence_adapter<T, VoidPtrSeq, CloneAllocator>::value_type = libime::LatticeNode*]
+         void push_back( value_type x )  // strong
+              ^~~~~~~~~
+/build/recipe-sysroot/usr/include/boost/ptr_container/ptr_sequence_adapter.hpp:244:14: note:   no known conversion for argument 1 from 'std::remove_reference<std::unique_ptr<libime::LatticeNode>&>::type {aka std::unique_ptr<libime::LatticeNode>}' to 'boost::ptr_sequence_adapter<libime::LatticeNode, std::vector<void*, std::allocator<void*> >, boost::heap_clone_allocator>::value_type {aka libime::LatticeNode*}'
+/build/recipe-sysroot/usr/include/boost/ptr_container/ptr_sequence_adapter.hpp:254:14: note: candidate: template<class U> void boost::ptr_sequence_adapter<T, VoidPtrSeq, CloneAllocator>::push_back(std::auto_ptr<_Up>) [with U = U; T = libime::LatticeNode; VoidPtrSeq = std::vector<void*, std::allocator<void*> >; CloneAllocator = boost::heap_clone_allocator]
+         void push_back( std::auto_ptr<U> x )
+              ^~~~~~~~~
+/build/recipe-sysroot/usr/include/boost/ptr_container/ptr_sequence_adapter.hpp:254:14: note:   template argument deduction/substitution failed:
+/build/libime-1.0.7/src/libime/core/decoder.cpp:130:50: note:   'std::unique_ptr<libime::LatticeNode>' is not derived from 'std::auto_ptr<_Up>'
+             latticeUnit.push_back(std::move(node));
+                                                  ^
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/libime/core/decoder.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/libime/core/decoder.cpp b/src/libime/core/decoder.cpp
+index 035ac29..23a2982 100644
+--- a/src/libime/core/decoder.cpp
++++ b/src/libime/core/decoder.cpp
+@@ -127,7 +127,8 @@ bool DecoderPrivate::buildLattice(
+     for (auto &[path, nodes] : frames) {
+         auto &latticeUnit = lattice[path.second];
+         for (auto &node : nodes) {
+-            latticeUnit.push_back(std::move(node));
++            latticeUnit.push_back(node.get());
++            node.release();
+         }
+     }
+     if (!lattice.count(&graph.end())) {
+-- 
+2.30.2
+
