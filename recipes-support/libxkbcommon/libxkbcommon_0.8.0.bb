@@ -7,15 +7,10 @@ SRC_URI[sha256sum] = "e829265db04e0aebfb0591b6dc3377b64599558167846c3f5ee5c5e536
 
 S = "${WORKDIR}/libxkbcommon-${PV}"
 
-# NOTE: the following prog dependencies are unknown, ignoring: wayland-scanner
 DEPENDS = "bison-native libxcb"
 
-# NOTE: if this software is not capable of being built in a separate build directory
-# from the source, you should replace autotools with autotools-brokensep in the
-# inherit line
 inherit pkgconfig autotools
 
-# Specify any options you want to pass to the configure script using EXTRA_OECONF:
 EXTRA_OECONF = " \
     --without-doxygen \
     --with-default-rules="xorg" \

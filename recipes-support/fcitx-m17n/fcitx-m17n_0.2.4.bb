@@ -10,10 +10,8 @@ SRC_URI = "https://download.fcitx-im.org/fcitx-m17n/fcitx-m17n-${PV}.tar.xz"
 SRC_URI[md5sum] = "d9c3e77914bd19d235d4d74fcea8df89"
 SRC_URI[sha256sum] = "cf82158b907ba6b79aad3e4c26f9e0e2457a270619548adc31e9f77412144597"
 
-# NOTE: unable to map the following CMake package dependencies: M17N Fcitx
 inherit cmake pkgconfig
 
-# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE += " \
     -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
     -DMAKE_INSTALL_PREFIX=/usr \

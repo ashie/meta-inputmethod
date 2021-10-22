@@ -18,10 +18,8 @@ SRC_URI_append = "\
     file://0011-Add-text-input-unstable-v1.xml-and-text-input-unstab.patch \
 "
 
-# Modify these as desired
 S = "${WORKDIR}/${BPN}-${PV}"
 
-# NOTE: unable to map the following CMake package dependencies: WaylandScanner ECM Execinfo WaylandProtocols LibUUID XKBCommon fmt XCBImdkit XKeyboardConfig Systemd DL LibIntl LibKVM Doxygen Libevent IsoCodes Wayland
 DEPENDS = " ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
     libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit libxkbcommon libxkbfile\
     wayland wayland-native wayland-protocols iso-codes cairo \
