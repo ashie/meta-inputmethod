@@ -44,3 +44,5 @@ FILES_${PN} += "\
     ${datadir}/icons \
     ${datadir}/fcitx5 \
 "
+
+FILES_${PN}-dev += "${libdir}/cmake"

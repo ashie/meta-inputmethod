@@ -36,3 +36,5 @@ do_unpack_extra() {
     cp ${DL_DIR}/table.tar.gz ${S}/data/
 }
 addtask unpack_extra after do_unpack before do_patch
+
+FILES_${PN}-dev += "${libdir}/cmake"
