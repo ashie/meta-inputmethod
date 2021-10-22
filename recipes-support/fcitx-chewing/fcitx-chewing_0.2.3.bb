@@ -19,7 +19,8 @@ EXTRA_OECMAKE += " \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
-FILES_${PN} += "${libdir}/fcitx/fcitx-chewing.so \
-	${datadir}/fcitx \
-	${datadir}/icons \
+FILES_${PN} += " \
+    ${libdir}/fcitx/fcitx-chewing.so \
+    ${datadir}/fcitx \
+    ${datadir}/icons \
 "

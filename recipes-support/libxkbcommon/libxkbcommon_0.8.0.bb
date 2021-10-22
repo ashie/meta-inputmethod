@@ -16,10 +16,11 @@ DEPENDS = "bison-native libxcb"
 inherit pkgconfig autotools
 
 # Specify any options you want to pass to the configure script using EXTRA_OECONF:
-EXTRA_OECONF = "--without-doxygen \
-                --with-default-rules="xorg" \
-                --with-x-locale-root=${D}/usr/lib/X11/locale \
-                --disable-wayland \
+EXTRA_OECONF = " \
+    --without-doxygen \
+    --with-default-rules="xorg" \
+    --with-x-locale-root=${D}/usr/lib/X11/locale \
+    --disable-wayland \
 "
 
 BBCLASSEXTEND = "native nativesdk"

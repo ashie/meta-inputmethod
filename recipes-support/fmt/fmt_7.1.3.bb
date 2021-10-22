@@ -1,6 +1,8 @@
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b \
-                    file://doc/python-license.txt;md5=d214581529e343354f8e23025bdf582d"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b \
+    file://doc/python-license.txt;md5=d214581529e343354f8e23025bdf582d \
+"
 
 SRC_URI = "https://github.com/fmtlib/fmt/archive/${PV}.tar.gz"
 SRC_URI[md5sum] = "2522ec65070c0bda0ca288677ded2831"

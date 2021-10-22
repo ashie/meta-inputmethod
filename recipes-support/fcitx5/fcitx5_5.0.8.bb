@@ -5,17 +5,17 @@ SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5/fcitx5-${PV}_dict.tar.xz"
 SRC_URI[sha256sum] = "02f5de5e4d8c9912656b5acf954085ee5cdd567292fc1a915be051f9aed46614"
 
 SRC_URI_append = "\
-	file://0001-Don-t-use-charconv-to-support-GCC-7.x.patch \
-	file://0002-Add-CMAKE_SYSROOT-for-xkb_base.patch \
-	file://0003-Add-options-to-disable-XIM-IBus-frontend.patch \
-	file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
-	file://0005-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
-        file://0006-Tweak-include-directories-to-care-CMAKE_SYSROOT.patch \
-        file://0007-Make-sure-to-get-global-registry.patch \
-        file://0008-Fix-a-bug-that-wayland-module-cannot-input-text-to-w.patch \
-        file://0009-Add-input-method-unstable-v1.xml.patch \
-        file://0010-Disable-input-method-v2.patch \
-        file://0011-Add-text-input-unstable-v1.xml-and-text-input-unstab.patch \
+    file://0001-Don-t-use-charconv-to-support-GCC-7.x.patch \
+    file://0002-Add-CMAKE_SYSROOT-for-xkb_base.patch \
+    file://0003-Add-options-to-disable-XIM-IBus-frontend.patch \
+    file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
+    file://0005-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
+    file://0006-Tweak-include-directories-to-care-CMAKE_SYSROOT.patch \
+    file://0007-Make-sure-to-get-global-registry.patch \
+    file://0008-Fix-a-bug-that-wayland-module-cannot-input-text-to-w.patch \
+    file://0009-Add-input-method-unstable-v1.xml.patch \
+    file://0010-Disable-input-method-v2.patch \
+    file://0011-Add-text-input-unstable-v1.xml-and-text-input-unstab.patch \
 "
 
 # Modify these as desired
@@ -23,21 +23,21 @@ S = "${WORKDIR}/${BPN}-${PV}"
 
 # NOTE: unable to map the following CMake package dependencies: WaylandScanner ECM Execinfo WaylandProtocols LibUUID XKBCommon fmt XCBImdkit XKeyboardConfig Systemd DL LibIntl LibKVM Doxygen Libevent IsoCodes Wayland
 DEPENDS = " ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
-	libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit libxkbcommon libxkbfile\
-	wayland wayland-native wayland-protocols iso-codes cairo \
-	gdk-pixbuf pango enchant2 json-c systemd fcitx5-tools-native xkeyboard-config \
+    libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit libxkbcommon libxkbfile\
+    wayland wayland-native wayland-protocols iso-codes cairo \
+    gdk-pixbuf pango enchant2 json-c systemd fcitx5-tools-native xkeyboard-config \
 "
 
 inherit cmake pkgconfig gettext
 
 EXTRA_OECMAKE = "\
-	-DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
-	-DENABLE_TEST=OFF \
-	-DENABLE_IBUS=OFF \
-	-DENABLE_METAINFO=OFF \
-	-DENABLE_X11=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)} \
-	-DENABLE_XIM=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)} \
-	-DENABLE_WAYLAND=${@bb.utils.contains("DISTRO_FEATURES", "wayland", "ON", "OFF", d)} \
+    -DCMAKE_SYSROOT=${RECIPE_SYSROOT} \
+    -DENABLE_TEST=OFF \
+    -DENABLE_IBUS=OFF \
+    -DENABLE_METAINFO=OFF \
+    -DENABLE_X11=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)} \
+    -DENABLE_XIM=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)} \
+    -DENABLE_WAYLAND=${@bb.utils.contains("DISTRO_FEATURES", "wayland", "ON", "OFF", d)} \
 "
 
 do_configure_append() {

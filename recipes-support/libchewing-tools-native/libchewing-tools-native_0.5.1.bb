@@ -13,8 +13,8 @@ S = "${WORKDIR}/libchewing-${PV}/"
 inherit autotools pkgconfig native
 
 do_compile(){
-	cd ${B}/src/tools
-	make init_database dump_database
+    cd ${B}/src/tools
+    make init_database dump_database
 }
 do_install(){
     install -d ${D}${bindir}

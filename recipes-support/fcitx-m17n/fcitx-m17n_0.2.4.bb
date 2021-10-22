@@ -20,6 +20,7 @@ EXTRA_OECMAKE += " \
     -DLIB_INSTALL_DIR=${libdir} \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
-FILES_${PN} += "${libdir}/fcitx/fcitx-m17n.so \
-	${datadir}/fcitx \
+FILES_${PN} += " \
+    ${libdir}/fcitx/fcitx-m17n.so \
+    ${datadir}/fcitx \
 "

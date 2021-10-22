@@ -1,8 +1,10 @@
 LICENSE = "GPLv2+ & BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6306e547e5c5e43190193019ed46ee13 \
-                    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
-                    file://COPYING.LIBS;md5=3976e49afa51d2020b98eb4fdc395b21 \
-                    file://cmake/COPYING-CMAKE-SCRIPTS;md5=2d149a0f4588c9f5e60c729e786dad45"
+LIC_FILES_CHKSUM = " \
+    file://COPYING;md5=6306e547e5c5e43190193019ed46ee13 \
+    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
+    file://COPYING.LIBS;md5=3976e49afa51d2020b98eb4fdc395b21 \
+    file://cmake/COPYING-CMAKE-SCRIPTS;md5=2d149a0f4588c9f5e60c729e786dad45 \
+"
 
 SRC_URI = "http://download.fcitx-im.org/fcitx/fcitx-${PV}.tar.xz"
 SRC_URI[md5sum] = "dc155b77bebadb716be34f097baa1cdc"
@@ -17,19 +19,19 @@ _PYSTROKE_VER=  "20121124"
 _PYTABLE_VER=   "20121124"
 
 SRC_URI += " \
-           http://download.fcitx-im.org/data/pinyin.tar.gz;name=pinyin \
-           http://download.fcitx-im.org/data/table.tar.gz;name=table \
-           http://download.fcitx-im.org/data/py_stroke-${_PYSTROKE_VER}.tar.gz;name=py_stroke \
-           http://download.fcitx-im.org/data/py_table-${_PYTABLE_VER}.tar.gz;name=py_table \
-           http://download.fcitx-im.org/data/en_dict-${_DICT_VER}.tar.gz;name=en_dict \
-           file://0001-Add-fPIC-to-CFLAGS-and-CXXFLAGS.patch \
-           file://0002-Use-precompiled-building-tools.patch \
-           file://0003-Add-CMAKE_SYSROOT-for-paths-for-cmake-macros.patch \
-           file://0004-Force-set-configuration-directories.patch \
-           file://0005-Add-NoUI-module.patch \
-           file://0006-fcitx-Don-t-build-dev-tools.patch \
-           file://0007-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
-           file://0008-Use-LIB_INSTALL_DIR-instead-of-CMAKE_INSTALL_PREFIX-.patch \
+    http://download.fcitx-im.org/data/pinyin.tar.gz;name=pinyin \
+    http://download.fcitx-im.org/data/table.tar.gz;name=table \
+    http://download.fcitx-im.org/data/py_stroke-${_PYSTROKE_VER}.tar.gz;name=py_stroke \
+    http://download.fcitx-im.org/data/py_table-${_PYTABLE_VER}.tar.gz;name=py_table \
+    http://download.fcitx-im.org/data/en_dict-${_DICT_VER}.tar.gz;name=en_dict \
+    file://0001-Add-fPIC-to-CFLAGS-and-CXXFLAGS.patch \
+    file://0002-Use-precompiled-building-tools.patch \
+    file://0003-Add-CMAKE_SYSROOT-for-paths-for-cmake-macros.patch \
+    file://0004-Force-set-configuration-directories.patch \
+    file://0005-Add-NoUI-module.patch \
+    file://0006-fcitx-Don-t-build-dev-tools.patch \
+    file://0007-Avoid-to-add-CMAKE_SYSROOT-to-ISOCODES_ISO-_JSON.patch \
+    file://0008-Use-LIB_INSTALL_DIR-instead-of-CMAKE_INSTALL_PREFIX-.patch \
 "
 
 SRC_URI[pinyin.md5sum] = "34dcb1b5209c28baa4e87f6a2773bfd0"
@@ -72,18 +74,19 @@ GTKIMMODULES_PACKAGES = "fcitx-gtk2.0 fcitx-gtk3"
 
 OECMAKE_GENERATOR = "Unix Makefiles"
 
-EXTRA_OECMAKE += "-DENABLE_XDGAUTOSTART=OFF -DFORCE_ENCHANT=ON \
-                -DDATADIR=${datadir} \
-                -DLIB_INSTALL_DIR=${libdir} \
-                -DDOCSDIR=${docsdir} \
-                -DGOBJECT_INTROSPECTION_GIRDIR=${D}/usr/share/gir-1.0 \
-                -DGOBJECT_INTROSPECTION_TYPELIBDIR=${D}/usr/lib/girepository-1.0 \
-                -DMANPREFIX=${MANPREFIX} \
-                -DPREFIX=/usr/ \
-                -DQT_PLUGINS_DIR=/usr/lib/qt4/plugins \
-                -DENABLE_GIR=OFF -DENABLE_GTK3_IM_MODULE=ON \
-		-DENABLE_QT=OFF -DENABLE_QT_IM_MODULE=OFF -DENABLE_QT_GUI=OFF \
-                -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
+EXTRA_OECMAKE += " \
+    -DENABLE_XDGAUTOSTART=OFF -DFORCE_ENCHANT=ON \
+    -DDATADIR=${datadir} \
+    -DLIB_INSTALL_DIR=${libdir} \
+    -DDOCSDIR=${docsdir} \
+    -DGOBJECT_INTROSPECTION_GIRDIR=${D}/usr/share/gir-1.0 \
+    -DGOBJECT_INTROSPECTION_TYPELIBDIR=${D}/usr/lib/girepository-1.0 \
+    -DMANPREFIX=${MANPREFIX} \
+    -DPREFIX=/usr/ \
+    -DQT_PLUGINS_DIR=/usr/lib/qt4/plugins \
+    -DENABLE_GIR=OFF -DENABLE_GTK3_IM_MODULE=ON \
+    -DENABLE_QT=OFF -DENABLE_QT_IM_MODULE=OFF -DENABLE_QT_GUI=OFF \
+    -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
 CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
@@ -132,30 +135,33 @@ RDEPENDS_${PN}-gtk2.0 = "fcitx-libs"
 RDEPENDS_${PN}-gtk3 = "fcitx-libs"
 RDEPENDS_${PN}-gclient = "fcitx-libs"
 
-FILES_${PN}-table = "${libdir}/fcitx/fcitx-table.so \
-   ${datadir}/fcitx/addon/fcitx-table.conf \
-   ${datadir}/fcitx/configdesc/fcitx-table.desc \
-   ${datadir}/fcitx/configdesc/table.desc \
+FILES_${PN}-table = " \
+    ${libdir}/fcitx/fcitx-table.so \
+    ${datadir}/fcitx/addon/fcitx-table.conf \
+    ${datadir}/fcitx/configdesc/fcitx-table.desc \
+    ${datadir}/fcitx/configdesc/table.desc \
 "
 
-FILES_${PN}-data = "${datadir}/fcitx/configdesc/addon.desc \
-   ${datadir}/fcitx/configdesc/config.desc \
-   ${datadir}/fcitx/configdesc/inputmethod.desc \
-   ${datadir}/fcitx/configdesc/profile.desc \
-   ${datadir}/fcitx/configdesc/skin.desc \
-   ${datadir}/fcitx/imicon/*.png \
-   ${datadir}/icons/hicolor/128x128/apps/*.png \
-   ${datadir}/icons/hicolor/16x16/apps/*.png \
-   ${datadir}/icons/hicolor/22x22/apps/*.png \
-   ${datadir}/icons/hicolor/24x24/apps/*.png \
-   ${datadir}/icons/hicolor/32x32/apps/*.png \
-   ${datadir}/icons/hicolor/48x48/apps/*.png \
-   ${datadir}/icons/hicolor/scalable/apps/*.svg\
-   ${datadir}/mime/packages/x-fskin.xml \
-   ${datadir}/fcitx/data/quickphrase.d/emoji-eac.mb \
+FILES_${PN}-data = " \
+    ${datadir}/fcitx/configdesc/addon.desc \
+    ${datadir}/fcitx/configdesc/config.desc \
+    ${datadir}/fcitx/configdesc/inputmethod.desc \
+    ${datadir}/fcitx/configdesc/profile.desc \
+    ${datadir}/fcitx/configdesc/skin.desc \
+    ${datadir}/fcitx/imicon/*.png \
+    ${datadir}/icons/hicolor/128x128/apps/*.png \
+    ${datadir}/icons/hicolor/16x16/apps/*.png \
+    ${datadir}/icons/hicolor/22x22/apps/*.png \
+    ${datadir}/icons/hicolor/24x24/apps/*.png \
+    ${datadir}/icons/hicolor/32x32/apps/*.png \
+    ${datadir}/icons/hicolor/48x48/apps/*.png \
+    ${datadir}/icons/hicolor/scalable/apps/*.svg\
+    ${datadir}/mime/packages/x-fskin.xml \
+    ${datadir}/fcitx/data/quickphrase.d/emoji-eac.mb \
 "
 
-FILES_${PN}-ui-classic = "${libdir}/fcitx/fcitx-classic-ui.so \
+FILES_${PN}-ui-classic = " \
+    ${libdir}/fcitx/fcitx-classic-ui.so \
     ${libdir}/fcitx/fcitx-notificationitem.so \
     ${datadir}/fcitx/skin/classic/*.conf \
     ${datadir}/fcitx/skin/classic/*.png \
@@ -168,11 +174,13 @@ FILES_${PN}-ui-classic = "${libdir}/fcitx/fcitx-classic-ui.so \
     ${datadir}/fcitx/configdesc/fcitx-classic-ui.desc \
 "
 
-FILES_${PN}-noui = "${libdir}/fcitx/fcitx-no-ui.so \
+FILES_${PN}-noui = " \
+    ${libdir}/fcitx/fcitx-no-ui.so \
     ${datadir}/fcitx/addon/fcitx-no-ui.conf \
 "
 
-FILES_${PN}-modules = "${libdir}/fcitx/fcitx-autoeng.so \
+FILES_${PN}-modules = " \
+    ${libdir}/fcitx/fcitx-autoeng.so \
     ${libdir}/fcitx/fcitx-chttrans.so \
     ${libdir}/fcitx/fcitx-clipboard.so \
     ${libdir}/fcitx/fcitx-fullwidth-char.so \
@@ -213,7 +221,8 @@ FILES_${PN}-modules = "${libdir}/fcitx/fcitx-autoeng.so \
     ${datadir}/fcitx/spell/en_dict.fscd \
 "
 
-FILES_${PN}-module-x11 = "${libdir}/fcitx/fcitx-vk.so \
+FILES_${PN}-module-x11 = " \
+    ${libdir}/fcitx/fcitx-vk.so \
     ${libdir}/fcitx/fcitx-x11.so \
     ${libdir}/fcitx/fcitx-xim.so \
     ${libdir}/fcitx/fcitx-xkb.so \
@@ -228,7 +237,8 @@ FILES_${PN}-module-x11 = "${libdir}/fcitx/fcitx-vk.so \
     ${datadir}/fcitx/data/vk.conf \
 "
 
-FILES_${PN}-module-dbus = "${libdir}/fcitx/fcitx-dbus.so \
+FILES_${PN}-module-dbus = " \
+    ${libdir}/fcitx/fcitx-dbus.so \
     ${libdir}/fcitx/fcitx-freedesktop-notify.so \
     ${libdir}/fcitx/fcitx-ipc.so \
     ${datadir}/fcitx/addon/fcitx-dbus.conf \
@@ -237,15 +247,18 @@ FILES_${PN}-module-dbus = "${libdir}/fcitx/fcitx-dbus.so \
     ${datadir}/fcitx/dbus/daemon.conf \
 "
 
-FILES_${PN}-module-kimpanel = "${libdir}/fcitx/fcitx-kimpanel-ui.so \
+FILES_${PN}-module-kimpanel = " \
+    ${libdir}/fcitx/fcitx-kimpanel-ui.so \
     ${datadir}/fcitx/addon/fcitx-kimpanel-ui.conf \
 "
 
-FILES_${PN}-ipcportal = "${libdir}/fcitx/fcitx-ipcportal.so \
+FILES_${PN}-ipcportal = " \
+    ${libdir}/fcitx/fcitx-ipcportal.so \
     ${datadir}/fcitx/addon/fcitx-ipcportal.conf \
 "
 
-FILES_${PN}-pinyin = "${libdir}/fcitx/fcitx-pinyin-enhance.so \
+FILES_${PN}-pinyin = " \
+    ${libdir}/fcitx/fcitx-pinyin-enhance.so \
     ${libdir}/fcitx/fcitx-pinyin.so \
     ${datadir}/fcitx/addon/fcitx-pinyin-enhance.conf \ 
     ${datadir}/fcitx/addon/fcitx-pinyin.conf \
@@ -261,12 +274,14 @@ FILES_${PN}-pinyin = "${libdir}/fcitx/fcitx-pinyin-enhance.so \
     ${datadir}/fcitx/pinyin/sp.dat \
 "
 
-FILES_${PN}-dev += "${datadir}/cmake/fcitx/*.cmake \
+FILES_${PN}-dev += " \
+    ${datadir}/cmake/fcitx/*.cmake \
     ${datadir}/cmake/fcitx/*.sh \
     ${datadir}/cmake/fcitx/getdescpo \
 "
 
-FILES_${PN}-libs = "${libdir}/libfcitx-config.so.4 \
+FILES_${PN}-libs = " \
+    ${libdir}/libfcitx-config.so.4 \
     ${libdir}/libfcitx-core.so.0 \
     ${libdir}/libfcitx-utils.so.0 \
     ${libdir}/libfcitx-config.so.4.1 \
@@ -274,44 +289,54 @@ FILES_${PN}-libs = "${libdir}/libfcitx-config.so.4 \
     ${libdir}/libfcitx-utils.so.0.1 \
 "
 
-FILES_${PN}-gclient = "${libdir}/libfcitx-gclient.so.1\
+FILES_${PN}-gclient = " \
+    ${libdir}/libfcitx-gclient.so.1\
     ${libdir}/libfcitx-gclient.so.0.2 \
 "
 
-FILES_${PN}-qw = "${libdir}/fcitx/fcitx-qw.so \
+FILES_${PN}-qw = " \
+    ${libdir}/fcitx/fcitx-qw.so \
     ${datadir}/fcitx/addon/fcitx-qw.conf \
     ${datadir}/fcitx/inputmethod/qw.conf \
 "
 
-FILES_${PN}-table-bingchan = "${datadir}/fcitx/table/qxm.conf \
+FILES_${PN}-table-bingchan = " \
+    ${datadir}/fcitx/table/qxm.conf \
     ${datadir}/fcitx/table/qxm.mb \
 "
 
-FILES_${PN}-table-cangjie = "${datadir}/fcitx/table/cangjie.conf \
+FILES_${PN}-table-cangjie = " \
+    ${datadir}/fcitx/table/cangjie.conf \
     ${datadir}/fcitx/table/cj.mb \
 "
 
-FILES_${PN}-table-dianbaoma = "${datadir}/fcitx/table/db.conf \
+FILES_${PN}-table-dianbaoma = " \
+    ${datadir}/fcitx/table/db.conf \
     ${datadir}/fcitx/table/db.mb \
 "
 
-FILES_${PN}-table-erbi = "${datadir}/fcitx/table/erbi.conf \
+FILES_${PN}-table-erbi = " \
+    ${datadir}/fcitx/table/erbi.conf \
     ${datadir}/fcitx/table/erbi.mb \
 "
 
-FILES_${PN}-table-wanfeng = "${datadir}/fcitx/table/wanfeng.conf \
+FILES_${PN}-table-wanfeng = " \
+    ${datadir}/fcitx/table/wanfeng.conf \
     ${datadir}/fcitx/table/wanfeng.mb \
 "
 
-FILES_${PN}-table-wbpy = "${datadir}/fcitx/table/wbpy.conf \
+FILES_${PN}-table-wbpy = " \
+    ${datadir}/fcitx/table/wbpy.conf \
     ${datadir}/fcitx/table/wbpy.mb \
 "
 
-FILES_${PN}-table-wubi = "${datadir}/fcitx/table/wbx.conf \
+FILES_${PN}-table-wubi = " \
+    ${datadir}/fcitx/table/wbx.conf \
     ${datadir}/fcitx/table/wbx.mb \
 "
 
-FILES_${PN}-table-ziranma = "${datadir}/fcitx/table/zrm.conf \
+FILES_${PN}-table-ziranma = " \
+    ${datadir}/fcitx/table/zrm.conf \
     ${datadir}/fcitx/table/zrm.mb \
 "
 
