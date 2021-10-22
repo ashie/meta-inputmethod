@@ -46,6 +46,10 @@ actual needs.
 
 FYI: On our test, Fcitx was superior to IBus at many points.
 
+### gtk-wayland-textinputv1
+
+Enable text input on GTK applications on Weston.
+
 Quick Start
 -----------
 
@@ -69,6 +73,7 @@ IMAGE_INSTALL_append = " \
   source-han-sans-jp-fonts \
   source-han-sans-kr-fonts \
 "
+IMAGE_INSTALL_append = " gtk-wayland-textinputv1 " # If you need GTK on Weston
 ```
 * Build: `bitbake core-image-weston`
 
@@ -102,6 +107,16 @@ Name=pinyin
 Name=hangul
 ```
 * Run weston
+
+#### How to input on GTK application on Weston
+
+Set a environment variable `GTK_IMMODULE=wltextinputv1` if you need to use Fcitx5 on GTK applications on Weston:
+
+e.g.)
+
+```
+$ GTK_IMMODULE=wltextinputv1 gtk3-demo
+```
 
 #### How to use with applications
 
