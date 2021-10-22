@@ -16,7 +16,7 @@ SRC_URI[table_dict.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3
 
 S = "${WORKDIR}/libime-${PV}"
 
-FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx5-tools:"
+FILESEXTRAPATHS =. "${FILE_DIRNAME}/libime-tools:"
 
 inherit cmake pkgconfig python3native native
 
