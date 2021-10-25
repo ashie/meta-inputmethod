@@ -13,11 +13,9 @@ SRCREV = "ea2f79a6938f5ef76cc3d17c8965a5eeacadbf6e"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "python3 opencc-tools-native "
+DEPENDS = "python3-native opencc-tools-native "
 
-inherit setuptools cmake
-
-RDEPENDS_${PN} += "python-core"
+inherit python3native cmake
 
 EXTRA_OECMAKE = " \
     -DLIB_INSTALL_DIR=${libdir} \
