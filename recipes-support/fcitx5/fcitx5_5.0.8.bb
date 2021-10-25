@@ -20,10 +20,12 @@ SRC_URI_append = "\
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
-DEPENDS = " ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
+DEPENDS = " \
+    ninja-native extra-cmake-modules virtual/egl expat dbus fmt \
     libxcb xcb-util xcb-util-keysyms xcb-util-wm xcb-imdkit libxkbcommon libxkbfile\
     wayland wayland-native wayland-protocols iso-codes cairo \
-    gdk-pixbuf pango enchant2 json-c systemd fcitx5-tools-native xkeyboard-config \
+    gdk-pixbuf pango enchant2 json-c fcitx5-tools-native xkeyboard-config \
+    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "libevent", d)} \
 "
 
 inherit cmake pkgconfig gettext
