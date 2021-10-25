@@ -8,7 +8,7 @@ SRCREV = "d2ec504fec2550f4fd046e801b34317ef4a4bab9"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "kbproto libx11"
+DEPENDS = "libx11"
 
 inherit pkgconfig autotools
 
