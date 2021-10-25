@@ -13,8 +13,6 @@ S = "${WORKDIR}/fcitx5-${PV}"
 
 FILESEXTRAPATHS =. "${FILE_DIRNAME}/fcitx5-tools:"
 
-Systemd DL LibIntl LibKVM Doxygen Libevent IsoCodes Wayland
-
 DEPENDS = "extra-cmake-modules fmt libevent enchant2 gettext"
 
 inherit cmake pkgconfig gettext native
