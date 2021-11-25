@@ -1,7 +1,7 @@
 From ab6897f10078af54f861be8fe5aa7d3806dc8c6e Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 27 Jul 2021 13:31:56 +0900
-Subject: [PATCH 2/2] Add cmake option ENABLE_METAINFO
+Subject: [PATCH 2/3] Add cmake option ENABLE_METAINFO
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
@@ -32,5 +32,5 @@ index a2d829a..b76013e 100644
 +endif()
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 -- 
-2.30.2
+2.32.0
 

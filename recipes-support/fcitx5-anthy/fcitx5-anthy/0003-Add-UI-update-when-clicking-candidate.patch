@@ -1,0 +1,26 @@
+From 182b8b58daf22913014fec5713d130dda6243b34 Mon Sep 17 00:00:00 2001
+From: daipom <fukuda@clear-code.com>
+Date: Tue, 16 Nov 2021 14:24:45 +0900
+Subject: [PATCH 3/3] Add UI update when clicking candidate
+
+Without UI update here, UI doesn't be updated when selecting
+candidate with mouse click.
+---
+ src/conversion.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/conversion.cpp b/src/conversion.cpp
+index f392166..8a8c5f2 100644
+--- a/src/conversion.cpp
++++ b/src/conversion.cpp
+@@ -416,6 +416,7 @@ public:
+ 
+     void select(fcitx::InputContext *) const override {
+         anthy_->actionSelectCandidate(idx_);
++        anthy_->updateUI();
+     }
+ 
+ private:
+-- 
+2.32.0
+

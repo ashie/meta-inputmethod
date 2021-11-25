@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "22364003e737cbe4ea6eaa83d9d274a8df8e38dea61d8f4576560ee7d5
 SRC_URI_append = "\
     file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
     file://0002-Add-cmake-option-ENABLE_METAINFO.patch \
+    file://0003-Add-UI-update-when-clicking-candidate.patch \
 "
 
 inherit cmake pkgconfig
