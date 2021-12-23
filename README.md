@@ -84,7 +84,7 @@ IMAGE_INSTALL_append = " gtk-wayland-textinputv1 " # If you need GTK on Weston
 [input-method]
 path=/usr/bin/fcitx5
 ```
-* Add following lines to you /etc/xdg/fcitx5/profile
+* Add following lines to your /etc/xdg/fcitx5/profile
 ```
 [Groups/0]
 Name=Default
