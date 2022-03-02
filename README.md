@@ -63,16 +63,11 @@ Quick Start
   `bitbake-layers add-layer /path/to/meta-inputmethod`
 * Add following lines to your local.conf:
 ```
-IMAGE_INSTALL_append = " fcitx5-anthy "          # Japanese
-IMAGE_INSTALL_append = " fcitx5-chewing "        # Traditional Chinese
-IMAGE_INSTALL_append = " fcitx5-chinese-addons " # Simplified Chinese
-IMAGE_INSTALL_append = " fcitx5-hangul "         # Korean
-IMAGE_INSTALL_append = " fcitx5-m17n "           # Other launguages
-IMAGE_INSTALL_append = " \
-  source-han-sans-cn-fonts \
-  source-han-sans-jp-fonts \
-  source-han-sans-kr-fonts \
-"
+IMAGE_INSTALL_append = " fcitx5-anthy          source-han-sans-jp-fonts " # Japanese
+IMAGE_INSTALL_append = " fcitx5-chewing        source-han-sans-cn-fonts " # Traditional Chinese
+IMAGE_INSTALL_append = " fcitx5-chinese-addons source-han-sans-tw-fonts " # Simplified Chinese
+IMAGE_INSTALL_append = " fcitx5-hangul         source-han-sans-kr-fonts " # Korean
+IMAGE_INSTALL_append = " fcitx5-m17n "             # Other launguages
 IMAGE_INSTALL_append = " gtk-wayland-textinputv1 " # If you need GTK on Weston
 ```
 * Build: `bitbake core-image-weston`
