@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f650
 SRC_URI = "https://download.fcitx-im.org/fcitx5/fcitx5/fcitx5-${PV}_dict.tar.xz"
 SRC_URI[sha256sum] = "02f5de5e4d8c9912656b5acf954085ee5cdd567292fc1a915be051f9aed46614"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     file://0001-Don-t-use-charconv-to-support-GCC-7.x.patch \
     file://0004-Add-an-option-to-disable-AppStream-metainfo.patch \
 "
@@ -37,7 +37,7 @@ EXTRA_OECMAKE = " \
     -DPTHREAD_LIB_FOUND=/usr/lib \
 "
 
-LDFLAGS_append = ",--no-as-needed -ldl "
+LDFLAGS:append = ",--no-as-needed -ldl "
 
 do_compile() {
     cmake --build ${B} --target Fcitx5Utils

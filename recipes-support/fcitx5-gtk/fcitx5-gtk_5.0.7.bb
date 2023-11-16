@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "bb64a6b39c4e1bd3ba1c7b0d0ff53bce434786fe484e7908ed62593896
 inherit cmake gtk-immodules-cache
 GTKIMMODULES_PACKAGES = "fcitx5-gtk"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     file://0001-Enable-to-build-against-older-GLib-2.60.patch \
 "
 
@@ -24,14 +24,14 @@ DEBIAN_NOAUTONAME_${PN}2 = "1"
 DEBIAN_NOAUTONAME_${PN}3 = "1"
 PACKAGES =+ "fcitx5-gclient ${PN}2 ${PN}3"
 
-RDEPENDS_${PN}-gtk2 = "fcitx5-gclient"
-RDEPENDS_${PN}-gtk3 = "fcitx5-gclient"
+RDEPENDS:${PN}-gtk2 = "fcitx5-gclient"
+RDEPENDS:${PN}-gtk3 = "fcitx5-gclient"
 
-FILES_${PN}2 += "\
+FILES:${PN}2 += "\
     ${libdir}/gtk-2.0/2.10.0/immodules/im-fcitx5.so \
 "
 
-FILES_${PN}3 += "\
+FILES:${PN}3 += "\
     ${libdir}/gtk-3.0/3.0.0/immodules/im-fcitx5.so \
 "
 
