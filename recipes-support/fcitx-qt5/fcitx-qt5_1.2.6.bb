@@ -2,7 +2,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6306e547e5c5e43190193019ed46ee13"
 
 DEPENDS = "fcitx fcitx-tools-native qtbase-native"
-RDEPENDS_${PN} = "fcitx fcitx-data fcitx-modules qtbase"
+RDEPENDS:${PN} = "fcitx fcitx-data fcitx-modules qtbase"
 
 SRC_URI = "https://gitlab.com/fcitx/fcitx-qt5/-/archive/${PV}/fcitx-qt5-${PV}.tar.bz2"
 SRC_URI[md5sum] = "550a0f6215c75a7338ddeef30b3ef245"
@@ -20,11 +20,11 @@ EXTRA_OECMAKE += " \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
-FILES_${PN} += "${libdir}/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
+FILES:${PN} += "${libdir}/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
     ${libdir}/fcitx/libexec/fcitx-qt5-gui-wrapper \
     ${libdir}/fcitx/qt/libfcitx-quickphrase-editor5.so \
 "
 
-FILES_${PN}-dev += "${libdir}/cmake/FcitxQt5WidgetsAddons \
+FILES:${PN}-dev += "${libdir}/cmake/FcitxQt5WidgetsAddons \
     ${libdir}/cmake/FcitxQt5DBusAddons \
 "
