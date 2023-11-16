@@ -13,9 +13,9 @@ SRC_URI[sha256sum] = "78bacae7451822dfff62482ce4f9433c5ae82846e4c64b590541e29e80
 inherit autotools-brokensep pkgconfig gettext
 
 DEPENDS += "m17n-db gd freetype libxt libxmu libxml2 libxaw libx11 fribidi"
-RDEPENDS_${PN} += "m17n-db"
+RDEPENDS:${PN} += "m17n-db"
 
 PARALLEL_MAKE = "-j1"
 
-FILES_${PN} += "${libdir}/m17n/1.0/*.so"
-FILES_${PN}-staticdev += "${libdir}/m17n/1.0/*.a"
+FILES:${PN} += "${libdir}/m17n/1.0/*.so"
+FILES:${PN}-staticdev += "${libdir}/m17n/1.0/*.a"

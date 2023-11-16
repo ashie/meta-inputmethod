@@ -22,6 +22,6 @@ inherit cmake
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=off"
 
-FILES_${PN}-dev += "${datadir}/ECM"
+FILES:${PN}-dev += "${datadir}/ECM"
 
 BBCLASSEXTEND = "native nativesdk"
