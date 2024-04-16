@@ -6,8 +6,8 @@ SRC_URI = " \
     file://0001-Search-RECIPE_SYSROOT-to-find-wayland-protocols-if-i.patch \
 "
 
-PV = "0.1.4"
-SRCREV = "265d41efebb1d787ce236fea314fd51b73c63b23"
+PV = "0.1.5"
+SRCREV = "d47a7f47ba56f415fec0fa101a9a01c313acdff0"
 
 S = "${WORKDIR}/git"
 
