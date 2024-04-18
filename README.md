@@ -127,14 +127,7 @@ that supports
 [text-input-v1](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/master/unstable/text-input/text-input-unstable-v1.xml)
 protocol.
 
-GTK applications aren't supported yet because GTK supports only
-[text-input-v3](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/master/unstable/text-input/text-input-unstable-v3.xml)
-and
-[gtk-text-input](https://gitlab.gnome.org/GNOME/mutter/-/commit/efd7a4af5e37299f17011a7f39cc66d8416a1bf9)
-protocols.
-To resolve this issue, we are preparing a patch at:
-[gtk3-wayland-text-input-v1 branch](./-/tree/gtk3-wayland-text-input-v1).
-We'll import it into master branch as a separated module later.
+GTK applications are supported via gtk-wayland-textinputv1 as described above.
 
 Qt applications aren't confirmed yet.
 
