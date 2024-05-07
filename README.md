@@ -111,12 +111,12 @@ Name=hangul
 
 #### How to input on GTK application on Weston
 
-Set a environment variable `GTK_IMMODULE=wltextinputv1` if you need to use Fcitx5 on GTK applications on Weston:
+Set a environment variable `GTK_IM_MODULE=wltextinputv1` if you need to use Fcitx5 on GTK applications on Weston:
 
 e.g.)
 
 ```
-$ GTK_IMMODULE=wltextinputv1 gtk3-demo
+$ GTK_IM_MODULE=wltextinputv1 gtk3-demo
 ```
 
 #### How to use with applications
