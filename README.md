@@ -4,7 +4,7 @@ OpenEmbedded/Yocto BSP layer for inputmethod
 This layer provides recipes for multilingual input methods used with
 OpenEmbedded and/or Yocto.
 
-This layer depends on meta-openembedded, poky, and qt5 layers.
+This layer depends on meta-openembedded and poky layers (and optionally qt5 layer).
 
 Contributing
 ------------
