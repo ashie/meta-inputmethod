@@ -4,7 +4,7 @@ OpenEmbedded/Yocto BSP layer for inputmethod
 This layer provides recipes for multilingual input methods used with
 OpenEmbedded and/or Yocto.
 
-This layer depends on meta-openembedded and poky layers (and optionally qt5 layer).
+This layer depends on meta-openembedded and poky layers.
 
 Contributing
 ------------
@@ -18,7 +18,6 @@ Recipes
 ### fcitx5 and fcitx5-*
 
 [Fcitx5](https://fcitx-im.org/wiki/Fcitx_5) and its modules.
-Mainly for Wayland environment.
 
 * fcitx5: Input method framework
 * fcitx5-anthy: Japanese input method
@@ -26,17 +25,6 @@ Mainly for Wayland environment.
 * fcitx5-chinese-addons: Simplified Chinese (Pinyin and table) input methods
 * fcitx5-hangul: Korean (Hangul) input method
 * fcitx5-m17n: Multilingual input methods
-
-### fcitx and fcitx-*
-
-[Fcitx4](https://fcitx-im.org/wiki/Fcitx) and its modules.
-Mainly for X11 environment.
-
-* fcitx: Input method framework and Chinese (Pinyin and table) input methods
-* fcitx-anthy: Japanese input method
-* fcitx-chewing: Traditional Chinese (Chewing) input method
-* fcitx-hangul: Korean (Hangul) input method
-* fcitx-m17n: Multilingual input methods
 
 ### ibus and ibus-*
 
