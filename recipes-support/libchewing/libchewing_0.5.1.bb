@@ -3,7 +3,7 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "sqlite3 libchewing-tools-native"
-RDEPENDS_remove = "libgcc gcc-runtime"
+RDEPENDS:remove = "libgcc gcc-runtime"
 TARGET_LDFLAGS += " -static-libgcc -static-libstdc++ "
 
 SRC_URI = "https://github.com/chewing/libchewing/releases/download/v${PV}/libchewing-${PV}.tar.bz2" 

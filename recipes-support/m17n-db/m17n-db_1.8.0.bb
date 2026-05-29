@@ -8,16 +8,16 @@ SRC_URI[md5sum] = "49378f8ed738f84abfaf5e09699e1fa0"
 SRC_URI[sha256sum] = "657f23835b6655e7a63a362bac66260454ee356da4855eadb9366911d33fdc6d"
 
 DEPENDS = "glibc glibc-locale"
-RDEPENDS_${PN} += "busybox"
+RDEPENDS:${PN} += "busybox"
 
 inherit autotools-brokensep pkgconfig gettext
 
 EXTRA_OECONF = "--with-charmaps=${STAGING_DIR_TARGET}${datadir}/i18n/charmaps"
 
-FILES_${PN} += "${bindir}/m17n-db \
+FILES:${PN} += "${bindir}/m17n-db \
     ${datadir}/m17n \
     ${datadir}/locale \
 "
-do_install_prepend() {
+do_install:prepend() {
     sed -i -e 's/gawk/awk/g' ${S}/tbl2mim.awk 
 }

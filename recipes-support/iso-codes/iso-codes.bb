@@ -12,7 +12,7 @@ inherit autotools
 
 EXTRA_OECONF = ""
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${datadir}/xml/iso-codes/* \
     ${datadir}/iso-codes/* \
 "

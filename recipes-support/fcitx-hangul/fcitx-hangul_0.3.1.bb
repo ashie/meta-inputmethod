@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=00ed06f01bcb1983382068710eb131c4"
 
 DEPENDS = "fcitx fcitx-tools-native libhangul"
-RDEPENDS_${PN} = "fcitx fcitx-data fcitx-modules libhangul"
+RDEPENDS:${PN} = "fcitx fcitx-data fcitx-modules libhangul"
 
 SRC_URI = "https://download.fcitx-im.org/fcitx-hangul/fcitx-hangul-${PV}.tar.xz" 
 
@@ -19,7 +19,7 @@ EXTRA_OECMAKE += " \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/fcitx/fcitx-hangul.so \
     ${datadir}/fcitx \
     ${datadir}/icons \

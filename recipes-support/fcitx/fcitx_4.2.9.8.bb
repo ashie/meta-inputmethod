@@ -89,9 +89,9 @@ EXTRA_OECMAKE += " \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
 
-CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
+CONFIGUREOPTS:remove_class-target = "--disable-silent-rules"
 
-do_install_append() {
+do_install:append() {
     install -m 0744 ${S}/data/script/fcitx-autostart ${D}/${bindir}/fcitx-autostart
     rm -rf ${D}/${datadir}/applications
 }
@@ -102,7 +102,7 @@ fcitx-table-dianbaoma fcitx-table-erbi fcitx-table-wanfeng fcitx-table-wbpy fcit
 fcitx-ipcportal \
 "
 
-FILES_${PN} = "${bindir}/fcitx \
+FILES:${PN} = "${bindir}/fcitx \
     ${bindir}/fcitx-autostart \
     ${bindir}/fcitx-configtool \
     ${bindir}/fcitx-diagnose \
@@ -117,10 +117,10 @@ FILES_${PN} = "${bindir}/fcitx \
     ${datadir}/fcitx/data/env_setup.sh \
 "
 
-FILES_${PN}-gtk2.0 = "${libdir}/gtk-2.0/2.10.0/immodules/im-fcitx.so"
-FILES_${PN}-gtk3 = "${libdir}/gtk-3.0/3.0.0/immodules/im-fcitx.so"
+FILES:${PN}-gtk2.0 = "${libdir}/gtk-2.0/2.10.0/immodules/im-fcitx.so"
+FILES:${PN}-gtk3 = "${libdir}/gtk-3.0/3.0.0/immodules/im-fcitx.so"
 
-FILES_${PN}-tools = "${bindir}/createPYMB \
+FILES:${PN}-tools = "${bindir}/createPYMB \
     ${bindir}/mb2org \
     ${bindir}/mb2txt \
     ${bindir}/readPYBase \
@@ -129,20 +129,20 @@ FILES_${PN}-tools = "${bindir}/createPYMB \
     ${bindir}/txt2mb \
 "
 
-RDEPENDS_${PN} = "fcitx-libs iso-codes"
-RDEPENDS_${PN}-tools = "fcitx-libs"
-RDEPENDS_${PN}-gtk2.0 = "fcitx-libs"
-RDEPENDS_${PN}-gtk3 = "fcitx-libs"
-RDEPENDS_${PN}-gclient = "fcitx-libs"
+RDEPENDS:${PN} = "fcitx-libs iso-codes"
+RDEPENDS:${PN}-tools = "fcitx-libs"
+RDEPENDS:${PN}-gtk2.0 = "fcitx-libs"
+RDEPENDS:${PN}-gtk3 = "fcitx-libs"
+RDEPENDS:${PN}-gclient = "fcitx-libs"
 
-FILES_${PN}-table = " \
+FILES:${PN}-table = " \
     ${libdir}/fcitx/fcitx-table.so \
     ${datadir}/fcitx/addon/fcitx-table.conf \
     ${datadir}/fcitx/configdesc/fcitx-table.desc \
     ${datadir}/fcitx/configdesc/table.desc \
 "
 
-FILES_${PN}-data = " \
+FILES:${PN}-data = " \
     ${datadir}/fcitx/configdesc/addon.desc \
     ${datadir}/fcitx/configdesc/config.desc \
     ${datadir}/fcitx/configdesc/inputmethod.desc \
@@ -160,7 +160,7 @@ FILES_${PN}-data = " \
     ${datadir}/fcitx/data/quickphrase.d/emoji-eac.mb \
 "
 
-FILES_${PN}-ui-classic = " \
+FILES:${PN}-ui-classic = " \
     ${libdir}/fcitx/fcitx-classic-ui.so \
     ${libdir}/fcitx/fcitx-notificationitem.so \
     ${datadir}/fcitx/skin/classic/*.conf \
@@ -174,12 +174,12 @@ FILES_${PN}-ui-classic = " \
     ${datadir}/fcitx/configdesc/fcitx-classic-ui.desc \
 "
 
-FILES_${PN}-noui = " \
+FILES:${PN}-noui = " \
     ${libdir}/fcitx/fcitx-no-ui.so \
     ${datadir}/fcitx/addon/fcitx-no-ui.conf \
 "
 
-FILES_${PN}-modules = " \
+FILES:${PN}-modules = " \
     ${libdir}/fcitx/fcitx-autoeng.so \
     ${libdir}/fcitx/fcitx-chttrans.so \
     ${libdir}/fcitx/fcitx-clipboard.so \
@@ -221,7 +221,7 @@ FILES_${PN}-modules = " \
     ${datadir}/fcitx/spell/en_dict.fscd \
 "
 
-FILES_${PN}-module-x11 = " \
+FILES:${PN}-module-x11 = " \
     ${libdir}/fcitx/fcitx-vk.so \
     ${libdir}/fcitx/fcitx-x11.so \
     ${libdir}/fcitx/fcitx-xim.so \
@@ -237,7 +237,7 @@ FILES_${PN}-module-x11 = " \
     ${datadir}/fcitx/data/vk.conf \
 "
 
-FILES_${PN}-module-dbus = " \
+FILES:${PN}-module-dbus = " \
     ${libdir}/fcitx/fcitx-dbus.so \
     ${libdir}/fcitx/fcitx-freedesktop-notify.so \
     ${libdir}/fcitx/fcitx-ipc.so \
@@ -247,17 +247,17 @@ FILES_${PN}-module-dbus = " \
     ${datadir}/fcitx/dbus/daemon.conf \
 "
 
-FILES_${PN}-module-kimpanel = " \
+FILES:${PN}-module-kimpanel = " \
     ${libdir}/fcitx/fcitx-kimpanel-ui.so \
     ${datadir}/fcitx/addon/fcitx-kimpanel-ui.conf \
 "
 
-FILES_${PN}-ipcportal = " \
+FILES:${PN}-ipcportal = " \
     ${libdir}/fcitx/fcitx-ipcportal.so \
     ${datadir}/fcitx/addon/fcitx-ipcportal.conf \
 "
 
-FILES_${PN}-pinyin = " \
+FILES:${PN}-pinyin = " \
     ${libdir}/fcitx/fcitx-pinyin-enhance.so \
     ${libdir}/fcitx/fcitx-pinyin.so \
     ${datadir}/fcitx/addon/fcitx-pinyin-enhance.conf \ 
@@ -274,13 +274,13 @@ FILES_${PN}-pinyin = " \
     ${datadir}/fcitx/pinyin/sp.dat \
 "
 
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
     ${datadir}/cmake/fcitx/*.cmake \
     ${datadir}/cmake/fcitx/*.sh \
     ${datadir}/cmake/fcitx/getdescpo \
 "
 
-FILES_${PN}-libs = " \
+FILES:${PN}-libs = " \
     ${libdir}/libfcitx-config.so.4 \
     ${libdir}/libfcitx-core.so.0 \
     ${libdir}/libfcitx-utils.so.0 \
@@ -289,57 +289,57 @@ FILES_${PN}-libs = " \
     ${libdir}/libfcitx-utils.so.0.1 \
 "
 
-FILES_${PN}-gclient = " \
+FILES:${PN}-gclient = " \
     ${libdir}/libfcitx-gclient.so.1\
     ${libdir}/libfcitx-gclient.so.0.2 \
 "
 
-FILES_${PN}-qw = " \
+FILES:${PN}-qw = " \
     ${libdir}/fcitx/fcitx-qw.so \
     ${datadir}/fcitx/addon/fcitx-qw.conf \
     ${datadir}/fcitx/inputmethod/qw.conf \
 "
 
-FILES_${PN}-table-bingchan = " \
+FILES:${PN}-table-bingchan = " \
     ${datadir}/fcitx/table/qxm.conf \
     ${datadir}/fcitx/table/qxm.mb \
 "
 
-FILES_${PN}-table-cangjie = " \
+FILES:${PN}-table-cangjie = " \
     ${datadir}/fcitx/table/cangjie.conf \
     ${datadir}/fcitx/table/cj.mb \
 "
 
-FILES_${PN}-table-dianbaoma = " \
+FILES:${PN}-table-dianbaoma = " \
     ${datadir}/fcitx/table/db.conf \
     ${datadir}/fcitx/table/db.mb \
 "
 
-FILES_${PN}-table-erbi = " \
+FILES:${PN}-table-erbi = " \
     ${datadir}/fcitx/table/erbi.conf \
     ${datadir}/fcitx/table/erbi.mb \
 "
 
-FILES_${PN}-table-wanfeng = " \
+FILES:${PN}-table-wanfeng = " \
     ${datadir}/fcitx/table/wanfeng.conf \
     ${datadir}/fcitx/table/wanfeng.mb \
 "
 
-FILES_${PN}-table-wbpy = " \
+FILES:${PN}-table-wbpy = " \
     ${datadir}/fcitx/table/wbpy.conf \
     ${datadir}/fcitx/table/wbpy.mb \
 "
 
-FILES_${PN}-table-wubi = " \
+FILES:${PN}-table-wubi = " \
     ${datadir}/fcitx/table/wbx.conf \
     ${datadir}/fcitx/table/wbx.mb \
 "
 
-FILES_${PN}-table-ziranma = " \
+FILES:${PN}-table-ziranma = " \
     ${datadir}/fcitx/table/zrm.conf \
     ${datadir}/fcitx/table/zrm.mb \
 "
 
-FILES_${PN}-dbg += "${libdir}/*/*/*/.debug ${libdir}/*/*/.debug"
+FILES:${PN}-dbg += "${libdir}/*/*/*/.debug ${libdir}/*/*/.debug"
 
 PACKAGE_WRITE_DEPS += "qemu-native"

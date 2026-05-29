@@ -12,7 +12,7 @@ DEPENDS = "qtbase qtx11extras qtsvg"
 
 inherit qmake5
 
-FILES_${PN} = "\
+FILES:${PN} = "\
 	    /usr/share/icons/hicolor/scalable/apps/featherpad.svg \
 	    /usr/bin/fpad \
 	    /usr/bin/featherpad \

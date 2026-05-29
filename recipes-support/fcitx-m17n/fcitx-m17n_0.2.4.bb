@@ -3,7 +3,7 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 DEPENDS = "fcitx fcitx-tools-native m17n-lib"
-RDEPENDS_${PN} = "fcitx fcitx-data fcitx-modules m17n-lib"
+RDEPENDS:${PN} = "fcitx fcitx-data fcitx-modules m17n-lib"
 
 SRC_URI = "https://download.fcitx-im.org/fcitx-m17n/fcitx-m17n-${PV}.tar.xz"
 
@@ -18,7 +18,7 @@ EXTRA_OECMAKE += " \
     -DLIB_INSTALL_DIR=${libdir} \
     -DFCITX_TOOL_BINARY_DIR=${STAGING_LIBDIR_NATIVE}/fcitx/ \
 "
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/fcitx/fcitx-m17n.so \
     ${datadir}/fcitx \
 "

@@ -17,6 +17,6 @@ inherit pkgconfig autotools gtk-immodules-cache
 
 EXTRA_OECONF = "WAYLAND_PROTOCOLS_SYSROOT_DIR=${RECIPE_SYSROOT}"
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${libdir}/gtk-3.0/3.0.0/immodules/im-wltextinputv1.so \
 "

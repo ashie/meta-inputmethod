@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "fcitx5 fcitx5-tools-native fmt curl opencc libime libime-tools-native"
-RDEPENDS_${PN} = "fcitx5 curl opencc libime"
+RDEPENDS:${PN} = "fcitx5 curl opencc libime"
 
 SRC_URI = " \
     https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz;name=src \
@@ -16,7 +16,7 @@ SRC_URI[src.sha256sum] = "061e71ef55524e51334ff29e9f93a677b7453f7af48181db0bf3ae
 SRC_URI[py_stroke.sha256sum] = "8eb128a9bfa43952e67cf2fcee1fd134c6f4cfd317bc2f6c38a615f5eb64e248"
 SRC_URI[py_table.sha256sum] = "42146ac97de6c13d55f9e99ed873915f4c66739e9c11532a34556badf9792c04"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
     file://0002-Add-cmake-option-ENABLE_METAINFO.patch \
     file://0003-Work-arround-to-execute-libime_pinyindict-for-cross-.patch \
@@ -39,10 +39,10 @@ do_unpack_extra() {
 }
 addtask unpack_extra after do_unpack before do_patch
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${libdir}/fcitx5/*.so \
     ${datadir}/icons \
     ${datadir}/fcitx5 \
 "
 
-FILES_${PN}-dev += "${libdir}/cmake"
+FILES:${PN}-dev += "${libdir}/cmake"

@@ -45,7 +45,7 @@ EXTRA_OECMAKE += " \
     -DENABLE_QT=OFF -DENABLE_QT_IM_MODULE=OFF -DENABLE_QT_GUI=OFF \
 "
 
-CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
+CONFIGUREOPTS:remove_class-target = "--disable-silent-rules"
 
 do_compile() {
     make fcitx-scanner fcitx-po-parser txt2mb comp-spell-dict createPYMB

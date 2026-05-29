@@ -2,7 +2,7 @@ LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68"
 
 DEPENDS = "fcitx5 fcitx5-tools-native boost python3-native libime-tools-native"
-RDEPENDS_${PN} = "fcitx5 boost"
+RDEPENDS:${PN} = "fcitx5 boost"
 
 SRC_URI = " \
     https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz;name=src \
@@ -15,7 +15,7 @@ SRC_URI[opengram_lm.sha256sum] = "751bab7c55ea93a2cedfb0fbb7eb09f67d4da9c2c55496
 SRC_URI[opengram_dict.sha256sum] = "818cfbb5a99ae5b40c2707b6158734f4a10196444853400cbd6b14505592d80d"
 SRC_URI[table_dict.sha256sum] = "6196053c724125e3ae3d8bd6b2f9172d0c83b65b0d410d3cde63b7a8d6ab87b7"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
     file://0002-Use-CMAKE_INSTALL_INCLUDEDIR-instead-of-CMAKE_INSTAL.patch \
     file://0003-Fix-a-build-error-on-boost-1.64.0.patch \
@@ -38,4 +38,4 @@ do_unpack_extra() {
 }
 addtask unpack_extra after do_unpack before do_patch
 
-FILES_${PN}-dev += "${libdir}/cmake"
+FILES:${PN}-dev += "${libdir}/cmake"
