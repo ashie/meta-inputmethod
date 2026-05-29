@@ -21,3 +21,7 @@ FILES:${PN} += "${bindir}/m17n-db \
 do_install:prepend() {
     sed -i -e 's/gawk/awk/g' ${S}/tbl2mim.awk 
 }
+do_install:append() {
+    sed -i -e "1s#${STAGING_DIR_TARGET}##g" \
+        ${D}${datadir}/m17n/*.map
+}
