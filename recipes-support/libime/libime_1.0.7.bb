@@ -5,7 +5,7 @@ DEPENDS = "fcitx5 fcitx5-tools-native boost python3-native libime-tools-native"
 RDEPENDS:${PN} = "fcitx5 boost"
 
 SRC_URI = " \
-    https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz;name=src \
+    https://download.fcitx-im.org/fcitx5/${BPN}/${BPN}-${PV}.tar.xz;name=src \
     https://download.fcitx-im.org/data/lm_sc.3gm.arpa-20140820.tar.bz2;name=opengram_lm \
     https://download.fcitx-im.org/data/dict.utf8-20210402.tar.xz;name=opengram_dict \
     https://download.fcitx-im.org/data/table.tar.gz;name=table_dict \

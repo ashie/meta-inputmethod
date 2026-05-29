@@ -3,7 +3,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f650
 
 DEPENDS = "fcitx5 gtk+ gtk+3 fcitx5-tools-native"
 
-SRC_URI = "https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz"
+SRC_URI = "https://download.fcitx-im.org/fcitx5/${BPN}/${BPN}-${PV}.tar.xz"
 SRC_URI[sha256sum] = "bb64a6b39c4e1bd3ba1c7b0d0ff53bce434786fe484e7908ed62593896e73d75"
 
 inherit cmake gtk-immodules-cache

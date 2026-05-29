@@ -8,7 +8,7 @@ DEPENDS = "fcitx5 fcitx5-tools-native fmt curl opencc libime libime-tools-native
 RDEPENDS:${PN} = "fcitx5 curl opencc libime"
 
 SRC_URI = " \
-    https://download.fcitx-im.org/fcitx5/${PN}/${PN}-${PV}.tar.xz;name=src \
+    https://download.fcitx-im.org/fcitx5/${BPN}/${BPN}-${PV}.tar.xz;name=src \
     https://download.fcitx-im.org/data/py_stroke-20121124.tar.gz;name=py_stroke \
     https://download.fcitx-im.org/data/py_table-20121124.tar.gz;name=py_table \
 "
