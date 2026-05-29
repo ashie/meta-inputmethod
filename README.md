@@ -64,17 +64,17 @@ Quick Start
 * Add following lines to your local.conf:
 ```
 # Japanese
-IMAGE_INSTALL_append = " fcitx5-anthy          source-han-sans-jp-fonts "
+IMAGE_INSTALL:append = " fcitx5-anthy          source-han-sans-jp-fonts "
 # Traditional Chinese
-IMAGE_INSTALL_append = " fcitx5-chewing        source-han-sans-tw-fonts "
+IMAGE_INSTALL:append = " fcitx5-chewing        source-han-sans-tw-fonts "
 # Simplified Chinese
-IMAGE_INSTALL_append = " fcitx5-chinese-addons source-han-sans-cn-fonts "
+IMAGE_INSTALL:append = " fcitx5-chinese-addons source-han-sans-cn-fonts "
 # Korean
-IMAGE_INSTALL_append = " fcitx5-hangul         source-han-sans-kr-fonts "
+IMAGE_INSTALL:append = " fcitx5-hangul         source-han-sans-kr-fonts "
 # Other launguages
-IMAGE_INSTALL_append = " fcitx5-m17n "
+IMAGE_INSTALL:append = " fcitx5-m17n "
 # If you need GTK on Weston
-IMAGE_INSTALL_append = " gtk-wayland-textinputv1 "
+IMAGE_INSTALL:append = " gtk-wayland-textinputv1 "
 ```
 * Build: `bitbake core-image-weston`
 
