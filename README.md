@@ -123,7 +123,7 @@ $ GTK_IM_MODULE=wltextinputv1 gtk3-demo
 
 Fcitx5 provided by this recipe is confirmed with weston-editor and
 chromium-ozone-wayland. It will also work with other applications
-that supports
+that support
 [text-input-v1](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/master/unstable/text-input/text-input-unstable-v1.xml)
 protocol.
 
