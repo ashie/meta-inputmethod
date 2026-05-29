@@ -2,7 +2,7 @@ LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
 
 SRC_URI = " \
-    git://gitlab.com/clear-code/gtk-wayland-textinputv1.git;protocol=https \
+    git://gitlab.com/clear-code/gtk-wayland-textinputv1.git;protocol=https;branch=master \
     file://0001-Search-RECIPE_SYSROOT-to-find-wayland-protocols-if-i.patch \
 "
 

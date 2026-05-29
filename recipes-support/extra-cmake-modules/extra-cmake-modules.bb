@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = " \
-    git://github.com/KDE/extra-cmake-modules.git;protocol=https \
+    git://github.com/KDE/extra-cmake-modules.git;protocol=https;branch=master \
     file://0001-Use-code-instead-of-public-code-for-wayland-scanner.patch \
 "
 

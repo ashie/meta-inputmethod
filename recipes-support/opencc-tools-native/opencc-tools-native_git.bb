@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://deps/marisa-0.2.6/COPYING.md;md5=436b518598dca3cb23d801bd12d59826 \
     file://deps/pybind11-2.5.0/LICENSE;md5=beb87117af69fd10fbf9fb14c22a2e62"
 
-SRC_URI = "git://github.com/BYVoid/OpenCC/;protocol=https"
+SRC_URI = "git://github.com/BYVoid/OpenCC/;protocol=https;branch=master"
 
 PV = "1.1.2+git${SRCPV}"
 SRCREV = "ea2f79a6938f5ef76cc3d17c8965a5eeacadbf6e"
