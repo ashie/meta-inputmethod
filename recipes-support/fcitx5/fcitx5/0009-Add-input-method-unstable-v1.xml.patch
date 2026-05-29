@@ -1,7 +1,7 @@
 From b1efe3f84a83bd80fcc50c35f75b96f915d990b0 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 6 Oct 2021 17:10:56 +0900
-Subject: [PATCH 09/11] Add input-method-unstable-v1.xml
+Subject: [PATCH 09/12] Add input-method-unstable-v1.xml
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
@@ -11,7 +11,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  create mode 100644 src/lib/fcitx-wayland/input-method/input-method-unstable-v1.xml
 
 diff --git a/src/lib/fcitx-wayland/input-method/CMakeLists.txt b/src/lib/fcitx-wayland/input-method/CMakeLists.txt
-index dcb7b8b..1e22584 100644
+index dcb7b8b0..1e225846 100644
 --- a/src/lib/fcitx-wayland/input-method/CMakeLists.txt
 +++ b/src/lib/fcitx-wayland/input-method/CMakeLists.txt
 @@ -1,5 +1,5 @@
@@ -23,7 +23,7 @@ index dcb7b8b..1e22584 100644
  set(FCITX_WAYLAND_INPUTMETHOD_SOURCES
 diff --git a/src/lib/fcitx-wayland/input-method/input-method-unstable-v1.xml b/src/lib/fcitx-wayland/input-method/input-method-unstable-v1.xml
 new file mode 100644
-index 0000000..e9d93ba
+index 00000000..e9d93ba6
 --- /dev/null
 +++ b/src/lib/fcitx-wayland/input-method/input-method-unstable-v1.xml
 @@ -0,0 +1,305 @@
@@ -333,5 +333,5 @@ index 0000000..e9d93ba
 +
 +</protocol>
 -- 
-2.30.2
+2.43.0
 

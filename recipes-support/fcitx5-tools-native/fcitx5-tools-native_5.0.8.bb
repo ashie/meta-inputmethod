@@ -37,7 +37,7 @@ EXTRA_OECMAKE = " \
     -DPTHREAD_LIB_FOUND=/usr/lib \
 "
 
-LDFLAGS:append = ",--no-as-needed -ldl "
+LDFLAGS:append = " -Wl,--no-as-needed -ldl "
 
 do_compile() {
     cmake --build ${B} --target Fcitx5Utils

@@ -1,7 +1,7 @@
 From c9184183a81caf20e645211b1ec62a2b8b26b6f1 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 23 Aug 2021 12:56:31 +0900
-Subject: [PATCH 08/11] Fix a bug that wayland module cannot input text to
+Subject: [PATCH 08/12] Fix a bug that wayland module cannot input text to
  weston-editor
 
 According to the protocol specification,
@@ -18,7 +18,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/src/frontend/waylandim/waylandimserver.cpp b/src/frontend/waylandim/waylandimserver.cpp
-index df45767..82b41c4 100644
+index df457671..82b41c48 100644
 --- a/src/frontend/waylandim/waylandimserver.cpp
 +++ b/src/frontend/waylandim/waylandimserver.cpp
 @@ -351,10 +351,7 @@ void WaylandIMInputContextV1::keyCallback(uint32_t serial, uint32_t time,
@@ -34,5 +34,5 @@ index df45767..82b41c4 100644
      server_->display_->flush();
  }
 -- 
-2.30.2
+2.43.0
 

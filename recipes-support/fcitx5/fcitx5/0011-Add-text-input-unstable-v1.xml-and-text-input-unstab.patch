@@ -1,7 +1,7 @@
 From dd874455c234bd152a77aa5d0833d10f735d02e1 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 6 Oct 2021 18:14:46 +0900
-Subject: [PATCH 11/11] Add text-input-unstable-v1.xml and
+Subject: [PATCH 11/12] Add text-input-unstable-v1.xml and
  text-input-unstable-v3.xml
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
@@ -14,7 +14,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  create mode 100644 src/frontend/waylandim/text-input-unstable-v3.xml
 
 diff --git a/src/frontend/waylandim/CMakeLists.txt b/src/frontend/waylandim/CMakeLists.txt
-index 9d05e67..0440c47 100644
+index 9d05e677..0440c475 100644
 --- a/src/frontend/waylandim/CMakeLists.txt
 +++ b/src/frontend/waylandim/CMakeLists.txt
 @@ -1,11 +1,11 @@
@@ -33,7 +33,7 @@ index 9d05e67..0440c47 100644
  add_library(waylandim MODULE waylandim.cpp waylandimserver.cpp ${WAYLAND_IM_PROTOCOL_SRCS})
 diff --git a/src/frontend/waylandim/text-input-unstable-v1.xml b/src/frontend/waylandim/text-input-unstable-v1.xml
 new file mode 100644
-index 0000000..29a217e
+index 00000000..29a217eb
 --- /dev/null
 +++ b/src/frontend/waylandim/text-input-unstable-v1.xml
 @@ -0,0 +1,385 @@
@@ -424,7 +424,7 @@ index 0000000..29a217e
 +</protocol>
 diff --git a/src/frontend/waylandim/text-input-unstable-v3.xml b/src/frontend/waylandim/text-input-unstable-v3.xml
 new file mode 100644
-index 0000000..8b710fd
+index 00000000..8b710fd6
 --- /dev/null
 +++ b/src/frontend/waylandim/text-input-unstable-v3.xml
 @@ -0,0 +1,441 @@
@@ -870,5 +870,5 @@ index 0000000..8b710fd
 +  </interface>
 +</protocol>
 -- 
-2.30.2
+2.43.0
 

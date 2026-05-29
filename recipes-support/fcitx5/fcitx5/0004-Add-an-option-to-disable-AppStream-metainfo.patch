@@ -1,7 +1,7 @@
 From 29345fbe4eea751a428afb198a49f2091ce474ca Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 19 Jul 2021 23:44:05 +0900
-Subject: [PATCH 04/11] Add an option to disable AppStream metainfo
+Subject: [PATCH 04/12] Add an option to disable AppStream metainfo
 
 See https://www.freedesktop.org/software/appstream/docs/ for more
 detail of AppStream.
@@ -13,7 +13,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  2 files changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ca9f874..f6a7e13 100644
+index ca9f874b..f6a7e135 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -34,6 +34,7 @@ option(ENABLE_DOC "Build doxygen" Off)
@@ -25,7 +25,7 @@ index ca9f874..f6a7e13 100644
  option(USE_FLATPAK_ICON "Use flatpak icon name for desktop files" Off)
  set(CLDR_DIR "" CACHE STRING "Unicode CLDR (Common Locale Data Repository) directory")
 diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
-index d67ede2..9541c8f 100644
+index d67ede2c..9541c8f2 100644
 --- a/data/CMakeLists.txt
 +++ b/data/CMakeLists.txt
 @@ -11,8 +11,6 @@ fcitx5_translate_desktop_file(${CMAKE_CURRENT_BINARY_DIR}/fcitx5-configtool.desk
@@ -51,5 +51,5 @@ index d67ede2..9541c8f 100644
  install(FILES fcitx5-configtool.sh RENAME fcitx5-configtool DESTINATION "${FCITX_INSTALL_BINDIR}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
  GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 -- 
-2.30.2
+2.43.0
 

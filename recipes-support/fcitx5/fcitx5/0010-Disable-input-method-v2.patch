@@ -1,7 +1,7 @@
 From 6870ada8c6bc53ec8fc8b9837873fce47f41a5f1 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 6 Oct 2021 17:14:32 +0900
-Subject: [PATCH 10/11] Disable input-method-v2
+Subject: [PATCH 10/12] Disable input-method-v2
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---
@@ -17,7 +17,7 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  9 files changed, 32 insertions(+), 4 deletions(-)
 
 diff --git a/src/frontend/waylandim/CMakeLists.txt b/src/frontend/waylandim/CMakeLists.txt
-index 9e05bf3..9d05e67 100644
+index 9e05bf38..9d05e677 100644
 --- a/src/frontend/waylandim/CMakeLists.txt
 +++ b/src/frontend/waylandim/CMakeLists.txt
 @@ -8,9 +8,9 @@ ecm_add_wayland_client_protocol(WAYLAND_IM_PROTOCOL_SRCS
@@ -33,7 +33,7 @@ index 9e05bf3..9d05e67 100644
  install(TARGETS waylandim DESTINATION "${FCITX_INSTALL_ADDONDIR}")
  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/waylandim.conf.in.in ${CMAKE_CURRENT_BINARY_DIR}/waylandim.conf.in @ONLY)
 diff --git a/src/frontend/waylandim/waylandim.cpp b/src/frontend/waylandim/waylandim.cpp
-index 4cbbec1..5331e34 100644
+index 4cbbec13..5331e340 100644
 --- a/src/frontend/waylandim/waylandim.cpp
 +++ b/src/frontend/waylandim/waylandim.cpp
 @@ -14,7 +14,9 @@
@@ -81,7 +81,7 @@ index 4cbbec1..5331e34 100644
  class WaylandIMModuleFactory : public AddonFactory {
  public:
 diff --git a/src/frontend/waylandim/waylandim.h b/src/frontend/waylandim/waylandim.h
-index be65a46..c184bb7 100644
+index be65a465..c184bb7c 100644
 --- a/src/frontend/waylandim/waylandim.h
 +++ b/src/frontend/waylandim/waylandim.h
 @@ -18,7 +18,9 @@ namespace fcitx {
@@ -115,7 +115,7 @@ index be65a46..c184bb7 100644
          createdCallback_;
      std::unique_ptr<HandlerTableEntry<WaylandConnectionClosed>> closedCallback_;
 diff --git a/src/frontend/waylandim/waylandim_public.h b/src/frontend/waylandim/waylandim_public.h
-index 736c1bc..2fc9d0b 100644
+index 736c1bc5..2fc9d0b1 100644
 --- a/src/frontend/waylandim/waylandim_public.h
 +++ b/src/frontend/waylandim/waylandim_public.h
 @@ -14,10 +14,12 @@
@@ -132,7 +132,7 @@ index 736c1bc..2fc9d0b 100644
  
  #endif // _FCITX5_FRONTEND_WAYLANDIM_WAYLANDIM_PUBLIC_H_
 diff --git a/src/lib/fcitx-wayland/CMakeLists.txt b/src/lib/fcitx-wayland/CMakeLists.txt
-index 5efea24..788e531 100644
+index 5efea242..788e5311 100644
 --- a/src/lib/fcitx-wayland/CMakeLists.txt
 +++ b/src/lib/fcitx-wayland/CMakeLists.txt
 @@ -1,4 +1,4 @@
@@ -142,7 +142,7 @@ index 5efea24..788e531 100644
 +#add_subdirectory(input-method-v2)
  #add_subdirectory(input-method-v3)
 diff --git a/src/ui/classic/CMakeLists.txt b/src/ui/classic/CMakeLists.txt
-index 2b237ba..3f4f1be 100644
+index 2b237ba4..3f4f1be0 100644
 --- a/src/ui/classic/CMakeLists.txt
 +++ b/src/ui/classic/CMakeLists.txt
 @@ -8,7 +8,7 @@ if (WAYLAND_FOUND)
@@ -155,7 +155,7 @@ index 2b237ba..3f4f1be 100644
  endif()
  
 diff --git a/src/ui/classic/waylandinputwindow.cpp b/src/ui/classic/waylandinputwindow.cpp
-index d014513..f224e5f 100644
+index d014513f..f224e5fa 100644
 --- a/src/ui/classic/waylandinputwindow.cpp
 +++ b/src/ui/classic/waylandinputwindow.cpp
 @@ -9,7 +9,9 @@
@@ -187,7 +187,7 @@ index d014513..f224e5f 100644
      }
  
 diff --git a/src/ui/classic/waylandinputwindow.h b/src/ui/classic/waylandinputwindow.h
-index 9559b73..dad64d6 100644
+index 9559b73c..dad64d6a 100644
 --- a/src/ui/classic/waylandinputwindow.h
 +++ b/src/ui/classic/waylandinputwindow.h
 @@ -9,7 +9,9 @@
@@ -212,7 +212,7 @@ index 9559b73..dad64d6 100644
      TrackableObjectReference<InputContext> repaintIC_;
  };
 diff --git a/src/ui/classic/waylandui.cpp b/src/ui/classic/waylandui.cpp
-index e5d21e8..5ffee3e 100644
+index e5d21e8f..5ffee3e2 100644
 --- a/src/ui/classic/waylandui.cpp
 +++ b/src/ui/classic/waylandui.cpp
 @@ -18,7 +18,9 @@
@@ -226,5 +226,5 @@ index e5d21e8..5ffee3e 100644
  #ifdef CAIRO_EGL_FOUND
  
 -- 
-2.30.2
+2.43.0
 

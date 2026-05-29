@@ -16,6 +16,7 @@ SRC_URI:append = "\
     file://0009-Add-input-method-unstable-v1.xml.patch \
     file://0010-Disable-input-method-v2.patch \
     file://0011-Add-text-input-unstable-v1.xml-and-text-input-unstab.patch \
+    file://0012-Add-missing-include-cstding.patch \
 "
 
 S = "${WORKDIR}/${BPN}-${PV}"

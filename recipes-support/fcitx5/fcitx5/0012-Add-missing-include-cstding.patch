@@ -1,0 +1,38 @@
+From 888025afaf48c2aeb88c27144f6c54a7d7a974bc Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Fri, 29 May 2026 18:25:01 +0900
+Subject: [PATCH 12/12] Add missing #include <cstding>
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/modules/spell/spell-custom-dict.h | 1 +
+ src/modules/unicode/charselectdata.h  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/modules/spell/spell-custom-dict.h b/src/modules/spell/spell-custom-dict.h
+index 21554eac..f4fe99ad 100644
+--- a/src/modules/spell/spell-custom-dict.h
++++ b/src/modules/spell/spell-custom-dict.h
+@@ -10,6 +10,7 @@
+ 
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ namespace fcitx {
+ 
+diff --git a/src/modules/unicode/charselectdata.h b/src/modules/unicode/charselectdata.h
+index f5d3d19d..20031bf2 100644
+--- a/src/modules/unicode/charselectdata.h
++++ b/src/modules/unicode/charselectdata.h
+@@ -12,6 +12,7 @@
+ #include <string>
+ #include <unordered_map>
+ #include <vector>
++#include <cstdint>
+ 
+ class CharSelectData {
+ public:
+-- 
+2.43.0
+
