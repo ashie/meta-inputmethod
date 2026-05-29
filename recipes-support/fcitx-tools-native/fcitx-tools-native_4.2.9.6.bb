@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "d55eee3f094037b5c32f0c5397d585fdf932cbc7d2091ed6f78fd7a9ae
 DESCRIPTION = "A multilingual user input method library (build phase tools only)"
 HOMEPAGE = "https://fcitx-im.org/wiki/Fcitx"
 SECTION = "inputmethods"
-S = "${WORKDIR}/fcitx-${PV}/"
+S = "${WORKDIR}/fcitx-${PV}"
 
 SRC_URI += " \
     file://enable-pic.patch \

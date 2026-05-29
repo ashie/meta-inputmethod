@@ -8,7 +8,7 @@ SRC_URI = "https://gitlab.com/fcitx/fcitx-qt5/-/archive/${PV}/fcitx-qt5-${PV}.ta
 SRC_URI[md5sum] = "550a0f6215c75a7338ddeef30b3ef245"
 SRC_URI[sha256sum] = "741904439c4a7461c5b19b6e9fcdf1446c440ed10c2171f8325ec0ceaff0a65c"
 
-S = "${WORKDIR}/${PN}-${PV}/"
+S = "${WORKDIR}/${PN}-${PV}"
 
 inherit cmake pkgconfig cmake_qt5
 

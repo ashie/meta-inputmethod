@@ -8,7 +8,7 @@ SRC_URI = "https://download.fcitx-im.org/fcitx-anthy/fcitx-anthy-${PV}.tar.xz"
 SRC_URI[md5sum] = "01eea99ce3e1cdc41f881f1cd422ca0d"
 SRC_URI[sha256sum] = "1f186cd915ee15ffdb85ccdc437f998fe808dfe6780447c8ccc21f50e50d5fb3"
 
-S = "${WORKDIR}/${PN}-${PV}/"
+S = "${WORKDIR}/${PN}-${PV}"
 
 inherit cmake pkgconfig
 

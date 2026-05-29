@@ -8,7 +8,7 @@ SRC_URI = "https://gitlab.com/fcitx/fcitx-configtool/-/archive/${PV}/fcitx-confi
 SRC_URI[md5sum] = "fcd7e2238c5bdddb77098699025719ce"
 SRC_URI[sha256sum] = "3b33797e561e44615bf4130900524f1c94abfd76b3fc482a49dca415aa309b10"
 
-S = "${WORKDIR}/${PN}-${PV}/"
+S = "${WORKDIR}/${PN}-${PV}"
 
 inherit cmake pkgconfig
 

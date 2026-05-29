@@ -8,7 +8,7 @@ SRC_URI = "https://github.com/chewing/libchewing/releases/download/v${PV}/libche
 SRC_URI[md5sum] = "2739d5c5697db2eb1d097b6bfb73bf0c"
 SRC_URI[sha256sum] = "9708c63415fa6034435c0f38100e7d30d0e1bac927f67bec6dfeb3fef016172b"
 
-S = "${WORKDIR}/libchewing-${PV}/"
+S = "${WORKDIR}/libchewing-${PV}"
 
 inherit autotools pkgconfig native
 
