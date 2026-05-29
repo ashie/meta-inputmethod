@@ -1,4 +1,4 @@
-LICENSE = "LGPLv2.1+"
+LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=dfcbabf9131dc9a95febef6753a2958b \
     file://src/myspell/license.myspell;md5=144d202f24e14f38b722f11f45135c91 \

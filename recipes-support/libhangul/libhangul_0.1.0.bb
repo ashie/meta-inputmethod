@@ -1,5 +1,5 @@
 # Recipe created by recipetool
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
 
 SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/libhangul/libhangul-${PV}.tar.gz" 
