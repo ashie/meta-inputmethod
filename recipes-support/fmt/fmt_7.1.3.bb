@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://doc/python-license.txt;md5=d214581529e343354f8e23025bdf582d \
 "
 
-SRC_URI = "https://github.com/fmtlib/fmt/archive/${PV}.tar.gz"
+SRC_URI = "https://github.com/fmtlib/fmt/releases/download/${PV}.tar.gz"
 SRC_URI[md5sum] = "2522ec65070c0bda0ca288677ded2831"
 SRC_URI[sha1sum] = "5936a766e3754fdfa4131bf892916c23d972b5ae"
 SRC_URI[sha256sum] = "5cae7072042b3043e12d53d50ef404bbb76949dad1de368d7f993a15c8c05ecc"
