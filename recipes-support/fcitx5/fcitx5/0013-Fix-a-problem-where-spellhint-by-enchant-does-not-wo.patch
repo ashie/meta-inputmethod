@@ -1,0 +1,26 @@
+From 47d07b3f5696ff7f61fc85ae812467a6d45b1a5f Mon Sep 17 00:00:00 2001
+From: Daijiro Fukuda <fukuda@clear-code.com>
+Date: Sat, 25 Dec 2021 01:02:54 +0900
+Subject: [PATCH 13/18] Fix a problem where spellhint by enchant does not work
+ (#417)
+
+---
+ src/modules/spell/spell-enchant.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/modules/spell/spell-enchant.cpp b/src/modules/spell/spell-enchant.cpp
+index 6c09fad7..a553d08a 100644
+--- a/src/modules/spell/spell-enchant.cpp
++++ b/src/modules/spell/spell-enchant.cpp
+@@ -46,7 +46,7 @@ std::vector<std::string> SpellEnchant::hint(const std::string &language,
+     std::vector<std::string> result;
+     number = number > limit ? limit : number;
+     result.reserve(number);
+-    for (auto i = number; i < number; i++) {
++    for (auto i = 0; i < number; i++) {
+         result.push_back(suggestions[i]);
+     }
+ 
+-- 
+2.43.0
+

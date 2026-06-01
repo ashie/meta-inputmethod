@@ -1,0 +1,24 @@
+From 91751f67ee89fb3b575abbb33ff8f523c04d7c29 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 7 Mar 2022 12:09:34 +0900
+Subject: [PATCH 18/18] Make sure to show UI on activate
+
+---
+ src/frontend/waylandim/waylandimserver.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/frontend/waylandim/waylandimserver.cpp b/src/frontend/waylandim/waylandimserver.cpp
+index ed221801..6ad29ddb 100644
+--- a/src/frontend/waylandim/waylandimserver.cpp
++++ b/src/frontend/waylandim/waylandimserver.cpp
+@@ -129,6 +129,7 @@ void WaylandIMInputContextV1::activate(wayland::ZwpInputMethodContextV1 *ic) {
+     repeatInfoCallback(repeatRate_, repeatDelay_);
+     server_->display_->sync();
+     focusIn();
++    updateUserInterface(UserInterfaceComponent::InputPanel);
+ }
+ 
+ void WaylandIMInputContextV1::deactivate(wayland::ZwpInputMethodContextV1 *ic) {
+-- 
+2.43.0
+

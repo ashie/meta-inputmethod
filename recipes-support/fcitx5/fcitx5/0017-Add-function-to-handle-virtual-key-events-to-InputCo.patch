@@ -1,0 +1,172 @@
+From b5fc2bc4d50114bd07522711c7f039419d25343e Mon Sep 17 00:00:00 2001
+From: daipom <fukuda@clear-code.com>
+Date: Fri, 14 Jan 2022 11:24:42 +0900
+Subject: [PATCH 17/18] Add function to handle virtual key events to
+ InputContext
+
+We can use `InputContext::virtualKeyEvent` to handle KeyEvents the same
+way as physical key events.
+---
+ src/frontend/waylandim/waylandimserver.cpp | 41 +++++++++++++++++++---
+ src/frontend/waylandim/waylandimserver.h   |  2 ++
+ src/lib/fcitx/inputcontext.cpp             | 18 ++++++++++
+ src/lib/fcitx/inputcontext.h               | 13 +++++++
+ 4 files changed, 70 insertions(+), 4 deletions(-)
+
+diff --git a/src/frontend/waylandim/waylandimserver.cpp b/src/frontend/waylandim/waylandimserver.cpp
+index 82b41c48..ed221801 100644
+--- a/src/frontend/waylandim/waylandimserver.cpp
++++ b/src/frontend/waylandim/waylandimserver.cpp
+@@ -335,13 +335,44 @@ void WaylandIMInputContextV1::keyCallback(uint32_t serial, uint32_t time,
+                        server_->modifiers_, code),
+                    state == WL_KEYBOARD_KEY_STATE_RELEASED, time);
+ 
+-    if (state == WL_KEYBOARD_KEY_STATE_RELEASED && key == repeatKey_) {
++    processKeyEvent(event, false, serial);
++}
++
++void WaylandIMInputContextV1::virtualKeyEventImpl(KeyEvent &event) {
++    // `mods_locked` value seems to be 16 usually.
++    // It will be 18 with the capslocked state,
++    // but we don't have to consider about it in virtual key process.
++    if (event.rawKey().hasModifier()) {
++        if (event.rawKey().states().test(KeyState::Shift)) {
++            modifiersCallback(serial_, (uint32_t)KeyState::Shift, 0, 16, 0);
++        }
++    } else {
++        modifiersCallback(serial_, 0, 0, 16, 0);
++    }
++
++    processKeyEvent(event, true, serial_);
++}
++
++void WaylandIMInputContextV1::processKeyEvent(KeyEvent &event,
++                                              bool isVirtualKey,
++                                              uint32_t serial) {
++    const uint32_t key = event.rawKey().code() > 8 ? event.rawKey().code() - 8
++                                                   : 0;
++    const auto state = event.isRelease() ? WL_KEYBOARD_KEY_STATE_RELEASED
++                                         : WL_KEYBOARD_KEY_STATE_PRESSED;
++
++    const auto cancelRepeat = isVirtualKey
++        ? (state == WL_KEYBOARD_KEY_STATE_RELEASED)
++        // Strict condition for physical keys.
++        : (state == WL_KEYBOARD_KEY_STATE_RELEASED && key == repeatKey_);
++
++    if (cancelRepeat) {
+         timeEvent_->setEnabled(false);
+     } else if (state == WL_KEYBOARD_KEY_STATE_PRESSED &&
+-               xkb_keymap_key_repeats(server_->keymap_.get(), code)) {
++               xkb_keymap_key_repeats(server_->keymap_.get(), event.rawKey().code())) {
+         if (repeatRate_) {
+             repeatKey_ = key;
+-            repeatTime_ = time;
++            repeatTime_ = event.time();
+             repeatSym_ = event.rawKey().sym();
+             timeEvent_->setNextInterval(repeatDelay_ * 1000);
+             timeEvent_->setOneShot();
+@@ -350,11 +381,13 @@ void WaylandIMInputContextV1::keyCallback(uint32_t serial, uint32_t time,
+ 
+     WAYLANDIM_DEBUG() << event.key().toString()
+                       << " IsRelease=" << event.isRelease();
++
+     if (!keyEvent(event)) {
+-        ic_->key(serial, time, key, state);
++        ic_->key(serial, event.time(), key, state);
+     }
+     server_->display_->flush();
+ }
++
+ void WaylandIMInputContextV1::modifiersCallback(uint32_t serial,
+                                                 uint32_t mods_depressed,
+                                                 uint32_t mods_latched,
+diff --git a/src/frontend/waylandim/waylandimserver.h b/src/frontend/waylandim/waylandimserver.h
+index 099ea32d..0c3e05bc 100644
+--- a/src/frontend/waylandim/waylandimserver.h
++++ b/src/frontend/waylandim/waylandimserver.h
+@@ -84,6 +84,7 @@ public:
+     void deactivate(wayland::ZwpInputMethodContextV1 *id);
+ 
+ protected:
++    void virtualKeyEventImpl(KeyEvent &event) override;
+     void commitStringImpl(const std::string &text) override {
+         ic_->commitString(serial_, text.c_str());
+     }
+@@ -112,6 +113,7 @@ private:
+     void keymapCallback(uint32_t format, int32_t fd, uint32_t size);
+     void keyCallback(uint32_t serial, uint32_t time, uint32_t key,
+                      uint32_t state);
++    void processKeyEvent(KeyEvent &event, bool isVirtualKey, uint32_t serial);
+     void modifiersCallback(uint32_t serial, uint32_t mods_depressed,
+                            uint32_t mods_latched, uint32_t mods_locked,
+                            uint32_t group);
+diff --git a/src/lib/fcitx/inputcontext.cpp b/src/lib/fcitx/inputcontext.cpp
+index 1fba900e..735225a6 100644
+--- a/src/lib/fcitx/inputcontext.cpp
++++ b/src/lib/fcitx/inputcontext.cpp
+@@ -235,6 +235,19 @@ bool InputContext::keyEvent(KeyEvent &event) {
+     return result;
+ }
+ 
++void InputContext::virtualKeyEvent(KeyEvent &event) {
++    decltype(std::chrono::steady_clock::now()) start;
++    // Don't query time if we don't want log.
++    if (::keyTrace().checkLogLevel(LogLevel::Debug)) {
++        start = std::chrono::steady_clock::now();
++    }
++    virtualKeyEventImpl(event);
++    FCITX_KEYTRACE() << "KeyEvent handling time: "
++                     << std::chrono::duration_cast<std::chrono::milliseconds>(
++                            std::chrono::steady_clock::now() - start)
++                            .count();
++}
++
+ void InputContext::reset(ResetReason reason) {
+     FCITX_D();
+     d->emplaceEvent<ResetEvent>(reason, this);
+@@ -316,6 +329,11 @@ StatusArea &InputContext::statusArea() {
+     return d->statusArea_;
+ }
+ 
++void InputContext::virtualKeyEventImpl(KeyEvent &event) {
++    FCITX_D();
++    d->postEvent(event);
++}
++
+ void InputContext::updateClientSideUIImpl() {}
+ 
+ InputContextEventBlocker::InputContextEventBlocker(InputContext *inputContext)
+diff --git a/src/lib/fcitx/inputcontext.h b/src/lib/fcitx/inputcontext.h
+index e127a0a9..af607f28 100644
+--- a/src/lib/fcitx/inputcontext.h
++++ b/src/lib/fcitx/inputcontext.h
+@@ -129,6 +129,10 @@ public:
+     /// Send a key event to current input context.
+     bool keyEvent(KeyEvent &event);
+ 
++    /// Send a virtual key event to current input context.
++    /// This handles the event the same way as physical key events.
++    void virtualKeyEvent(KeyEvent &event);
++
+     /// Returns whether the input context holds the input focus.
+     bool hasFocus() const;
+ 
+@@ -245,6 +249,15 @@ public:
+     void updateProperty(const InputContextPropertyFactory *factory);
+ 
+ protected:
++    /**
++     * Process the virtual key event.
++     *
++     * @param event KeyEvent
++     * 
++     * @see virtualKeyEvent
++     */
++    virtual void virtualKeyEventImpl(KeyEvent &event);
++
+     /**
+      * Send the committed string to client
+      *
+-- 
+2.43.0
+

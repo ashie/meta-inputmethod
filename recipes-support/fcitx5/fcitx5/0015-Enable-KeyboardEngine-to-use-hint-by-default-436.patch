@@ -1,0 +1,67 @@
+From 2ec8ca9e81827ba3b11cfec054f4f3eb7295a84c Mon Sep 17 00:00:00 2001
+From: Daijiro Fukuda <fukuda@clear-code.com>
+Date: Thu, 20 Jan 2022 00:21:29 +0900
+Subject: [PATCH 15/18] Enable KeyboardEngine to use hint by default (#436)
+
+Add `EnableHintByDefault` parameter to keyboard.conf.
+---
+ src/im/keyboard/keyboard.cpp | 4 ++++
+ src/im/keyboard/keyboard.h   | 6 +++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/src/im/keyboard/keyboard.cpp b/src/im/keyboard/keyboard.cpp
+index b1264baf..137d2c46 100644
+--- a/src/im/keyboard/keyboard.cpp
++++ b/src/im/keyboard/keyboard.cpp
+@@ -197,6 +197,10 @@ private:
+ 
+ } // namespace
+ 
++KeyboardEngineState::KeyboardEngineState(KeyboardEngine *engine) {
++    enableWordHint_ = engine->config().enableHintByDefault.value();
++}
++
+ KeyboardEngine::KeyboardEngine(Instance *instance) : instance_(instance) {
+     setupDefaultLongPressConfig(longPressConfig_);
+     registerDomain("xkeyboard-config", XKEYBOARDCONFIG_DATADIR "/locale");
+diff --git a/src/im/keyboard/keyboard.h b/src/im/keyboard/keyboard.h
+index 69d9806f..5ec38a8f 100644
+--- a/src/im/keyboard/keyboard.h
++++ b/src/im/keyboard/keyboard.h
+@@ -56,6 +56,8 @@ FCITX_CONFIGURATION(
+     OptionWithAnnotation<ChooseModifier, ChooseModifierI18NAnnotation>
+         chooseModifier{this, "Choose Modifier", _("Choose key modifier"),
+                        ChooseModifier::Alt};
++    Option<bool> enableHintByDefault{this, "EnableHintByDefault",
++                                     _("Enable hint by default"), false};
+     KeyListOption hintTrigger{this,
+                               "Hint Trigger",
+                               _("Trigger hint mode"),
+@@ -82,6 +84,7 @@ class KeyboardEngine;
+ enum class CandidateMode { Hint, LongPress };
+ 
+ struct KeyboardEngineState : public InputContextProperty {
++    KeyboardEngineState(KeyboardEngine *engine);
+     bool enableWordHint_ = false;
+     bool oneTimeEnableWordHint_ = false;
+     InputBuffer buffer_;
+@@ -113,6 +116,7 @@ public:
+     std::vector<InputMethodEntry> listInputMethods() override;
+     void reloadConfig() override;
+ 
++    const KeyboardEngineConfig &config() { return config_; }
+     const Configuration *getConfig() const override { return &config_; }
+     void setConfig(const RawConfig &config) override {
+         config_.load(config, true);
+@@ -184,7 +188,7 @@ private:
+         quickphraseHandler_;
+ 
+     FactoryFor<KeyboardEngineState> factory_{
+-        [](InputContext &) { return new KeyboardEngineState; }};
++        [this](InputContext &) { return new KeyboardEngineState(this); }};
+ 
+     std::unordered_set<std::string> longPressBlocklistSet_;
+ 
+-- 
+2.43.0
+

@@ -17,6 +17,12 @@ SRC_URI:append = "\
     file://0010-Disable-input-method-v2.patch \
     file://0011-Add-text-input-unstable-v1.xml-and-text-input-unstab.patch \
     file://0012-Add-missing-include-cstding.patch \
+    file://0013-Fix-a-problem-where-spellhint-by-enchant-does-not-wo.patch \
+    file://0014-Fix-comparison-warning-420.patch \
+    file://0015-Enable-KeyboardEngine-to-use-hint-by-default-436.patch \
+    file://0016-Add-simple-group-enumerating-function-for-addons-452.patch \
+    file://0017-Add-function-to-handle-virtual-key-events-to-InputCo.patch \
+    file://0018-Make-sure-to-show-UI-on-activate.patch \
 "
 
 S = "${WORKDIR}/${BPN}-${PV}"

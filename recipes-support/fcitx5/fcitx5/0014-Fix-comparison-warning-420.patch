@@ -1,0 +1,27 @@
+From 1f4d4dc2d59165f27f4776b5ff649d3fcb509c08 Mon Sep 17 00:00:00 2001
+From: Daijiro Fukuda <fukuda@clear-code.com>
+Date: Mon, 27 Dec 2021 09:53:13 +0900
+Subject: [PATCH 14/18] Fix comparison warning (#420)
+
+This fix a comparison warning between int and size_t,
+which e99498a801cc99e5d622844153e59667a1d3acc7 causes.
+---
+ src/modules/spell/spell-enchant.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/modules/spell/spell-enchant.cpp b/src/modules/spell/spell-enchant.cpp
+index a553d08a..4f8d108d 100644
+--- a/src/modules/spell/spell-enchant.cpp
++++ b/src/modules/spell/spell-enchant.cpp
+@@ -46,7 +46,7 @@ std::vector<std::string> SpellEnchant::hint(const std::string &language,
+     std::vector<std::string> result;
+     number = number > limit ? limit : number;
+     result.reserve(number);
+-    for (auto i = 0; i < number; i++) {
++    for (size_t i = 0; i < number; i++) {
+         result.push_back(suggestions[i]);
+     }
+ 
+-- 
+2.43.0
+
