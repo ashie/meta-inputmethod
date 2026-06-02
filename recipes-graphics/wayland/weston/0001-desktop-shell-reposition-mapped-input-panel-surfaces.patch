@@ -1,0 +1,56 @@
+From 22ff8713b78b12a4fe39a82c875db740a7f73946 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 2 Jun 2026 15:12:29 +0900
+Subject: [PATCH] desktop-shell: reposition mapped input panel surfaces on
+ commit
+
+Recent input-panel refactoring changed mapped surface handling to rely
+on weston_surface_map()/weston_view_move_to_layer(). However,
+show_input_panel_surface() returned early when the view was already
+mapped, preventing the input panel position from being updated after
+surface size changes.
+
+This caused the virtual keyboard panel to extend below the screen when
+its height changed, e.g. when showing preedit or candidate areas.
+
+Update the position of already-mapped views instead of returning
+immediately, and also trigger repositioning from
+input_panel_committed() for mapped surfaces.
+
+Upstream-Status: Pending
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ desktop-shell/input-panel.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/desktop-shell/input-panel.c b/desktop-shell/input-panel.c
+index 9b5d3b2..97d6d11 100644
+--- a/desktop-shell/input-panel.c
++++ b/desktop-shell/input-panel.c
+@@ -92,8 +92,11 @@ show_input_panel_surface(struct input_panel_surface *ipsurf)
+ 	if (!weston_surface_is_mapped(ipsurf->surface))
+ 		return;
+ 
+-	if (weston_view_is_mapped(ipsurf->view))
++	if (weston_view_is_mapped(ipsurf->view)) {
++		if (!calc_input_panel_position(ipsurf, &pos))
++			weston_view_set_position(ipsurf->view, pos);
+ 		return;
++	}
+ 
+ 	wl_list_for_each(seat, &shell->compositor->seat_list, link) {
+ 		struct weston_keyboard *keyboard =
+@@ -196,8 +199,11 @@ input_panel_committed(struct weston_surface *surface,
+ 	if (!weston_surface_has_content(surface))
+ 		return;
+ 
+-	if (weston_surface_is_mapped(surface))
++	if (weston_surface_is_mapped(surface)) {
++		if (shell->showing_input_panels)
++			show_input_panel_surface(ip_surface);
+ 		return;
++	}
+ 
+ 	weston_surface_map(surface);
+ 
