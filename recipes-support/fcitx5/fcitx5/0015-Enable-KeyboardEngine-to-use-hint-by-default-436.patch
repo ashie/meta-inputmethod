@@ -1,7 +1,7 @@
 From 2ec8ca9e81827ba3b11cfec054f4f3eb7295a84c Mon Sep 17 00:00:00 2001
 From: Daijiro Fukuda <fukuda@clear-code.com>
 Date: Thu, 20 Jan 2022 00:21:29 +0900
-Subject: [PATCH 15/18] Enable KeyboardEngine to use hint by default (#436)
+Subject: [PATCH 15/19] Enable KeyboardEngine to use hint by default (#436)
 
 Add `EnableHintByDefault` parameter to keyboard.conf.
 ---

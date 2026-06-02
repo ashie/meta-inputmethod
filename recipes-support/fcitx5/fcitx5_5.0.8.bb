@@ -23,6 +23,7 @@ SRC_URI:append = "\
     file://0016-Add-simple-group-enumerating-function-for-addons-452.patch \
     file://0017-Add-function-to-handle-virtual-key-events-to-InputCo.patch \
     file://0018-Make-sure-to-show-UI-on-activate.patch \
+    file://0019-wayland-avoid-wl_output-listener-mismatch-with-newer.patch \
 "
 
 S = "${WORKDIR}/${BPN}-${PV}"

@@ -1,7 +1,7 @@
 From b5fc2bc4d50114bd07522711c7f039419d25343e Mon Sep 17 00:00:00 2001
 From: daipom <fukuda@clear-code.com>
 Date: Fri, 14 Jan 2022 11:24:42 +0900
-Subject: [PATCH 17/18] Add function to handle virtual key events to
+Subject: [PATCH 17/19] Add function to handle virtual key events to
  InputContext
 
 We can use `InputContext::virtualKeyEvent` to handle KeyEvents the same

@@ -1,7 +1,7 @@
 From 47d07b3f5696ff7f61fc85ae812467a6d45b1a5f Mon Sep 17 00:00:00 2001
 From: Daijiro Fukuda <fukuda@clear-code.com>
 Date: Sat, 25 Dec 2021 01:02:54 +0900
-Subject: [PATCH 13/18] Fix a problem where spellhint by enchant does not work
+Subject: [PATCH 13/19] Fix a problem where spellhint by enchant does not work
  (#417)
 
 ---

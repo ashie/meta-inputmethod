@@ -1,7 +1,7 @@
 From 6870ada8c6bc53ec8fc8b9837873fce47f41a5f1 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 6 Oct 2021 17:14:32 +0900
-Subject: [PATCH 10/18] Disable input-method-v2
+Subject: [PATCH 10/19] Disable input-method-v2
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---

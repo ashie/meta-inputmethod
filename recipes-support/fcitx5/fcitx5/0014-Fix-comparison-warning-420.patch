@@ -1,7 +1,7 @@
 From 1f4d4dc2d59165f27f4776b5ff649d3fcb509c08 Mon Sep 17 00:00:00 2001
 From: Daijiro Fukuda <fukuda@clear-code.com>
 Date: Mon, 27 Dec 2021 09:53:13 +0900
-Subject: [PATCH 14/18] Fix comparison warning (#420)
+Subject: [PATCH 14/19] Fix comparison warning (#420)
 
 This fix a comparison warning between int and size_t,
 which e99498a801cc99e5d622844153e59667a1d3acc7 causes.

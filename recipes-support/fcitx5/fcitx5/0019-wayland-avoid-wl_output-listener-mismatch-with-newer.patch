@@ -1,0 +1,60 @@
+From 29d6546c3ddd486e65e79fa5096e922102b55d6d Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 2 Jun 2026 13:53:53 +0900
+Subject: [PATCH 19/19] wayland: avoid wl_output listener mismatch with newer
+ compositors
+
+fcitx5 5.0.8 implements wl_output listener callbacks
+only up to protocol version 3. When running against
+newer compositors (e.g. Weston 13), the compositor
+may advertise a newer wl_output version and send
+additional events unsupported by this client.
+
+Clamp wl_output binding to version 3 so the compositor
+does not send newer events such as wl_output.name,
+which otherwise causes libwayland-client to abort with:
+
+  listener function for opcode 4 of wl_output is NULL
+---
+ src/lib/fcitx-wayland/core/wl_registry.h | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/src/lib/fcitx-wayland/core/wl_registry.h b/src/lib/fcitx-wayland/core/wl_registry.h
+index b95e8c58..4d1528ea 100644
+--- a/src/lib/fcitx-wayland/core/wl_registry.h
++++ b/src/lib/fcitx-wayland/core/wl_registry.h
+@@ -4,6 +4,19 @@
+ #include <wayland-client.h>
+ #include "fcitx-utils/signals.h"
+ namespace fcitx::wayland {
++
++class WlOutput;
++
++template <typename T>
++static constexpr uint32_t supportedVersion(uint32_t requested) {
++    return requested;
++}
++
++template <>
++constexpr uint32_t supportedVersion<WlOutput>(uint32_t requested) {
++    return std::min(requested, 3u);
++}
++
+ class WlRegistry final {
+ public:
+     static constexpr const char *interface = "wl_registry";
+@@ -20,8 +33,10 @@ public:
+     void setUserData(void *userData) { userData_ = userData; }
+     template <typename T>
+     T *bind(uint32_t name, uint32_t requested_version) {
++        uint32_t version =
++            supportedVersion<T>(requested_version);
+         return new T(static_cast<typename T::wlType *>(
+-            wl_registry_bind(*this, name, T::wlInterface, requested_version)));
++            wl_registry_bind(*this, name, T::wlInterface, version)));
+     }
+     auto &global() { return globalSignal_; }
+     auto &globalRemove() { return globalRemoveSignal_; }
+-- 
+2.43.0
+
