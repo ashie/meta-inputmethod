@@ -1,7 +1,7 @@
 From 446b31c7ec3061a1f6b9b92ee133c4b6a3fe5413 Mon Sep 17 00:00:00 2001
 From: Daijiro Fukuda <fukuda@clear-code.com>
 Date: Mon, 28 Feb 2022 15:08:40 +0900
-Subject: [PATCH 16/19] Add simple group enumerating function for addons (#452)
+Subject: [PATCH 16/20] Add simple group enumerating function for addons (#452)
 
 ---
  src/lib/fcitx/inputmethodmanager.cpp | 22 ++++++++++++++++++++++

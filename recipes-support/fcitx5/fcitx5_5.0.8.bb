@@ -24,6 +24,7 @@ SRC_URI:append = "\
     file://0017-Add-function-to-handle-virtual-key-events-to-InputCo.patch \
     file://0018-Make-sure-to-show-UI-on-activate.patch \
     file://0019-wayland-avoid-wl_output-listener-mismatch-with-newer.patch \
+    file://0020-cmake-fix-TMPDIR-leakage-via-FCITX_INSTALL_LIBDATADI.patch \
 "
 
 S = "${WORKDIR}/${BPN}-${PV}"

@@ -1,7 +1,7 @@
 From b1efe3f84a83bd80fcc50c35f75b96f915d990b0 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 6 Oct 2021 17:10:56 +0900
-Subject: [PATCH 09/19] Add input-method-unstable-v1.xml
+Subject: [PATCH 09/20] Add input-method-unstable-v1.xml
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
 ---

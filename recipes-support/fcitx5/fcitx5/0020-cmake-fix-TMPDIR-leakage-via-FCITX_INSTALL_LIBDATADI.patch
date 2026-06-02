@@ -1,0 +1,30 @@
+From 43f8dc743f14a41ff99837335d6ec9a5486e101e Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 2 Jun 2026 16:51:32 +0900
+Subject: [PATCH 20/20] cmake: fix TMPDIR leakage via FCITX_INSTALL_LIBDATADIR
+
+FCITX_INSTALL_LIBDATADIR was derived from
+CMAKE_INSTALL_FULL_LIBDATADIR, causing absolute build paths to be
+embedded into generated config files and libraries under Yocto.
+
+Use the install-relative path instead.
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f6a7e135..9c669b65 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -188,7 +188,7 @@ if(NOT CMAKE_INSTALL_LIBDATADIR)
+   set(CMAKE_INSTALL_LIBDATADIR "${CMAKE_INSTALL_LIBDIR}" CACHE PATH "libdata root (LIBDIR)")
+ endif()
+ 
+-get_filename_component(CMAKE_INSTALL_FULL_LIBDATADIR "${CMAKE_INSTALL_LIBDATADIR}" ABSOLUTE)
++set(CMAKE_INSTALL_FULL_LIBDATADIR "${CMAKE_INSTALL_FULL_LIBDIR}")
+ mark_as_advanced(CMAKE_INSTALL_LIBDATADIR)
+ mark_as_advanced(CMAKE_INSTALL_FULL_LIBDATADIR)
+ 
+-- 
+2.43.0
+

@@ -1,7 +1,7 @@
 From dd874455c234bd152a77aa5d0833d10f735d02e1 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 6 Oct 2021 18:14:46 +0900
-Subject: [PATCH 11/19] Add text-input-unstable-v1.xml and
+Subject: [PATCH 11/20] Add text-input-unstable-v1.xml and
  text-input-unstable-v3.xml
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
