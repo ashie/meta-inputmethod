@@ -26,6 +26,19 @@ Recipes
 * fcitx5-hangul: Korean (Hangul) input method
 * fcitx5-m17n: Multilingual input methods
 
+### fcitx5-virtualkeyboard-ui
+
+We also develop an on-screen virtual keyboard UI for Fcitx5:
+https://github.com/clear-code/fcitx5-virtualkeyboard-ui
+
+This virtual keyboard is already used internally and provided to selected
+customers together with this layer, but its recipe is not included in the
+public repository.
+
+If you are interested in using it with Yocto/OpenEmbedded, please contact us.
+
+[![Demo video for fcitx5-virtualkeyboard-ui](https://img.youtube.com/vi/f1QBqWy_Ps4/0.jpg)](https://www.youtube.com/watch?v=f1QBqWy_Ps4)
+
 ### ibus and ibus-*
 
 Although we don't yet publish them, we already have these recipes internally.
