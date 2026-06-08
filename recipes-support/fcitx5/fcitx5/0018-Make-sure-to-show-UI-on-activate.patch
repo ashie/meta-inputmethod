@@ -1,7 +1,7 @@
 From 91751f67ee89fb3b575abbb33ff8f523c04d7c29 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Mon, 7 Mar 2022 12:09:34 +0900
-Subject: [PATCH 18/20] Make sure to show UI on activate
+Subject: [PATCH 18/21] Make sure to show UI on activate
 
 ---
  src/frontend/waylandim/waylandimserver.cpp | 1 +

@@ -1,0 +1,29 @@
+From 8a52cd6bc7a852ea1de049f12df23813f359fc3a Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Mon, 8 Jun 2026 11:51:12 +0900
+Subject: [PATCH 21/21] dbusmodule: fix build failure with fmt v10+
+
+Explicitly cast fcitx::Flags to uint32_t to fix a compilation error
+caused by strict User-Defined Type formatting rules in newer fmt versions.
+
+Upstream-Status: Inappropriate [old version]
+---
+ src/modules/dbus/dbusmodule.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/modules/dbus/dbusmodule.cpp b/src/modules/dbus/dbusmodule.cpp
+index 9d48afe9..5ee2ecf5 100644
+--- a/src/modules/dbus/dbusmodule.cpp
++++ b/src/modules/dbus/dbusmodule.cpp
+@@ -537,7 +537,7 @@ public:
+                 }
+                 ss << "] program:" << ic->program()
+                    << " frontend:" << ic->frontend()
+-                   << " cap:" << fmt::format("{:x}", ic->capabilityFlags())
++                   << " cap:" << fmt::format("{:x}", static_cast<uint32_t>(ic->capabilityFlags()))
+                    << " focus:" << ic->hasFocus() << std::endl;
+                 return true;
+             });
+-- 
+2.43.0
+
