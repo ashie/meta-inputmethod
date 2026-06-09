@@ -1,7 +1,7 @@
 From 49d2cedc22fa705e89ffa09be9de6d15019e3023 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 18 Aug 2021 18:30:31 +0900
-Subject: [PATCH 2/3] Use CMAKE_INSTALL_INCLUDEDIR instead of
+Subject: [PATCH 2/4] Use CMAKE_INSTALL_INCLUDEDIR instead of
  CMAKE_INSTALL_FULL_INCLUDEDIR
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
@@ -51,5 +51,5 @@ index d7748b7..c357ef6 100644
  target_link_libraries(IMETable PUBLIC Fcitx5::Utils Boost::boost LibIME::Core PRIVATE Boost::regex)
  
 -- 
-2.30.2
+2.43.0
 

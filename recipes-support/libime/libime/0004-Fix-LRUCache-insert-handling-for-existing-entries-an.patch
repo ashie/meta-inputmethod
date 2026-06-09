@@ -1,0 +1,102 @@
+From 4d47d35c8ab331bd6a6e2bf51f31404ae8856606 Mon Sep 17 00:00:00 2001
+From: Takuro Ashie <ashie@clear-code.com>
+Date: Tue, 9 Jun 2026 17:05:58 +0900
+Subject: [PATCH 4/4] Fix LRUCache::insert() handling for existing entries and
+ empty caches
+
+LRUCache::insert() returned nullptr when the key already existed in
+the cache. Some callers assumed that a prior find() guaranteed that
+insert() would always succeed, which could lead to nullptr dereference
+and crashes during pinyin matching.
+
+Update insert() to return the existing value for duplicate keys
+instead of returning nullptr. Also add handling for zero-capacity
+caches and assert that eviction is never attempted on an empty list.
+
+Additionally, add a defensive nullptr check in
+PinyinDictionaryPrivate::matchWordsForOnePath() to avoid crashing
+if insert() unexpectedly fails.
+
+This fixes crashes observed during incremental pinyin input such as
+typing "nih".
+
+Upstream-Status: Pending
+
+Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+---
+ src/libime/core/lrucache.h             | 33 ++++++++++++++++++--------
+ src/libime/pinyin/pinyindictionary.cpp |  4 ++++
+ 2 files changed, 27 insertions(+), 10 deletions(-)
+
+diff --git a/src/libime/core/lrucache.h b/src/libime/core/lrucache.h
+index e9ee77d..d2bb854 100644
+--- a/src/libime/core/lrucache.h
++++ b/src/libime/core/lrucache.h
+@@ -41,19 +41,31 @@ public:
+ 
+     template <typename... Args>
+     value_type *insert(const key_type &key, Args &&...args) {
++        if (sz_ == 0) {
++            return nullptr;
++        }
++
+         auto iter = dict_.find(key);
+-        if (iter == dict_.end()) {
+-            if (size() >= sz_) {
+-                evict();
+-            }
+-
+-            order_.push_front(key);
+-            auto r = dict_.emplace(
+-                key, std::make_pair(value_type(std::forward<Args>(args)...),
+-                                    order_.begin()));
++        if (iter != dict_.end()) {
++            return &iter->second.first;
++        }
++
++        if (size() >= sz_) {
++            evict();
++        }
++
++        auto listIter = order_.insert(order_.begin(), key);
++
++        auto r = dict_.emplace(key,
++                               std::make_pair(value_type(std::forward<Args>(args)...),
++                                              listIter));
++
++        if (!r.second) {
++            order_.erase(listIter);
+             return &r.first->second.first;
+         }
+-        return nullptr;
++
++        return &r.first->second.first;
+     }
+ 
+     void erase(const key_type &key) {
+@@ -87,6 +99,7 @@ public:
+ private:
+     void evict() {
+         // evict item from the end of most recently used list
++        assert(!order_.empty());
+         auto i = std::prev(order_.end());
+         dict_.erase(*i);
+         order_.erase(i);
+diff --git a/src/libime/pinyin/pinyindictionary.cpp b/src/libime/pinyin/pinyindictionary.cpp
+index b1ac1d4..075eeca 100644
+--- a/src/libime/pinyin/pinyindictionary.cpp
++++ b/src/libime/pinyin/pinyindictionary.cpp
+@@ -375,6 +375,10 @@ bool PinyinDictionaryPrivate::matchWordsForOnePath(
+         if (!result) {
+             result =
+                 matchCache.insert(context.hasher_.pathToPinyins(path.path_));
++            if (!result) {
++                FCITX_ERROR() << "Unexpected nullptr from insert";
++                return false;
++            }
+             result->clear();
+ 
+             auto &items = *result;
+-- 
+2.43.0
+

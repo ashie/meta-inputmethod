@@ -1,7 +1,7 @@
 From 8ca6609694c65adebd9e07b502290fb02e2a2606 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Tue, 19 Oct 2021 21:40:49 +0900
-Subject: [PATCH 3/3] Fix a build error on boost-1.64.0
+Subject: [PATCH 3/4] Fix a build error on boost-1.64.0
 
 /build/libime-1.0.7/src/libime/core/decoder.cpp: In member function 'bool libime::DecoderPrivate::buildLattice(const libime::Decoder*, libime::Lattice&, const std::unordered_set<const libime::SegmentGraphNode*>&, const State&, const libime::SegmentGraph&, size_t, void*) const':
 /build/libime-1.0.7/src/libime/core/decoder.cpp:130:50: error: no matching function for call to 'boost::ptr_vector<libime::LatticeNode>::push_back(std::remove_reference<std::unique_ptr<libime::LatticeNode>&>::type)'
@@ -45,5 +45,5 @@ index 035ac29..23a2982 100644
      }
      if (!lattice.count(&graph.end())) {
 -- 
-2.30.2
+2.43.0
 

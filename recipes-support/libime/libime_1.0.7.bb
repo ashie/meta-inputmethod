@@ -19,6 +19,7 @@ SRC_URI:append = "\
     file://0001-Add-CMAKE_SYSROOT-to-find-additional-cmake-file.patch \
     file://0002-Use-CMAKE_INSTALL_INCLUDEDIR-instead-of-CMAKE_INSTAL.patch \
     file://0003-Fix-a-build-error-on-boost-1.64.0.patch \
+    file://0004-Fix-LRUCache-insert-handling-for-existing-entries-an.patch \
 "
 
 inherit cmake pkgconfig python3native
