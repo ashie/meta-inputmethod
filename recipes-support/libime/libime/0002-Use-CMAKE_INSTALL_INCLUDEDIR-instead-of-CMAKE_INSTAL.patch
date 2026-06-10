@@ -1,7 +1,7 @@
-From 49d2cedc22fa705e89ffa09be9de6d15019e3023 Mon Sep 17 00:00:00 2001
+From 0aee139bfb891120c1e5860493600a09232a0174 Mon Sep 17 00:00:00 2001
 From: Takuro Ashie <ashie@clear-code.com>
 Date: Wed, 18 Aug 2021 18:30:31 +0900
-Subject: [PATCH 2/4] Use CMAKE_INSTALL_INCLUDEDIR instead of
+Subject: [PATCH 2/2] Use CMAKE_INSTALL_INCLUDEDIR instead of
  CMAKE_INSTALL_FULL_INCLUDEDIR
 
 Signed-off-by: Takuro Ashie <ashie@clear-code.com>
@@ -12,10 +12,10 @@ Signed-off-by: Takuro Ashie <ashie@clear-code.com>
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/src/libime/core/CMakeLists.txt b/src/libime/core/CMakeLists.txt
-index d010938..f6932bb 100644
+index 42202e7..c5621f5 100644
 --- a/src/libime/core/CMakeLists.txt
 +++ b/src/libime/core/CMakeLists.txt
-@@ -63,7 +63,7 @@ set_target_properties(IMECore
+@@ -75,7 +75,7 @@ set_target_properties(IMECore
  target_include_directories(IMECore PUBLIC
      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>
      $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
